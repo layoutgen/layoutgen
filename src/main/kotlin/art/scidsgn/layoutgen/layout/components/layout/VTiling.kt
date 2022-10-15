@@ -49,7 +49,13 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
     }
 
     override fun calculateTargetSize() {
-        LayoutUtils.setTargetSizeForExpansiveComponent(this, verticalGap = gap)
+        LayoutUtils.setTargetSizeForExpansiveComponent(
+            this,
+            Dimensions(
+                LayoutUtils.getMaxWidth(childComponents),
+                LayoutUtils.getFittingHeight(childComponents) + getTotalGap()
+            )
+        )
     }
 
     override fun determineChildrenPositions() {
