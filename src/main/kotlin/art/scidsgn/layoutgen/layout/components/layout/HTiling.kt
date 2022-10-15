@@ -49,7 +49,7 @@ class HTiling(children: List<Component> = emptyList()) : GappedContainerComponen
     }
 
     override fun calculateTargetSize() {
-        LayoutUtils.setTargetSizeForExpansiveComponent(this)
+        LayoutUtils.setTargetSizeForExpansiveComponent(this, horizontalGap = gap)
     }
 
     override fun determineChildrenPositions() {

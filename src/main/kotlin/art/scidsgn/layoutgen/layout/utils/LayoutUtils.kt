@@ -2,9 +2,11 @@ package art.scidsgn.layoutgen.layout.utils
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.ContainerComponent
+import art.scidsgn.layoutgen.layout.components.layout.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
+import kotlin.math.max
 
 object LayoutUtils {
     fun getComponentsWithoutDefinedSize(components: List<Component>): List<Component> {
@@ -51,11 +53,31 @@ object LayoutUtils {
         return sum
     }
 
-    fun setTargetSizeForExpansiveComponent(component: Component) {
+    fun setTargetSizeForExpansiveComponent(
+        component: Component
+    ) {
         val fallbackSize = if (component is ContainerComponent) Dimensions(
             getFittingWidth(component.childComponents),
             getFittingHeight(component.childComponents)
         ) else Dimensions(0.0, 0.0)
+
+        if (component.size.definedSize != null) {
+            component.size.targetSize = component.size.definedSize!!
+        } else {
+            component.size.targetSize = component.size.requestedSize ?: fallbackSize
+        }
+    }
+
+    fun setTargetSizeForExpansiveComponent(
+        component: GappedContainerComponent,
+        horizontalGap: Double = 0.0,
+        verticalGap: Double = 0.0
+    ) {
+        val gapCount = max(0, component.childComponents.size - 1)
+        val fallbackSize = Dimensions(
+            getFittingWidth(component.childComponents) + gapCount * horizontalGap,
+            getFittingHeight(component.childComponents) + gapCount * verticalGap
+        )
 
         if (component.size.definedSize != null) {
             component.size.targetSize = component.size.definedSize!!
