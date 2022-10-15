@@ -33,7 +33,11 @@ class HStack(children: List<Component> = emptyList()) : GappedContainerComponent
     }
 
     override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        size.requestedSize = parentRequestedSize
+        if (hasDefinedSize()) {
+            size.requestedSize = size.definedSize
+        } else {
+            size.requestedSize = parentRequestedSize
+        }
 
         childComponents.forEach { it.propagateRequestedSize(null) }
     }

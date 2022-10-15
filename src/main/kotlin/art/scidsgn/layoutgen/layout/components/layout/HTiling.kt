@@ -26,12 +26,16 @@ class HTiling(children: List<Component> = emptyList()) : GappedContainerComponen
     }
 
     override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        size.requestedSize = parentRequestedSize
+        if (hasDefinedSize()) {
+            size.requestedSize = size.definedSize
+        } else {
+            size.requestedSize = parentRequestedSize
+        }
 
-        if (parentRequestedSize == null) {
+        if (size.requestedSize == null) {
             childComponents.forEach { it.propagateRequestedSize(null) }
         } else {
-            val nonDefinedWidth = parentRequestedSize.width - LayoutUtils.getCombinedDefinedWidth(
+            val nonDefinedWidth = size.requestedSize!!.width - LayoutUtils.getCombinedDefinedWidth(
                 childComponents
             ) - getTotalGap()
             val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedSize(childComponents).size
@@ -41,7 +45,7 @@ class HTiling(children: List<Component> = emptyList()) : GappedContainerComponen
                     it.propagateRequestedSize(it.size.definedSize)
                 } else {
                     it.propagateRequestedSize(
-                        Dimensions(nonDefinedWidth / nonDefinedItemCount, parentRequestedSize.height)
+                        Dimensions(nonDefinedWidth / nonDefinedItemCount, size.requestedSize!!.height)
                     )
                 }
             }

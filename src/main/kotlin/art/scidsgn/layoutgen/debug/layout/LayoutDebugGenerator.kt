@@ -22,7 +22,7 @@ object LayoutDebugGenerator {
 
         gfx.paint = Color.BLACK
         gfx.drawString(
-            "${component.javaClass.simpleName}@${component.javaClass.hashCode()}",
+            component.javaClass.simpleName,
             componentX + 4, componentY + 16
         )
 

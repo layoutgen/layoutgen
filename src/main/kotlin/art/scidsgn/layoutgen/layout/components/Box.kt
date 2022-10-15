@@ -25,7 +25,11 @@ open class Box(child: Component? = null) : ContainerComponent() {
     }
 
     override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        size.requestedSize = parentRequestedSize
+        if (hasDefinedSize()) {
+            size.requestedSize = size.definedSize
+        } else {
+            size.requestedSize = parentRequestedSize
+        }
 
         childComponents.forEach { it.propagateRequestedSize(size.requestedSize) }
     }

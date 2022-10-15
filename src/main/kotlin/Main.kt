@@ -5,6 +5,7 @@ import art.scidsgn.layoutgen.layout.components.layout.*
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
+import art.scidsgn.layoutgen.layout.withDefinedSize
 import java.io.File
 import javax.imageio.ImageIO
 
@@ -16,19 +17,32 @@ fun main() {
                     listOf(
                         Box(),
                         Box().withDefinedSize(Dimensions(40.0, 100.0)),
-                        Box(),
+                        Grid(
+                            2, 2,
+                            listOf(
+                                Box(),
+                                Box(),
+                                Box(),
+                                Box().withDefinedSize(Dimensions(30.0, 30.0))
+                            )
+                        ).withGap(8.0),
                         Box()
                     )
                 ).withHorizontalAlignment(HorizontalAlignment.RIGHT),
-                HStack(
+                VStack(
                     listOf(
-                        HStack(
+                        Grid(
+                            2, 2,
                             listOf(
-                                Box().withDefinedSize(Dimensions(20.0, 20.0)),
-                                Box().withDefinedSize(Dimensions(40.0, 20.0))
+                                Box(),
+                                Box(),
+                                Box(),
+                                Box().withDefinedSize(Dimensions(30.0, 30.0))
                             )
-                        ),
-                        VStack(
+                        ).withGap(8.0).withDefinedSize(Dimensions(100.0, 100.0))
+                            .withCellHorizontalAlignment(HorizontalAlignment.MIDDLE)
+                            .withCellVerticalAlignment(VerticalAlignment.CENTER),
+                        HStack(
                             listOf(
                                 Box().withDefinedSize(Dimensions(50.0, 30.0)),
                                 Box().withDefinedSize(Dimensions(20.0, 80.0))

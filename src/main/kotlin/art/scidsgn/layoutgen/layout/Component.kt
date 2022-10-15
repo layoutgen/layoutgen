@@ -42,9 +42,9 @@ abstract class Component {
     fun setDefinedSize(dimensions: Dimensions) {
         size.definedSize = dimensions
     }
+}
 
-    fun withDefinedSize(dimensions: Dimensions): Component {
-        setDefinedSize(dimensions)
-        return this
-    }
+fun <T : Component> T.withDefinedSize(dimensions: Dimensions): T {
+    setDefinedSize(dimensions)
+    return this
 }
