@@ -47,11 +47,34 @@ fun main() {
                                 Box().withDefinedSize(Dimensions(50.0, 30.0)),
                                 Box().withDefinedSize(Dimensions(20.0, 80.0))
                             )
-                        ).withGap(8.0)
+                        ).withGap(8.0).withVerticalAlignment(VerticalAlignment.CENTER),
+                        OverlapHStack(
+                            listOf(
+                                Box().withDefinedSize(Dimensions(48.0, 48.0)),
+                                Box().withDefinedSize(Dimensions(48.0, 48.0)),
+                                Grid(
+                                    2, 2,
+                                    listOf(
+                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
+                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
+                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
+                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
+                                    )
+                                ).withGap(4.0)
+                            )
+                        ).withGap(16.0).withVerticalAlignment(VerticalAlignment.CENTER)
                     )
                 ).withHorizontalAlignment(HorizontalAlignment.MIDDLE).withVerticalAlignment(VerticalAlignment.CENTER)
                     .withGap(8.0),
-                Box().withDefinedSize(Dimensions(80.0, 80.0)),
+                OverlapVStack(
+                    listOf(
+                        Box().withDefinedSize(Dimensions(60.0, 60.0)),
+                        Box().withDefinedSize(Dimensions(60.0, 60.0)),
+                        Box().withDefinedSize(Dimensions(60.0, 60.0))
+                    )
+                ).withGap(16.0).withHorizontalAlignment(HorizontalAlignment.MIDDLE)
+                    .withVerticalAlignment(VerticalAlignment.CENTER)
+                    .withDefinedSize(Dimensions(80.0, 150.0))
             )
         ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(8.0)
     )
