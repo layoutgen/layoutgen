@@ -1,7 +1,5 @@
-package art.scidsgn.layoutgen.layout.utils
+package art.scidsgn.layoutgen.layout
 
-import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.ContainerComponent
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
@@ -33,6 +31,14 @@ object LayoutUtils {
         }
 
         return sum
+    }
+
+    fun getMaxDefinedWidthOrNull(components: List<Component>): Double? {
+        return components.filter { it.hasDefinedWidth() }.maxOfOrNull { it.size.definedSize.width!! }
+    }
+
+    fun getMaxDefinedHeightOrNull(components: List<Component>): Double? {
+        return components.filter { it.hasDefinedHeight() }.maxOfOrNull { it.size.definedSize.height!! }
     }
 
     fun getFittingWidth(components: List<Component>): Double {

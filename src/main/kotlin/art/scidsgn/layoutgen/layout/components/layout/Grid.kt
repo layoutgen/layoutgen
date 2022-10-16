@@ -2,13 +2,13 @@ package art.scidsgn.layoutgen.layout.components.layout
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.ContainerComponent
+import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
-import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 import kotlin.math.floor
 
 class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()) : ContainerComponent() {

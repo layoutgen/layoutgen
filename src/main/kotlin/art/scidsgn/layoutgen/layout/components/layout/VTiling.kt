@@ -1,12 +1,12 @@
 package art.scidsgn.layoutgen.layout.components.layout
 
 import art.scidsgn.layoutgen.layout.Component
+import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
-import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 
 class VTiling(children: List<Component> = emptyList()) : GappedContainerComponent() {
     override var parent: Component? = null

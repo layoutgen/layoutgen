@@ -1,13 +1,13 @@
 package art.scidsgn.layoutgen.layout.components.layout
 
 import art.scidsgn.layoutgen.layout.Component
+import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
-import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 import kotlin.math.max
 
 class OverlapHStack(children: List<Component> = emptyList()) : GappedContainerComponent() {
@@ -19,6 +19,7 @@ class OverlapHStack(children: List<Component> = emptyList()) : GappedContainerCo
 
     private var horizontalAlignment = HorizontalAlignment.LEFT
     private var verticalAlignment = VerticalAlignment.TOP
+    private var verticalStretch = false
 
     init {
         LayoutUtils.setChildrenParent(this)
@@ -34,14 +35,25 @@ class OverlapHStack(children: List<Component> = emptyList()) : GappedContainerCo
         return this
     }
 
+    fun withVerticalStretch(stretch: Boolean): OverlapHStack {
+        this.verticalStretch = stretch
+        return this
+    }
+
     override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         size.requestedSize = UnclearDimensions(
             size.definedSize.width ?: parentRequestedSize.width,
             size.definedSize.height ?: parentRequestedSize.height
         )
 
-        // TODO: defined children height could be used here
-        childComponents.forEach { it.propagateRequestedSize(UnclearDimensions(null, null)) }
+        childComponents.forEach {
+            it.propagateRequestedSize(
+                UnclearDimensions(
+                    null,
+                    if (verticalStretch) LayoutUtils.getMaxDefinedHeightOrNull(childComponents) else null
+                )
+            )
+        }
     }
 
     private fun getTargetWidth(): Double {

@@ -50,9 +50,9 @@ fun createRootComponent(): Component {
                         HStack(
                             listOf(
                                 Box().withSize(50.0, 30.0),
-                                Box().withSize(20.0, 80.0)
+                                Box().withWidth(30.0)
                             )
-                        ).withGap(8.0).withVerticalAlignment(VerticalAlignment.CENTER),
+                        ).withGap(8.0).withVerticalAlignment(VerticalAlignment.CENTER).withVerticalStretch(true),
                         OverlapHStack(
                             listOf(
                                 Box().withSize(48.0, 48.0),
@@ -76,11 +76,12 @@ fun createRootComponent(): Component {
                     listOf(
                         Box().withSize(60.0, 60.0),
                         Box().withSize(60.0, 60.0),
-                        Box().withSize(60.0, 60.0)
+                        Box().withHeight(90.0)
                     )
                 ).withGap(16.0).withHorizontalAlignment(HorizontalAlignment.MIDDLE)
                     .withVerticalAlignment(VerticalAlignment.CENTER)
                     .withSize(80.0, 150.0)
+                    .withHorizontalStretch(true)
             )
         ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(8.0)
     )
