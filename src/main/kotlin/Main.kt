@@ -1,4 +1,5 @@
 import art.scidsgn.layoutgen.debug.layout.LayoutDebugGenerator
+import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.LayoutEngine
 import art.scidsgn.layoutgen.layout.components.Box
 import art.scidsgn.layoutgen.layout.components.layout.*
@@ -6,11 +7,17 @@ import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.withDefinedSize
-import java.io.File
-import javax.imageio.ImageIO
+import java.awt.Dimension
+import java.awt.event.ComponentAdapter
+import java.awt.event.ComponentEvent
+import javax.swing.JFrame
+import javax.swing.JPanel
+import javax.swing.SwingUtilities
+import javax.swing.WindowConstants
+import kotlin.random.Random
 
-fun main() {
-    val componentTree = Box(
+fun createRootComponent(): Component {
+    return Box(
         HTiling(
             listOf(
                 VTiling(
@@ -78,8 +85,33 @@ fun main() {
             )
         ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(8.0)
     )
-    LayoutEngine.layOut(componentTree, Dimensions(400.0, 400.0))
+}
 
-    val debugImage = LayoutDebugGenerator.createImage(componentTree)
-    ImageIO.write(debugImage, "png", File("images/test.png"))
+fun paintOnPanel(panel: JPanel) {
+    val root = createRootComponent()
+    LayoutEngine.layOut(root, Dimensions(panel.width.toDouble(), panel.height.toDouble()))
+
+    val image = LayoutDebugGenerator.createImage(root, Random(1))
+    panel.graphics.drawImage(image, 0, 0, null)
+}
+
+fun main() {
+    SwingUtilities.invokeLater {
+        val frame = JFrame("Layout Engine test")
+
+        val panel = JPanel()
+        panel.preferredSize = Dimension(600, 600)
+        panel.addComponentListener(object : ComponentAdapter() {
+            override fun componentResized(e: ComponentEvent?) {
+                paintOnPanel(panel)
+            }
+        })
+
+        frame.contentPane = panel
+        frame.pack()
+        frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
+        frame.isVisible = true
+
+        paintOnPanel(panel)
+    }
 }
