@@ -87,8 +87,8 @@ fun createRootComponent(): Component {
     )
 }
 
-fun paintOnPanel(panel: JPanel) {
-    val root = createRootComponent()
+fun paintOnPanel(root: Component, panel: JPanel) {
+    LayoutEngine.resetLayout(root)
     LayoutEngine.layOut(root, Dimensions(panel.width.toDouble(), panel.height.toDouble()))
 
     val image = LayoutDebugGenerator.createImage(root, Random(2))
@@ -96,6 +96,8 @@ fun paintOnPanel(panel: JPanel) {
 }
 
 fun main() {
+    val root = createRootComponent()
+
     SwingUtilities.invokeLater {
         val frame = JFrame("Layout Engine test")
 
@@ -103,7 +105,7 @@ fun main() {
         panel.preferredSize = Dimension(600, 600)
         panel.addComponentListener(object : ComponentAdapter() {
             override fun componentResized(e: ComponentEvent?) {
-                paintOnPanel(panel)
+                paintOnPanel(root, panel)
             }
         })
 
@@ -112,6 +114,6 @@ fun main() {
         frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
         frame.isVisible = true
 
-        paintOnPanel(panel)
+        paintOnPanel(root, panel)
     }
 }
