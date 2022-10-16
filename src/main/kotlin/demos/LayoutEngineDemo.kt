@@ -41,12 +41,12 @@ fun createRootComponent(): Component {
                         Grid(
                             2, 2,
                             listOf(
-                                Box(),
+                                Box().withSize(50.0, 15.0),
                                 Box(),
                                 Box(),
                                 Box().withSize(30.0, 30.0)
                             )
-                        ).withGap(8.0).withSize(100.0, 100.0)
+                        ).withGap(8.0)
                             .withCellHorizontalAlignment(HorizontalAlignment.MIDDLE)
                             .withCellVerticalAlignment(VerticalAlignment.CENTER),
                         HStack(
