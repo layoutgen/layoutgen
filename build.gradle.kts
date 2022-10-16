@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("java")
     kotlin("jvm") version "1.7.0"
     application
 }
@@ -10,10 +11,13 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
     testImplementation(kotlin("test"))
+
+    implementation("org.antlr:antlr4-runtime:4.11.1")
 }
 
 tasks.test {
