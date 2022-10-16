@@ -7,6 +7,7 @@ import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 import kotlin.math.floor
 
@@ -45,37 +46,34 @@ class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()
         return this
     }
 
-    override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        if (hasDefinedSize()) {
-            size.requestedSize = size.definedSize
-        } else {
-            size.requestedSize = parentRequestedSize
+    override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
+        // TODO: what if one cell has a set size but the grid itself does not?
+        val width: Double? = size.definedSize.width ?: parentRequestedSize.width
+        val height: Double? = size.definedSize.height ?: parentRequestedSize.height
+
+        size.requestedSize = UnclearDimensions(width, height)
+
+        var cellWidth: Double? = null
+        var cellHeight: Double? = null
+
+        if (width != null) {
+            cellWidth = (width - (cols - 1) * gap) / cols
+        }
+        if (height != null) {
+            cellHeight = (height - (rows - 1) * gap) / rows
         }
 
-        if (size.requestedSize == null) {
-            childComponents.forEach { it.propagateRequestedSize(null) }
-        } else {
-            val cellDimensions = Dimensions(
-                (size.requestedSize!!.width - (cols - 1) * gap) / cols,
-                (size.requestedSize!!.height - (rows - 1) * gap) / rows
-            )
-
-            childComponents.forEach { it.propagateRequestedSize(cellDimensions) }
-        }
+        childComponents.forEach { it.propagateRequestedSize(UnclearDimensions(cellWidth, cellHeight)) }
     }
 
     override fun calculateTargetSize() {
-        if (size.requestedSize != null) {
-            size.targetSize = size.requestedSize!!
-        } else {
-            val columnWidth = LayoutUtils.getMaxWidth(childComponents)
-            val rowHeight = LayoutUtils.getMaxHeight(childComponents)
+        val fallbackWidth = LayoutUtils.getMaxWidth(childComponents) * cols + gap * (cols - 1)
+        val fallbackHeight = LayoutUtils.getMaxHeight(childComponents) * rows + gap * (rows - 1)
 
-            size.targetSize = Dimensions(
-                columnWidth * cols + gap * (cols - 1),
-                rowHeight * rows + gap * (rows - 1)
-            )
-        }
+        size.targetSize = Dimensions(
+            size.requestedSize.width ?: fallbackWidth,
+            size.requestedSize.height ?: fallbackHeight
+        )
     }
 
     override fun determineChildrenPositions() {

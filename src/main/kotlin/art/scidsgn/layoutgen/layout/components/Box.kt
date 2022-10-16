@@ -2,9 +2,9 @@ package art.scidsgn.layoutgen.layout.components
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.ContainerComponent
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 
 open class Box(child: Component? = null) : ContainerComponent() {
@@ -24,12 +24,11 @@ open class Box(child: Component? = null) : ContainerComponent() {
         LayoutUtils.setChildrenParent(this)
     }
 
-    override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        if (hasDefinedSize()) {
-            size.requestedSize = size.definedSize
-        } else {
-            size.requestedSize = parentRequestedSize
-        }
+    override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
+        size.requestedSize = UnclearDimensions(
+            size.definedSize.width ?: parentRequestedSize.width,
+            size.definedSize.height ?: parentRequestedSize.height
+        )
 
         childComponents.forEach { it.propagateRequestedSize(size.requestedSize) }
     }

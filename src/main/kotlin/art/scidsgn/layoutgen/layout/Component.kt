@@ -1,8 +1,8 @@
 package art.scidsgn.layoutgen.layout
 
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 
 abstract class Component {
     abstract var parent: Component?
@@ -10,7 +10,7 @@ abstract class Component {
     abstract val size: Size
     abstract var position: Position
 
-    abstract fun propagateRequestedSize(parentRequestedSize: Dimensions?)
+    abstract fun propagateRequestedSize(parentRequestedSize: UnclearDimensions)
     abstract fun calculateTargetSize()
 
     fun nextSibling(): Component? {
@@ -35,16 +35,26 @@ abstract class Component {
         return size.hasTargetSize()
     }
 
-    fun hasDefinedSize(): Boolean {
-        return size.definedSize != null
+    fun hasDefinedWidth(): Boolean {
+        return size.definedSize.hasWidth()
     }
 
-    fun setDefinedSize(dimensions: Dimensions) {
-        size.definedSize = dimensions
+    fun hasDefinedHeight(): Boolean {
+        return size.definedSize.hasHeight()
     }
 }
 
-fun <T : Component> T.withDefinedSize(dimensions: Dimensions): T {
-    setDefinedSize(dimensions)
+fun <T : Component> T.withSize(width: Double, height: Double): T {
+    size.definedSize = UnclearDimensions(width, height)
+    return this
+}
+
+fun <T : Component> T.withWidth(width: Double): T {
+    size.definedSize.width = width
+    return this
+}
+
+fun <T : Component> T.withHeight(height: Double): T {
+    size.definedSize.height = height
     return this
 }

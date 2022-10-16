@@ -1,10 +1,10 @@
 package art.scidsgn.layoutgen.layout.sizing
 
 class Size() {
-    var requestedSize: Dimensions? = null
+    var requestedSize: UnclearDimensions = UnclearDimensions(null, null)
     lateinit var targetSize: Dimensions
 
-    var definedSize: Dimensions? = null
+    var definedSize: UnclearDimensions = UnclearDimensions(null, null)
 
     fun hasTargetSize(): Boolean {
         return this::targetSize.isInitialized

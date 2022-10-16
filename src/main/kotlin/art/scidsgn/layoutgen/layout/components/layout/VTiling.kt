@@ -5,6 +5,7 @@ import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 
 class VTiling(children: List<Component> = emptyList()) : GappedContainerComponent() {
@@ -25,31 +26,22 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         return this
     }
 
-    override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        if (hasDefinedSize()) {
-            size.requestedSize = size.definedSize
-        } else {
-            size.requestedSize = parentRequestedSize
+    override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
+        val width: Double? = size.definedSize.width ?: parentRequestedSize.width
+        val height: Double? = size.definedSize.height ?: parentRequestedSize.height
+
+        size.requestedSize = UnclearDimensions(width, height)
+
+        var childHeight: Double? = null
+
+        if (height != null) {
+            val nonDefinedHeight = height - LayoutUtils.getCombinedDefinedHeight(childComponents) - getTotalGap()
+            val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
+
+            childHeight = nonDefinedHeight / nonDefinedItemCount
         }
 
-        if (size.requestedSize == null) {
-            childComponents.forEach { it.propagateRequestedSize(null) }
-        } else {
-            val nonDefinedHeight = size.requestedSize!!.height - LayoutUtils.getCombinedDefinedHeight(
-                childComponents
-            ) - getTotalGap()
-            val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedSize(childComponents).size
-
-            childComponents.forEach {
-                if (it.hasDefinedSize()) {
-                    it.propagateRequestedSize(it.size.definedSize)
-                } else {
-                    it.propagateRequestedSize(
-                        Dimensions(size.requestedSize!!.width, nonDefinedHeight / nonDefinedItemCount)
-                    )
-                }
-            }
-        }
+        childComponents.forEach { it.propagateRequestedSize(UnclearDimensions(width, childHeight)) }
     }
 
     override fun calculateTargetSize() {
@@ -66,7 +58,7 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         val nonDefinedHeight = size.targetSize.height - LayoutUtils.getCombinedDefinedHeight(
             childComponents
         ) - getTotalGap()
-        val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedSize(childComponents).size
+        val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
         var yOffset = 0.0
 
         childComponents.forEach {
@@ -75,11 +67,7 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
                 yOffset
             )
 
-            if (it.hasDefinedSize()) {
-                yOffset += it.size.definedSize!!.height
-            } else {
-                yOffset += nonDefinedHeight / nonDefinedItemCount
-            }
+            yOffset += it.size.definedSize.height ?: (nonDefinedHeight / nonDefinedItemCount)
             yOffset += gap
         }
     }

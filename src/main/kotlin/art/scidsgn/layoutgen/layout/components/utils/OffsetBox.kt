@@ -5,6 +5,7 @@ import art.scidsgn.layoutgen.layout.ContainerComponent
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 
 class OffsetBox(val offset: Position, child: Component? = null) : ContainerComponent() {
     override var parent: Component? = null
@@ -23,18 +24,17 @@ class OffsetBox(val offset: Position, child: Component? = null) : ContainerCompo
         }
     }
 
-    override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
+    override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         size.requestedSize = parentRequestedSize
 
         childComponents.forEach { it.propagateRequestedSize(size.requestedSize) }
     }
 
     override fun calculateTargetSize() {
-        if (size.definedSize != null) {
-            size.targetSize = size.definedSize!!
-        } else {
-            size.targetSize = size.requestedSize ?: Dimensions(0.0, 0.0)
-        }
+        size.targetSize = Dimensions(
+            size.definedSize.width ?: size.requestedSize.width ?: 0.0,
+            size.definedSize.height ?: size.requestedSize.height ?: 0.0
+        )
     }
 
     override fun determineChildrenPositions() {

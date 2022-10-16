@@ -6,6 +6,7 @@ import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
+import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.utils.LayoutUtils
 import kotlin.math.max
 
@@ -33,14 +34,14 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         return this
     }
 
-    override fun propagateRequestedSize(parentRequestedSize: Dimensions?) {
-        if (hasDefinedSize()) {
-            size.requestedSize = size.definedSize
-        } else {
-            size.requestedSize = parentRequestedSize
-        }
+    override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
+        size.requestedSize = UnclearDimensions(
+            size.definedSize.width ?: parentRequestedSize.width,
+            size.definedSize.height ?: parentRequestedSize.height
+        )
 
-        childComponents.forEach { it.propagateRequestedSize(null) }
+        // TODO: defined children width could be used here
+        childComponents.forEach { it.propagateRequestedSize(UnclearDimensions(null, null)) }
     }
 
     private fun getTargetHeight(): Double {

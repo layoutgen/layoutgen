@@ -1,12 +1,10 @@
 import art.scidsgn.layoutgen.debug.layout.LayoutDebugGenerator
-import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.LayoutEngine
+import art.scidsgn.layoutgen.layout.*
 import art.scidsgn.layoutgen.layout.components.Box
 import art.scidsgn.layoutgen.layout.components.layout.*
 import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
-import art.scidsgn.layoutgen.layout.withDefinedSize
 import java.awt.Dimension
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent
@@ -22,15 +20,15 @@ fun createRootComponent(): Component {
             listOf(
                 VTiling(
                     listOf(
-                        Box(),
-                        Box().withDefinedSize(Dimensions(40.0, 100.0)),
+                        Box().withWidth(150.0),
+                        Box().withSize(40.0, 100.0),
                         Grid(
                             2, 2,
                             listOf(
                                 Box(),
                                 Box(),
-                                Box(),
-                                Box().withDefinedSize(Dimensions(30.0, 30.0))
+                                Box().withHeight(20.0),
+                                Box().withSize(30.0, 30.0)
                             )
                         ).withGap(8.0),
                         Box()
@@ -44,44 +42,45 @@ fun createRootComponent(): Component {
                                 Box(),
                                 Box(),
                                 Box(),
-                                Box().withDefinedSize(Dimensions(30.0, 30.0))
+                                Box().withSize(30.0, 30.0)
                             )
-                        ).withGap(8.0).withDefinedSize(Dimensions(100.0, 100.0))
+                        ).withGap(8.0).withSize(100.0, 100.0)
                             .withCellHorizontalAlignment(HorizontalAlignment.MIDDLE)
                             .withCellVerticalAlignment(VerticalAlignment.CENTER),
                         HStack(
                             listOf(
-                                Box().withDefinedSize(Dimensions(50.0, 30.0)),
-                                Box().withDefinedSize(Dimensions(20.0, 80.0))
+                                Box().withSize(50.0, 30.0),
+                                Box().withSize(20.0, 80.0)
                             )
                         ).withGap(8.0).withVerticalAlignment(VerticalAlignment.CENTER),
                         OverlapHStack(
                             listOf(
-                                Box().withDefinedSize(Dimensions(48.0, 48.0)),
-                                Box().withDefinedSize(Dimensions(48.0, 48.0)),
+                                Box().withSize(48.0, 48.0),
+                                Box().withSize(48.0, 48.0),
                                 Grid(
                                     2, 2,
                                     listOf(
-                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
-                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
-                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
-                                        Box().withDefinedSize(Dimensions(16.0, 16.0)),
+                                        Box().withSize(16.0, 16.0),
+                                        Box().withSize(16.0, 16.0),
+                                        Box().withSize(16.0, 16.0),
+                                        Box().withSize(16.0, 16.0),
                                     )
                                 ).withGap(4.0)
                             )
                         ).withGap(16.0).withVerticalAlignment(VerticalAlignment.CENTER)
                     )
                 ).withHorizontalAlignment(HorizontalAlignment.MIDDLE).withVerticalAlignment(VerticalAlignment.CENTER)
+                    .withHeight(250.0)
                     .withGap(8.0),
                 OverlapVStack(
                     listOf(
-                        Box().withDefinedSize(Dimensions(60.0, 60.0)),
-                        Box().withDefinedSize(Dimensions(60.0, 60.0)),
-                        Box().withDefinedSize(Dimensions(60.0, 60.0))
+                        Box().withSize(60.0, 60.0),
+                        Box().withSize(60.0, 60.0),
+                        Box().withSize(60.0, 60.0)
                     )
                 ).withGap(16.0).withHorizontalAlignment(HorizontalAlignment.MIDDLE)
                     .withVerticalAlignment(VerticalAlignment.CENTER)
-                    .withDefinedSize(Dimensions(80.0, 150.0))
+                    .withSize(80.0, 150.0)
             )
         ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(8.0)
     )
@@ -91,7 +90,7 @@ fun paintOnPanel(panel: JPanel) {
     val root = createRootComponent()
     LayoutEngine.layOut(root, Dimensions(panel.width.toDouble(), panel.height.toDouble()))
 
-    val image = LayoutDebugGenerator.createImage(root, Random(1))
+    val image = LayoutDebugGenerator.createImage(root, Random(2))
     panel.graphics.drawImage(image, 0, 0, null)
 }
 

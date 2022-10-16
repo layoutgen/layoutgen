@@ -7,15 +7,19 @@ import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 
 object LayoutUtils {
-    fun getComponentsWithoutDefinedSize(components: List<Component>): List<Component> {
-        return components.filter { it.size.definedSize == null }
+    fun getComponentsWithoutDefinedWidth(components: List<Component>): List<Component> {
+        return components.filter { !it.hasDefinedWidth() }
+    }
+
+    fun getComponentsWithoutDefinedHeight(components: List<Component>): List<Component> {
+        return components.filter { !it.hasDefinedHeight() }
     }
 
     fun getCombinedDefinedWidth(components: List<Component>): Double {
         var sum = 0.0
 
         components.forEach {
-            sum += it.size.definedSize?.width ?: 0.0
+            sum += it.size.definedSize.width ?: 0.0
         }
 
         return sum
@@ -25,7 +29,7 @@ object LayoutUtils {
         var sum = 0.0
 
         components.forEach {
-            sum += it.size.definedSize?.height ?: 0.0
+            sum += it.size.definedSize.height ?: 0.0
         }
 
         return sum
@@ -51,11 +55,10 @@ object LayoutUtils {
         component: Component,
         fallbackSize: Dimensions = Dimensions(0.0, 0.0)
     ) {
-        if (component.size.definedSize != null) {
-            component.size.targetSize = component.size.definedSize!!
-        } else {
-            component.size.targetSize = component.size.requestedSize ?: fallbackSize
-        }
+        component.size.targetSize = Dimensions(
+            component.size.definedSize.width ?: component.size.requestedSize.width ?: fallbackSize.width,
+            component.size.definedSize.height ?: component.size.requestedSize.height ?: fallbackSize.height
+        )
     }
 
     fun setChildrenParent(parent: ContainerComponent) {
