@@ -32,9 +32,15 @@ TODO
 | Component   | Status |
 |-------------|:------:|
 | Box         |   ✅    |
+
+#### Single element alignment components
+
+| Component   | Status |
+|-------------|:------:|
 | OffsetBox   |   ✅    |
 | MarginBox   |   ❌    |
 | AbsoluteBox |   ❌    |
+| CenterBox   |   ❌    |
 
 #### 1D layouts
 
