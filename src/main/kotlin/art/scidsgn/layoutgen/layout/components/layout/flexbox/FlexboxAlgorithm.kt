@@ -1,17 +1,24 @@
 package art.scidsgn.layoutgen.layout.components.layout.flexbox
 
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
 import kotlin.math.max
 import kotlin.math.min
 
 class FlexboxAlgorithm(
-    val items: List<FlexItem>, val mainSize: Double, val crossSize: Double, val gap: Double,
-    val flexWrap: Boolean, val justifyContent: FlexContentAlignment, val alignContent: FlexContentAlignment
+    val items: List<FlexItem>,
+    val mainSize: Double,
+    val crossSize: Double,
+    val gap: Double,
+    val flexWrap: Boolean,
+    val justifyContent: FlexContentAlignment,
+    val alignContent: FlexContentAlignment,
+    var alignItems: FlexItemAlignment
 ) {
     val lines = mutableListOf(makeLine())
 
     private fun makeLine(): FlexLine {
-        return FlexLine(mainSize, gap, justifyContent)
+        return FlexLine(mainSize, gap, justifyContent, alignItems)
     }
 
     fun distributeFlexLines() {

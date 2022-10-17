@@ -5,6 +5,7 @@ import art.scidsgn.layoutgen.layout.ContainerComponent
 import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexDirection
+import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
@@ -24,6 +25,7 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
     private var flexWrap = false
     private var flexJustifyContent = FlexContentAlignment.FLEX_START
     private var flexAlignContent = FlexContentAlignment.FLEX_START
+    private var flexAlignItems = FlexItemAlignment.FLEX_START
 
     init {
         LayoutUtils.setChildrenParent(this)
@@ -54,6 +56,11 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
         return this
     }
 
+    fun withAlignItems(flexAlignItems: FlexItemAlignment): Flexbox {
+        this.flexAlignItems = flexAlignItems
+        return this
+    }
+
     override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         size.requestedSize = UnclearDimensions(
             size.definedSize.width ?: parentRequestedSize.width,
@@ -72,13 +79,13 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
             algorithm = FlexboxAlgorithm(
                 childComponents.map { RowFlexItem(it) },
                 flexContainerWidth, flexContainerHeight, gap,
-                flexWrap, flexJustifyContent, flexAlignContent
+                flexWrap, flexJustifyContent, flexAlignContent, flexAlignItems
             )
         } else {
             algorithm = FlexboxAlgorithm(
                 childComponents.map { ColumnFlexItem(it) },
                 flexContainerHeight, flexContainerWidth, gap,
-                flexWrap, flexJustifyContent, flexAlignContent
+                flexWrap, flexJustifyContent, flexAlignContent, flexAlignItems
             )
         }
 
