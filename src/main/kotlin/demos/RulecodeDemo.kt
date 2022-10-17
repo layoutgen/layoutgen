@@ -1,25 +1,26 @@
 package demos
 
-import art.scidsgn.layoutgen.rulecode.RulecodeBaseListener
-import art.scidsgn.layoutgen.rulecode.RulecodeLexer
-import art.scidsgn.layoutgen.rulecode.RulecodeParser
-import org.antlr.v4.runtime.CharStreams
-import org.antlr.v4.runtime.CommonTokenStream
-import org.antlr.v4.runtime.tree.ParseTreeWalker
+import art.scidsgn.layoutgen.ruletree.RuletreeEnvironment
+import art.scidsgn.layoutgen.ruletree.parsers.antlr.AntlrRuletreeGenerator
+import java.nio.file.Path
 
-object DemoListener : RulecodeBaseListener() {
-    override fun enterIsRule(ctx: RulecodeParser.IsRuleContext?) {
-        println("Is-rule found!")
-    }
-}
+//object DemoListener : RulecodeBaseListener() {
+//    override fun enterIsRule(ctx: RulecodeParser.IsRuleContext?) {
+//        println("Is-rule found!")
+//    }
+//}
 
 fun main() {
-    val ruleCode = "@Root Test := A B C | Xyz"
+    val ruleCodePath = Path.of(
+        {}.javaClass.classLoader.getResource(
+            "rulecode/example.rulecode"
+        )!!.toURI()
+    ).toString()
 
-    val lexer = RulecodeLexer(CharStreams.fromString(ruleCode))
-    val tokens = CommonTokenStream(lexer)
-    val parser = RulecodeParser(tokens)
-    val walker = ParseTreeWalker()
+    val generator = AntlrRuletreeGenerator()
+    val environment = RuletreeEnvironment(generator)
 
-    walker.walk(DemoListener, parser.program())
+    val ruletree = environment.loadFile(ruleCodePath)
+
+    println(ruletree)
 }

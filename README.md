@@ -2,13 +2,13 @@
 
 ## Progress status
 
-| Module        | Status            |
-|---------------|-------------------|
-| ANTLR parser  | 🔵 In progress    |
-| Ruletree AST  | ❌ Not started yet |
+| Module        | Status           |
+|---------------|------------------|
+| ANTLR parser  | 🔵 In progress   |
+| Ruletree AST  | 🔵 In progress   |
 | Interpreter   | ❌ Not started yet |
-| Layout Engine | 🔵 In progress    |
-| Renderer      | 🅿️ Prototype     |
+| Layout Engine | 🔵 In progress   |
+| Renderer      | 🅿️ Prototype    |
 
 ### Module progress - ANTLR parser
 

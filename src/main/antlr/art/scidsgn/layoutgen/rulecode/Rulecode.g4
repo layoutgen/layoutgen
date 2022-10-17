@@ -21,7 +21,7 @@ rewriteRule:
 		branchSep rewriteBranch
 	)*;
 // Rewrite branch: only rule names
-rewriteBranch: branchWeight? moduleRuleName+;
+rewriteBranch: branchWeight? ruleName+;
 
 // Annotation function call: @Fixed(...) {...}
 annotationFn: annotationName fnCallArgs? fnCallBody?;
@@ -35,6 +35,7 @@ fnCallBody: LBRACE element* RBRACE;
 
 // Single element
 element:
+// TODO: rule calls?
 	moduleRuleName
 	| number
 	| color

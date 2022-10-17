@@ -37,6 +37,24 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
+    public void enterImportStatement(RulecodeParser.ImportStatementContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitImportStatement(RulecodeParser.ImportStatementContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
     public void enterIsRule(RulecodeParser.IsRuleContext ctx) {
     }
 
@@ -307,7 +325,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void enterAnnotation(RulecodeParser.AnnotationContext ctx) {
+    public void enterAnnotationName(RulecodeParser.AnnotationNameContext ctx) {
     }
 
     /**
@@ -316,7 +334,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void exitAnnotation(RulecodeParser.AnnotationContext ctx) {
+    public void exitAnnotationName(RulecodeParser.AnnotationNameContext ctx) {
     }
 
     /**
@@ -325,7 +343,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void enterBuiltin(RulecodeParser.BuiltinContext ctx) {
+    public void enterBuiltinName(RulecodeParser.BuiltinNameContext ctx) {
     }
 
     /**
@@ -334,7 +352,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void exitBuiltin(RulecodeParser.BuiltinContext ctx) {
+    public void exitBuiltinName(RulecodeParser.BuiltinNameContext ctx) {
     }
 
     /**
@@ -343,7 +361,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void enterVariable(RulecodeParser.VariableContext ctx) {
+    public void enterVariableName(RulecodeParser.VariableNameContext ctx) {
     }
 
     /**
@@ -352,7 +370,7 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void exitVariable(RulecodeParser.VariableContext ctx) {
+    public void exitVariableName(RulecodeParser.VariableNameContext ctx) {
     }
 
     /**
@@ -407,6 +425,24 @@ public class RulecodeBaseListener implements RulecodeListener {
      */
     @Override
     public void exitString(RulecodeParser.StringContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterBoolean(RulecodeParser.BooleanContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitBoolean(RulecodeParser.BooleanContext ctx) {
     }
 
     /**

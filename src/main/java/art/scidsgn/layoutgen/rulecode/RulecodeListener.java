@@ -24,6 +24,20 @@ public interface RulecodeListener extends ParseTreeListener {
     void exitProgram(RulecodeParser.ProgramContext ctx);
 
     /**
+     * Enter a parse tree produced by {@link RulecodeParser#importStatement}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterImportStatement(RulecodeParser.ImportStatementContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#importStatement}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitImportStatement(RulecodeParser.ImportStatementContext ctx);
+
+    /**
      * Enter a parse tree produced by {@link RulecodeParser#isRule}.
      *
      * @param ctx the parse tree
@@ -234,46 +248,46 @@ public interface RulecodeListener extends ParseTreeListener {
     void exitRuleName(RulecodeParser.RuleNameContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link RulecodeParser#annotation}.
+     * Enter a parse tree produced by {@link RulecodeParser#annotationName}.
      *
      * @param ctx the parse tree
      */
-    void enterAnnotation(RulecodeParser.AnnotationContext ctx);
+    void enterAnnotationName(RulecodeParser.AnnotationNameContext ctx);
 
     /**
-     * Exit a parse tree produced by {@link RulecodeParser#annotation}.
+     * Exit a parse tree produced by {@link RulecodeParser#annotationName}.
      *
      * @param ctx the parse tree
      */
-    void exitAnnotation(RulecodeParser.AnnotationContext ctx);
+    void exitAnnotationName(RulecodeParser.AnnotationNameContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link RulecodeParser#builtin}.
+     * Enter a parse tree produced by {@link RulecodeParser#builtinName}.
      *
      * @param ctx the parse tree
      */
-    void enterBuiltin(RulecodeParser.BuiltinContext ctx);
+    void enterBuiltinName(RulecodeParser.BuiltinNameContext ctx);
 
     /**
-     * Exit a parse tree produced by {@link RulecodeParser#builtin}.
+     * Exit a parse tree produced by {@link RulecodeParser#builtinName}.
      *
      * @param ctx the parse tree
      */
-    void exitBuiltin(RulecodeParser.BuiltinContext ctx);
+    void exitBuiltinName(RulecodeParser.BuiltinNameContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link RulecodeParser#variable}.
+     * Enter a parse tree produced by {@link RulecodeParser#variableName}.
      *
      * @param ctx the parse tree
      */
-    void enterVariable(RulecodeParser.VariableContext ctx);
+    void enterVariableName(RulecodeParser.VariableNameContext ctx);
 
     /**
-     * Exit a parse tree produced by {@link RulecodeParser#variable}.
+     * Exit a parse tree produced by {@link RulecodeParser#variableName}.
      *
      * @param ctx the parse tree
      */
-    void exitVariable(RulecodeParser.VariableContext ctx);
+    void exitVariableName(RulecodeParser.VariableNameContext ctx);
 
     /**
      * Enter a parse tree produced by {@link RulecodeParser#number}.
@@ -316,4 +330,18 @@ public interface RulecodeListener extends ParseTreeListener {
      * @param ctx the parse tree
      */
     void exitString(RulecodeParser.StringContext ctx);
+
+    /**
+     * Enter a parse tree produced by {@link RulecodeParser#boolean}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterBoolean(RulecodeParser.BooleanContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#boolean}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitBoolean(RulecodeParser.BooleanContext ctx);
 }
