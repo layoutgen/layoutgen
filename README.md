@@ -51,8 +51,8 @@ TODO
 
 | Component     | Status  |
 |---------------|:-------:|
-| Grid          |    🔵    |
-| Flexbox       |    ❌    |
+| Grid          |    ✅    |
+| Flexbox       |    🔵    |
 
 #### Responsive layouts
 

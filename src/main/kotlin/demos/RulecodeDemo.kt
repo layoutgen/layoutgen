@@ -14,7 +14,7 @@ object DemoListener : RulecodeBaseListener() {
 }
 
 fun main() {
-    val ruleCode = "Test := A B C | Xyz"
+    val ruleCode = "@Root Test := A B C | Xyz"
 
     val lexer = RulecodeLexer(CharStreams.fromString(ruleCode))
     val tokens = CommonTokenStream(lexer)

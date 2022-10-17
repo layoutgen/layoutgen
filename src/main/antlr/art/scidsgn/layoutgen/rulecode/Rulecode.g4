@@ -1,6 +1,9 @@
 grammar Rulecode;
 
-program: (isRule | rewriteRule)+ EOF;
+program: (importStatement | isRule | rewriteRule)+ EOF;
+
+// Import statement: import "icons.scirc" as Icons
+importStatement: IMPORT_KEYWORD string AS_KEYWORD ruleName;
 
 // Is-rule: X := Y Z | ABC
 isRule:
@@ -10,7 +13,7 @@ isRule:
 // Is-rule branch: elements!
 isBranch: branchWeight? element+;
 // Is-rule variables: A(_x, _y, _z) := ...
-isVars: LPAREN (variable (COMMA variable)*)? RPAREN;
+isVars: LPAREN (variableName (COMMA variableName)*)? RPAREN;
 
 // Rewrite rule: X -> Y Z | ABC
 rewriteRule:
@@ -21,9 +24,9 @@ rewriteRule:
 rewriteBranch: branchWeight? moduleRuleName+;
 
 // Annotation function call: @Fixed(...) {...}
-annotationFn: annotation fnCallArgs? fnCallBody?;
+annotationFn: annotationName fnCallArgs? fnCallBody?;
 // Builtin function call: $Random(...) {...}
-builtinFn: builtin fnCallArgs? fnCallBody?;
+builtinFn: builtinName fnCallArgs? fnCallBody?;
 
 // Function call arguments
 fnCallArgs: LPAREN (fnCallArg (COMMA fnCallArg)*)? RPAREN;
@@ -36,7 +39,8 @@ element:
 	| number
 	| color
 	| string
-	| variable
+	| boolean
+	| variableName
 	| builtinFn;
 
 // Branch weight: [42] [0.5]
@@ -49,22 +53,29 @@ moduleRuleName: ID (DOT ID)?;
 // General rule name (no module specifier)
 ruleName: ID;
 
-annotation: ANNOTATION;
-builtin: BUILTIN;
-variable: VARIABLE;
+annotationName: ANNOTATION_ID;
+builtinName: BUILTIN_ID;
+variableName: VARIABLE_ID;
 
 number: NUMBER;
 color: HEXCOLOR;
 string: STRING;
+boolean: TRUE | FALSE;
 
 NUMBER: '-'? [0-9]+ ('.' [0-9]+)?;
 HEXCOLOR: '#' [0-9a-fA-F]+;
 STRING:
 	'"' (~('"' | '\\' | '\r' | '\n') | '\\' ('"' | '\\'))* '"';
 
-BUILTIN: '$' ID;
-ANNOTATION: '@' ID;
-VARIABLE: '_' ID;
+TRUE: 'true';
+FALSE: 'false';
+
+IMPORT_KEYWORD: 'import';
+AS_KEYWORD: 'as';
+
+BUILTIN_ID: '$' ID;
+ANNOTATION_ID: '@' ID;
+VARIABLE_ID: '_' ID;
 ID: [a-zA-Z][a-zA-Z0-9_]*;
 
 IS_EQUALS: ':=';

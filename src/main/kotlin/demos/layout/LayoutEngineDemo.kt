@@ -1,20 +1,14 @@
 package demos
 
-import art.scidsgn.layoutgen.debug.layout.LayoutDebugGenerator
-import art.scidsgn.layoutgen.layout.*
+import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.components.Box
 import art.scidsgn.layoutgen.layout.components.layout.*
-import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
-import java.awt.Dimension
-import java.awt.event.ComponentAdapter
-import java.awt.event.ComponentEvent
-import javax.swing.JFrame
-import javax.swing.JPanel
-import javax.swing.SwingUtilities
-import javax.swing.WindowConstants
-import kotlin.random.Random
+import art.scidsgn.layoutgen.layout.components.layout.enums.HorizontalAlignment
+import art.scidsgn.layoutgen.layout.components.layout.enums.VerticalAlignment
+import art.scidsgn.layoutgen.layout.withHeight
+import art.scidsgn.layoutgen.layout.withSize
+import art.scidsgn.layoutgen.layout.withWidth
+import demos.layout.LayoutDemoBase
 
 fun createRootComponent(): Component {
     return Box(
@@ -89,33 +83,6 @@ fun createRootComponent(): Component {
     )
 }
 
-fun paintOnPanel(root: Component, panel: JPanel) {
-    LayoutEngine.resetLayout(root)
-    LayoutEngine.layOut(root, Dimensions(panel.width.toDouble(), panel.height.toDouble()))
-
-    val image = LayoutDebugGenerator.createImage(root, Random(2))
-    panel.graphics.drawImage(image, 0, 0, null)
-}
-
 fun main() {
-    val root = createRootComponent()
-
-    SwingUtilities.invokeLater {
-        val frame = JFrame("Layout Engine test")
-
-        val panel = JPanel()
-        panel.preferredSize = Dimension(600, 600)
-        panel.addComponentListener(object : ComponentAdapter() {
-            override fun componentResized(e: ComponentEvent?) {
-                paintOnPanel(root, panel)
-            }
-        })
-
-        frame.contentPane = panel
-        frame.pack()
-        frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        frame.isVisible = true
-
-        paintOnPanel(root, panel)
-    }
+    LayoutDemoBase.runDemoOf(createRootComponent(), "Layout Engine test")
 }

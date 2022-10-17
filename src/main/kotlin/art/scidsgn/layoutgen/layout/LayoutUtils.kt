@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout
 
-import art.scidsgn.layoutgen.layout.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.enums.VerticalAlignment
+import art.scidsgn.layoutgen.layout.components.layout.enums.HorizontalAlignment
+import art.scidsgn.layoutgen.layout.components.layout.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 
 object LayoutUtils {
