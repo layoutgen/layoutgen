@@ -7,21 +7,22 @@ import kotlin.math.min
 
 class FlexboxAlgorithm(
     val items: List<FlexItem>,
-    val mainSize: Double,
-    val crossSize: Double,
+    var mainSize: Double,
+    var crossSize: Double,
     val gap: Double,
     val flexWrap: Boolean,
     val justifyContent: FlexContentAlignment,
     val alignContent: FlexContentAlignment,
     var alignItems: FlexItemAlignment
 ) {
-    val lines = mutableListOf(makeLine())
+    var lines = mutableListOf(makeLine())
 
     private fun makeLine(): FlexLine {
         return FlexLine(mainSize, gap, justifyContent, alignItems)
     }
 
     fun distributeFlexLines() {
+        lines = mutableListOf(makeLine())
         items.forEach {
             if (!lines.last().willFit(it) && flexWrap) {
                 lines += makeLine()
@@ -30,7 +31,7 @@ class FlexboxAlgorithm(
         }
     }
 
-    private fun getTotalCrossSize(): Double {
+    fun getTotalCrossSize(): Double {
         return lines.sumOf { it.getCrossSize() } + max(0, lines.size - 1) * gap
     }
 
@@ -69,5 +70,9 @@ class FlexboxAlgorithm(
 
             }
         }
+    }
+
+    fun getMinimumMainSize(): Double {
+        return lines.maxOf { it.getTotalMainSize() }
     }
 }

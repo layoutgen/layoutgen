@@ -6,6 +6,7 @@ import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
+import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
@@ -71,7 +72,7 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
     }
 
     override fun calculateTargetSize() {
-        // TODO: you need to implement maxRequestedSize!
+        // TODO: THIS IS UGLY
         val flexContainerWidth = size.requestedSize.width ?: Double.MAX_VALUE
         val flexContainerHeight = size.requestedSize.height ?: Double.MAX_VALUE
 
@@ -91,8 +92,24 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
 
         algorithm.distributeFlexLines()
 
-        // TODO: this doesn't account for the stuff inside!!
-        LayoutUtils.setTargetSizeForExpansiveComponent(this)
+        LayoutUtils.setTargetSizeForExpansiveComponent(
+            this,
+            if (flexDirection == FlexDirection.ROW)
+                Dimensions(algorithm.getMinimumMainSize(), algorithm.getTotalCrossSize())
+            else
+                Dimensions(algorithm.getTotalCrossSize(), algorithm.getMinimumMainSize())
+        )
+
+        if (algorithm.mainSize == Double.MAX_VALUE || algorithm.crossSize == Double.MAX_VALUE) {
+            if (flexDirection == FlexDirection.ROW) {
+                algorithm.mainSize = size.targetSize.width
+                algorithm.crossSize = size.targetSize.height
+            } else {
+                algorithm.mainSize = size.targetSize.height
+                algorithm.crossSize = size.targetSize.width
+            }
+            algorithm.distributeFlexLines()
+        }
     }
 
     override fun determineChildrenPositions() {

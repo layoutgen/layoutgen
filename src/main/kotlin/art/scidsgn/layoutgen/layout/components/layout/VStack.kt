@@ -48,6 +48,7 @@ class VStack(children: List<Component> = emptyList()) : GappedContainerComponent
         childComponents.forEach {
             it.propagateRequestedSize(
                 UnclearDimensions(
+                    // TODO: should this stretch to requested size or max child defined size??
                     if (horizontalStretch) LayoutUtils.getMaxDefinedWidthOrNull(childComponents) else null,
                     null
                 )

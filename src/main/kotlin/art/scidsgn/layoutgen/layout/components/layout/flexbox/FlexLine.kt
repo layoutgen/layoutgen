@@ -14,7 +14,7 @@ class FlexLine(
     val items: MutableList<FlexItem> = mutableListOf()
     var enforcedCrossSize: Double? = null
 
-    private fun getTotalMainSize(): Double {
+    fun getTotalMainSize(): Double {
         return items.sumOf { it.mainSize } + max(0, items.size - 1) * gap
     }
 
