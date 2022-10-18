@@ -6,7 +6,7 @@
 |---------------|------------------|
 | ANTLR parser  | 🔵 In progress   |
 | Ruletree AST  | 🔵 In progress   |
-| Interpreter   | ❌ Not started yet |
+| Interpreter   | 🔵 In progress |
 | Layout Engine | 🔵 In progress   |
 | Renderer      | 🅿️ Prototype    |
 
