@@ -1,6 +1,11 @@
-NumberTwice(_x) := _x _x
-Result := NumberTwice(_x = 1)
-          NumberTwice(_x = 2)
-          NumberTwice(_x = 3)
-          NumberTwice(_x = 4)
-          NumberTwice(_x = 5)
+import "digits.rulecode" as Digits
+
+NumberTwice(_x) :=
+    _x _x
+
+Result :=
+    NumberTwice(_x = Digits.RandomDigit)
+    NumberTwice(_x = Digits.RandomDigit)
+    NumberTwice(_x = Digits.RandomDigit)
+    NumberTwice(_x = Digits.RandomDigit)
+    NumberTwice(_x = Digits.RandomDigit)

@@ -43,6 +43,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
             is BooleanElement -> element.boolean
             is Variable -> arguments[element.name] ?: TODO("unknown parameter!")
             is RuleCall -> interpretRuleCall(ruleTree, element, arguments, depth)
+            is BuiltinCall -> TODO("todo...")
 
             else -> TODO("unknown element, sorry")
         }

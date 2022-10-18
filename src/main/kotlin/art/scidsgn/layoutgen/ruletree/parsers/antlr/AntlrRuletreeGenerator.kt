@@ -12,18 +12,17 @@ import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.Token
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 
-class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
-    lateinit var ruleTree: Ruletree
+class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
+    companion object : RuletreeGenerator {
+        override fun parse(ruleTree: Ruletree, code: String) {
+            val lexer = RulecodeLexer(CharStreams.fromString(code))
+            val tokens = CommonTokenStream(lexer)
+            val parser = RulecodeParser(tokens)
+            val walker = ParseTreeWalker()
 
-    override fun parse(ruleTree: Ruletree, code: String) {
-        val lexer = RulecodeLexer(CharStreams.fromString(code))
-        val tokens = CommonTokenStream(lexer)
-        val parser = RulecodeParser(tokens)
-        val walker = ParseTreeWalker()
+            walker.walk(AntlrRuletreeGenerator(ruleTree), parser.program())
+        }
 
-        this.ruleTree = ruleTree
-
-        walker.walk(this, parser.program())
     }
 
     override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {
