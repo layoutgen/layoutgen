@@ -23,6 +23,18 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
         return RuleName(ruleNameCtx.text, null, codePosition(ruleNameCtx.start))
     }
 
+    private fun moduleRuleName(moduleRuleNameCtx: RulecodeParser.ModuleRuleNameContext): RuleName {
+        if (moduleRuleNameCtx.ID().size == 2) {
+            return RuleName(
+                moduleRuleNameCtx.ID(1).text,
+                moduleRuleNameCtx.ID(0).text,
+                codePosition(moduleRuleNameCtx.start)
+            )
+        } else {
+            return RuleName(moduleRuleNameCtx.ID(0).text, null, codePosition(moduleRuleNameCtx.start))
+        }
+    }
+
     private fun parseRewriteRuleBranches(
         rewriteRule: RewriteRule,
         branches: List<RulecodeParser.RewriteBranchContext>
@@ -56,17 +68,54 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
         return BooleanElement(booleanCtx.text == "true", codePosition(booleanCtx.start))
     }
 
+    private fun color(colorCtx: RulecodeParser.ColorContext): ColorElement {
+        return ColorElement(colorCtx.text, codePosition(colorCtx.start))
+    }
+
     private fun number(numberCtx: RulecodeParser.NumberContext): NumberElement {
         return NumberElement(numberCtx.NUMBER().text.toDouble(), codePosition(numberCtx.start))
     }
 
     private fun string(stringCtx: RulecodeParser.StringContext): StringElement {
         // TODO: trim start and end quote
-        return StringElement(stringCtx.text, codePosition(stringCtx.start))
+        val text = stringCtx.text
+        return StringElement(text.substring(1, text.length - 1), codePosition(stringCtx.start))
     }
 
     private fun variable(variableCtx: RulecodeParser.VariableNameContext): Variable {
         return Variable(variableCtx.text, codePosition(variableCtx.start))
+    }
+
+    private fun builtinName(builtinNameCtx: RulecodeParser.BuiltinNameContext): BuiltinName {
+        return BuiltinName(builtinNameCtx.BUILTIN_ID().text, codePosition(builtinNameCtx.start))
+    }
+
+    private fun builtinCall(builtinFnCtx: RulecodeParser.BuiltinFnContext): BuiltinCall {
+        val builtinCall = BuiltinCall(builtinName(builtinFnCtx.builtinName()), codePosition(builtinFnCtx.start))
+
+        if (builtinFnCtx.fnCallArgs() != null) {
+            builtinFnCtx.fnCallArgs().fnCallArg().forEach {
+                builtinCall.arguments[it.ID().text] = parseElement(it.element())
+            }
+        }
+
+        if (builtinFnCtx.fnCallBody() != null) {
+            builtinCall.body += builtinFnCtx.fnCallBody().element().map { parseElement(it) }
+        }
+
+        return builtinCall
+    }
+
+    private fun ruleCall(ruleCallCtx: RulecodeParser.RuleFnContext): RuleCall {
+        val ruleCall = RuleCall(moduleRuleName(ruleCallCtx.moduleRuleName()), codePosition(ruleCallCtx.start))
+
+        if (ruleCallCtx.ruleCallArgs() != null) {
+            ruleCallCtx.ruleCallArgs().ruleCallArg().forEach {
+                ruleCall.arguments[it.variableName().text] = parseElement(it.element())
+            }
+        }
+
+        return ruleCall
     }
 
     private fun parseElement(elementCtx: RulecodeParser.ElementContext): Element {
@@ -75,8 +124,11 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
             elementCtx.number() != null -> number(elementCtx.number())
             elementCtx.string() != null -> string(elementCtx.string())
             elementCtx.variableName() != null -> variable(elementCtx.variableName())
+            elementCtx.color() != null -> color(elementCtx.color())
+            elementCtx.builtinFn() != null -> builtinCall(elementCtx.builtinFn())
+            elementCtx.ruleFn() != null -> ruleCall(elementCtx.ruleFn())
 
-            else -> Variable("todo", RuletreeCodePosition(0, 0))
+            else -> TODO("uwu")
         }
     }
 
@@ -120,6 +172,10 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
         parseIsRuleBranches(isRule, ctx.isBranch)
 
         ruleTree.rules += isRule
+    }
+
+    override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {
+        ruleTree.import(ctx.ruleName().text, string(ctx.string()).string)
     }
 
     override fun parse(ruleTree: Ruletree, code: String) {

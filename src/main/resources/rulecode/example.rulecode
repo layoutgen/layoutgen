@@ -1,4 +1,4 @@
-
+import "another.rulecode" as Another
 
 RewriteRule1 -> A B C
 RewriteRule2 -> A B C | D E | [20] F
@@ -6,4 +6,6 @@ RewriteRule2 -> A B C | D E | [20] F
 @Root
 IsRule1 := [10] 4256346 true false | "hello there!"
 
-IsRule2(_x, _y, _z) := _x _y | _z
+IsRule2(_x, _y, _z) := _x _y | _z #FFF $Circle(x = 4, y = true) { 7 _xyz }
+
+IsRule3 := Icons.LoveIcon(_size = 32)

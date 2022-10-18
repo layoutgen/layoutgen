@@ -7,7 +7,7 @@ importStatement: IMPORT_KEYWORD string AS_KEYWORD ruleName;
 
 // Is-rule: X := Y Z | ABC
 isRule:
-	annotationFn* ruleName isVars? IS_EQUALS isBranch (
+	annotationName* ruleName isVars? IS_EQUALS isBranch (
 		branchSep isBranch
 	)*;
 // Is-rule branch: elements!
@@ -17,14 +17,12 @@ isVars: LPAREN (variableName (COMMA variableName)*)? RPAREN;
 
 // Rewrite rule: X -> Y Z | ABC
 rewriteRule:
-	annotationFn* ruleName ARROW rewriteBranch (
+	annotationName* ruleName ARROW rewriteBranch (
 		branchSep rewriteBranch
 	)*;
 // Rewrite branch: only rule names
 rewriteBranch: branchWeight? ruleName+;
 
-// Annotation function call: @Fixed(...) {...}
-annotationFn: annotationName fnCallArgs? fnCallBody?;
 // Builtin function call: $Random(...) {...}
 builtinFn: builtinName fnCallArgs? fnCallBody?;
 
@@ -33,10 +31,15 @@ fnCallArgs: LPAREN (fnCallArg (COMMA fnCallArg)*)? RPAREN;
 fnCallArg: ID EQUALS element;
 fnCallBody: LBRACE element* RBRACE;
 
+// Rule call
+ruleFn: moduleRuleName ruleCallArgs?;
+ruleCallArgs: LPAREN (ruleCallArg (COMMA ruleCallArg)*)? RPAREN;
+ruleCallArg: variableName EQUALS element;
+
 // Single element
 element:
 // TODO: rule calls?
-	moduleRuleName
+	ruleFn
 	| number
 	| color
 	| string

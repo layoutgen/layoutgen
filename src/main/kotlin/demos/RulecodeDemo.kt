@@ -20,6 +20,7 @@ fun main() {
     val generator = AntlrRuletreeGenerator()
     val environment = RuletreeEnvironment(generator)
 
+    // TODO: error listener!
     val ruletree = environment.loadFile(ruleCodePath)
 
     println(ruletree)

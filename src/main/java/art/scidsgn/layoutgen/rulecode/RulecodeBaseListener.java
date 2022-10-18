@@ -145,24 +145,6 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
-    public void enterAnnotationFn(RulecodeParser.AnnotationFnContext ctx) {
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override
-    public void exitAnnotationFn(RulecodeParser.AnnotationFnContext ctx) {
-    }
-
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override
     public void enterBuiltinFn(RulecodeParser.BuiltinFnContext ctx) {
     }
 
@@ -227,6 +209,60 @@ public class RulecodeBaseListener implements RulecodeListener {
      */
     @Override
     public void exitFnCallBody(RulecodeParser.FnCallBodyContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterRuleFn(RulecodeParser.RuleFnContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitRuleFn(RulecodeParser.RuleFnContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterRuleCallArgs(RulecodeParser.RuleCallArgsContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitRuleCallArgs(RulecodeParser.RuleCallArgsContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void enterRuleCallArg(RulecodeParser.RuleCallArgContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitRuleCallArg(RulecodeParser.RuleCallArgContext ctx) {
     }
 
     /**

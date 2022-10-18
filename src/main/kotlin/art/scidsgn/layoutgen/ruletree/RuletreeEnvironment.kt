@@ -9,12 +9,12 @@ class RuletreeEnvironment(val generator: RuletreeGenerator) {
         if (ruleTrees.containsKey(absoluteFilePath)) {
             return ruleTrees[absoluteFilePath]!!
         } else {
-            val ruleTree = Ruletree(absoluteFilePath)
+            val ruleTree = Ruletree(this, absoluteFilePath)
+            ruleTrees[absoluteFilePath] = ruleTree
+
             // TODO: exception
             val code = File(absoluteFilePath).readText()
             generator.parse(ruleTree, code)
-
-            ruleTrees[absoluteFilePath] = ruleTree
 
             return ruleTree
         }

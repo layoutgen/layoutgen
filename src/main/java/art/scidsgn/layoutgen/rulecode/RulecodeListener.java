@@ -108,20 +108,6 @@ public interface RulecodeListener extends ParseTreeListener {
     void exitRewriteBranch(RulecodeParser.RewriteBranchContext ctx);
 
     /**
-     * Enter a parse tree produced by {@link RulecodeParser#annotationFn}.
-     *
-     * @param ctx the parse tree
-     */
-    void enterAnnotationFn(RulecodeParser.AnnotationFnContext ctx);
-
-    /**
-     * Exit a parse tree produced by {@link RulecodeParser#annotationFn}.
-     *
-     * @param ctx the parse tree
-     */
-    void exitAnnotationFn(RulecodeParser.AnnotationFnContext ctx);
-
-    /**
      * Enter a parse tree produced by {@link RulecodeParser#builtinFn}.
      *
      * @param ctx the parse tree
@@ -176,6 +162,48 @@ public interface RulecodeListener extends ParseTreeListener {
      * @param ctx the parse tree
      */
     void exitFnCallBody(RulecodeParser.FnCallBodyContext ctx);
+
+    /**
+     * Enter a parse tree produced by {@link RulecodeParser#ruleFn}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterRuleFn(RulecodeParser.RuleFnContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#ruleFn}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitRuleFn(RulecodeParser.RuleFnContext ctx);
+
+    /**
+     * Enter a parse tree produced by {@link RulecodeParser#ruleCallArgs}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterRuleCallArgs(RulecodeParser.RuleCallArgsContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#ruleCallArgs}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitRuleCallArgs(RulecodeParser.RuleCallArgsContext ctx);
+
+    /**
+     * Enter a parse tree produced by {@link RulecodeParser#ruleCallArg}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterRuleCallArg(RulecodeParser.RuleCallArgContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#ruleCallArg}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitRuleCallArg(RulecodeParser.RuleCallArgContext ctx);
 
     /**
      * Enter a parse tree produced by {@link RulecodeParser#element}.
