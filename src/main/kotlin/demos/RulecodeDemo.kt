@@ -13,7 +13,7 @@ import java.nio.file.Path
 fun main() {
     val ruleCodePath = Path.of(
         {}.javaClass.classLoader.getResource(
-            "rulecode/example.rulecode"
+            "rulecode/mathtest.rulecode"
         )!!.toURI()
     ).toString()
 
@@ -22,6 +22,8 @@ fun main() {
 
     // TODO: error listener!
     val ruletree = environment.loadFile(ruleCodePath)
+
+    val resultRule = ruletree.getIsRule("Result")
 
     println(ruletree)
 }

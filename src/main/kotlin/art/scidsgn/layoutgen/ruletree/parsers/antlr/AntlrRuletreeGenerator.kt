@@ -15,6 +15,53 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
     lateinit var ruleTree: Ruletree
 
+    override fun parse(ruleTree: Ruletree, code: String) {
+        val lexer = RulecodeLexer(CharStreams.fromString(code))
+        val tokens = CommonTokenStream(lexer)
+        val parser = RulecodeParser(tokens)
+        val walker = ParseTreeWalker()
+
+        this.ruleTree = ruleTree
+
+        walker.walk(this, parser.program())
+    }
+
+    override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {
+        ruleTree.import(ctx.ruleName().text, string(ctx.string()).string)
+    }
+
+    override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
+        var isRule = IsRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
+
+        if (ctx.annotationName() != null) {
+            ctx.annotationName().forEach {
+                isRule.annotations += it.ANNOTATION_ID().text
+            }
+        }
+
+        if (ctx.isVars != null) {
+            parseIsRuleVariables(isRule, ctx.isVars)
+        }
+
+        parseIsRuleBranches(isRule, ctx.isBranch)
+
+        ruleTree.rules += isRule
+    }
+
+    override fun enterRewriteRule(ctx: RulecodeParser.RewriteRuleContext) {
+        val rewriteRule = RewriteRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
+
+        if (ctx.annotationName() != null) {
+            ctx.annotationName().forEach {
+                rewriteRule.annotations += it.ANNOTATION_ID().text
+            }
+        }
+
+        parseRewriteRuleBranches(rewriteRule, ctx.rewriteBranch())
+
+        ruleTree.rules += rewriteRule
+    }
+
     private fun codePosition(token: Token): RuletreeCodePosition {
         return RuletreeCodePosition(token.line, token.charPositionInLine)
     }
@@ -54,16 +101,6 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
         }
     }
 
-    override fun enterRewriteRule(ctx: RulecodeParser.RewriteRuleContext) {
-        val rewriteRule = RewriteRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
-
-        // TODO: annotations
-
-        parseRewriteRuleBranches(rewriteRule, ctx.rewriteBranch())
-
-        ruleTree.rules += rewriteRule
-    }
-
     private fun boolean(booleanCtx: RulecodeParser.BooleanContext): BooleanElement {
         return BooleanElement(booleanCtx.text == "true", codePosition(booleanCtx.start))
     }
@@ -77,7 +114,6 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
     }
 
     private fun string(stringCtx: RulecodeParser.StringContext): StringElement {
-        // TODO: trim start and end quote
         val text = stringCtx.text
         return StringElement(text.substring(1, text.length - 1), codePosition(stringCtx.start))
     }
@@ -128,7 +164,7 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
             elementCtx.builtinFn() != null -> builtinCall(elementCtx.builtinFn())
             elementCtx.ruleFn() != null -> ruleCall(elementCtx.ruleFn())
 
-            else -> TODO("uwu")
+            else -> TODO("unknown element error")
         }
     }
 
@@ -158,34 +194,5 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
         variables.variableName().forEach {
             isRule.variables += variable(it)
         }
-    }
-
-    override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
-        var isRule = IsRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
-
-        // TODO: annotations
-
-        if (ctx.isVars != null) {
-            parseIsRuleVariables(isRule, ctx.isVars)
-        }
-
-        parseIsRuleBranches(isRule, ctx.isBranch)
-
-        ruleTree.rules += isRule
-    }
-
-    override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {
-        ruleTree.import(ctx.ruleName().text, string(ctx.string()).string)
-    }
-
-    override fun parse(ruleTree: Ruletree, code: String) {
-        val lexer = RulecodeLexer(CharStreams.fromString(code))
-        val tokens = CommonTokenStream(lexer)
-        val parser = RulecodeParser(tokens)
-        val walker = ParseTreeWalker()
-
-        this.ruleTree = ruleTree
-
-        walker.walk(this, parser.program())
     }
 }
