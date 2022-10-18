@@ -31,7 +31,7 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
     }
 
     override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
-        var isRule = IsRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
+        val isRule = IsRule(ruleTree, ruleName(ctx.ruleName()), codePosition(ctx.start))
 
         if (ctx.annotationName() != null) {
             ctx.annotationName().forEach {
@@ -49,7 +49,7 @@ class AntlrRuletreeGenerator : RulecodeBaseListener(), RuletreeGenerator {
     }
 
     override fun enterRewriteRule(ctx: RulecodeParser.RewriteRuleContext) {
-        val rewriteRule = RewriteRule(ruleName(ctx.ruleName()), codePosition(ctx.start))
+        val rewriteRule = RewriteRule(ruleTree, ruleName(ctx.ruleName()), codePosition(ctx.start))
 
         if (ctx.annotationName() != null) {
             ctx.annotationName().forEach {
