@@ -1,11 +1,31 @@
 import "digits.rulecode" as Digits
 
-NumberTwice(_x) :=
-    _x _x
-
 Result :=
-    NumberTwice(_x = Digits.RandomDigit)
-    NumberTwice(_x = Digits.RandomDigit)
-    NumberTwice(_x = Digits.RandomDigit)
-    NumberTwice(_x = Digits.RandomDigit)
-    NumberTwice(_x = Digits.RandomDigit)
+    $Add {
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+    }
+    $Add {
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+    }
+    $Add {
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+    }
+    $Add {
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+        Digits.RandomDigit
+    }
