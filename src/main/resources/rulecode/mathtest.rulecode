@@ -1,31 +1,13 @@
 import "digits.rulecode" as Digits
 
+List :=
+    "add" $Add { 1 2 3 4 }
+    "sub" $Sub { 1 2 3 4 }
+    "mul" $Mul { 1 2 3 4 }
+    "div" $Div { 1 2 3 4 }
+    "min" $Min { 1 2 3 4 }
+    "max" $Max { 1 2 3 4 }
+
 Result :=
-    $Add {
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-    }
-    $Add {
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-    }
-    $Add {
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-    }
-    $Add {
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-        Digits.RandomDigit
-    }
+    $Count { List }
+    List
