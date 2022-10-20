@@ -1,5 +1,5 @@
 package art.scidsgn.layoutgen.ruletree.ast
 
-import art.scidsgn.layoutgen.ruletree.RuletreeCodePosition
+import art.scidsgn.layoutgen.ruletree.io.CodePosition
 
-class BuiltinName(val name: String, codePosition: RuletreeCodePosition) : Element(codePosition)
+class BuiltinName(val name: String, codePosition: CodePosition) : Element(codePosition)

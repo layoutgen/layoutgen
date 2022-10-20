@@ -6,21 +6,25 @@ import art.scidsgn.layoutgen.ruletree.parsers.antlr.AntlrRuletreeGenerator
 import java.nio.file.Path
 
 fun main() {
-    val ruleCodePath = Path.of(
-        {}.javaClass.classLoader.getResource(
-            "rulecode/mathtest.rulecode"
-        )!!.toURI()
-    ).toString()
+    try {
+        val ruleCodePath = Path.of(
+            {}.javaClass.classLoader.getResource(
+                "rulecode/mathtest.rulecode"
+            )!!.toURI()
+        ).toString()
 
-    val environment = RuletreeEnvironment(AntlrRuletreeGenerator)
+        val environment = RuletreeEnvironment(AntlrRuletreeGenerator)
 
-    // TODO: error listener!
-    val ruletree = environment.loadFile(ruleCodePath)
-    val resultRule = ruletree.getIsRule("Result")
+        // TODO: error listener!
+        val ruletree = environment.loadFile(ruleCodePath)
+        val resultRule = ruletree.getIsRule("Result")
 
-    val interpreter = Interpreter()
+        val interpreter = Interpreter()
 
-    val output = interpreter.execute(resultRule)
+        val output = interpreter.execute(resultRule)
 
-    println(output as List<Double>)
+        println(output as List<Double>)
+    } catch (e: Throwable) {
+        System.err.println(e.message)
+    }
 }

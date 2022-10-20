@@ -1,12 +1,14 @@
 package art.scidsgn.layoutgen.ruletree.parsers.antlr
 
+import art.scidsgn.layoutgen.error.GeneralError
+import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.rulecode.RulecodeBaseListener
 import art.scidsgn.layoutgen.rulecode.RulecodeLexer
 import art.scidsgn.layoutgen.rulecode.RulecodeParser
 import art.scidsgn.layoutgen.ruletree.Ruletree
-import art.scidsgn.layoutgen.ruletree.RuletreeCodePosition
 import art.scidsgn.layoutgen.ruletree.RuletreeGenerator
 import art.scidsgn.layoutgen.ruletree.ast.*
+import art.scidsgn.layoutgen.ruletree.io.CodePosition
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.Token
@@ -26,7 +28,11 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
     }
 
     override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {
-        ruleTree.import(ctx.ruleName().text, string(ctx.string()).string)
+        try {
+            ruleTree.import(ctx.ruleName().text, string(ctx.string()).string)
+        } catch (e: GeneralError) {
+            throw InFileError(e, codePosition(ctx.start))
+        }
     }
 
     override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
@@ -61,8 +67,8 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
         ruleTree.rules += rewriteRule
     }
 
-    private fun codePosition(token: Token): RuletreeCodePosition {
-        return RuletreeCodePosition(token.line, token.charPositionInLine)
+    private fun codePosition(token: Token): CodePosition {
+        return CodePosition(ruleTree.sourceFile, token.line, token.charPositionInLine)
     }
 
     private fun ruleName(ruleNameCtx: RulecodeParser.RuleNameContext): RuleName {

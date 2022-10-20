@@ -1,21 +1,25 @@
 package art.scidsgn.layoutgen.ruletree
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
+import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.ruletree.ast.IsRule
 import art.scidsgn.layoutgen.ruletree.ast.RewriteRule
 import art.scidsgn.layoutgen.ruletree.ast.Rule
 import art.scidsgn.layoutgen.ruletree.ast.RuleName
+import art.scidsgn.layoutgen.ruletree.io.SourceFile
 import java.nio.file.FileSystems
 
-class Ruletree(val environment: RuletreeEnvironment, val absoluteFilePath: String) {
+class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile) {
     val importedModules = mutableMapOf<String, Ruletree>()
     val rules = mutableListOf<Rule>()
 
     fun import(moduleName: String, relativePath: String) {
         if (importedModules.containsKey(moduleName)) {
-            TODO("module already imported")
+            throw GeneralError(Errors.MODULE_ALREADY_EXISTS, arrayOf(moduleName))
         }
 
-        val basePath = FileSystems.getDefault().getPath(absoluteFilePath)
+        val basePath = FileSystems.getDefault().getPath(sourceFile.absoluteFilePath)
         val absoluteImportPath = basePath.parent.resolve(relativePath).normalize()
 
         importedModules[moduleName] = environment.loadFile(absoluteImportPath.toString())
@@ -26,7 +30,7 @@ class Ruletree(val environment: RuletreeEnvironment, val absoluteFilePath: Strin
             return getIsRule(name.name)
         }
         if (!importedModules.containsKey(name.moduleName)) {
-            TODO("module not found!")
+            throw InFileError(Errors.MODULE_NOT_FOUND, arrayOf(name.moduleName), name.codePosition)
         }
 
         return importedModules[name.moduleName]!!.getIsRule(name.name)
