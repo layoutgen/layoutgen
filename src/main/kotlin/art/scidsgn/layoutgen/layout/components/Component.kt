@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.layout
+package art.scidsgn.layoutgen.layout.components
 
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size

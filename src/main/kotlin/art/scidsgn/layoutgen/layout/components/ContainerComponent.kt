@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.layout
+package art.scidsgn.layoutgen.layout.components
 
 abstract class ContainerComponent : Component() {
     abstract val childComponents: List<Component>

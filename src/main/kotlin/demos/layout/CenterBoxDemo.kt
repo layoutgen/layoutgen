@@ -1,8 +1,8 @@
 package demos.layout
 
 import art.scidsgn.layoutgen.layout.components.Box
-import art.scidsgn.layoutgen.layout.components.CenterBox
-import art.scidsgn.layoutgen.layout.withSize
+import art.scidsgn.layoutgen.layout.components.utils.CenterBox
+import art.scidsgn.layoutgen.layout.components.withSize
 
 fun main() {
     LayoutDemoBase.runDemoOf(

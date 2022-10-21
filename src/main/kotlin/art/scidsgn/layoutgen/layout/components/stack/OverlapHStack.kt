@@ -1,7 +1,8 @@
-package art.scidsgn.layoutgen.layout.components
+package art.scidsgn.layoutgen.layout.components.stack
 
-import art.scidsgn.layoutgen.layout.Component
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.LayoutUtils
+import art.scidsgn.layoutgen.layout.components.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
@@ -10,7 +11,7 @@ import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import kotlin.math.max
 
-class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerComponent() {
+class OverlapHStack(children: List<Component> = emptyList()) : GappedContainerComponent() {
     override var parent: Component? = null
     override val childComponents = children
 
@@ -19,24 +20,24 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
 
     private var horizontalAlignment = HorizontalAlignment.LEFT
     private var verticalAlignment = VerticalAlignment.TOP
-    private var horizontalStretch = false
+    private var verticalStretch = false
 
     init {
         LayoutUtils.setChildrenParent(this)
     }
 
-    fun withVerticalAlignment(alignment: VerticalAlignment): OverlapVStack {
+    fun withVerticalAlignment(alignment: VerticalAlignment): OverlapHStack {
         this.verticalAlignment = alignment
         return this
     }
 
-    fun withHorizontalAlignment(alignment: HorizontalAlignment): OverlapVStack {
+    fun withHorizontalAlignment(alignment: HorizontalAlignment): OverlapHStack {
         this.horizontalAlignment = alignment
         return this
     }
 
-    fun withHorizontalStretch(stretch: Boolean): OverlapVStack {
-        this.horizontalStretch = stretch
+    fun withVerticalStretch(stretch: Boolean): OverlapHStack {
+        this.verticalStretch = stretch
         return this
     }
 
@@ -49,55 +50,55 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         childComponents.forEach {
             it.propagateRequestedSize(
                 UnclearDimensions(
-                    if (horizontalStretch) LayoutUtils.getMaxDefinedWidthOrNull(childComponents) else null,
-                    null
+                    null,
+                    if (verticalStretch) LayoutUtils.getMaxDefinedHeightOrNull(childComponents) else null
                 )
             )
         }
     }
 
-    private fun getTargetHeight(): Double {
-        var targetHeight = 0.0
+    private fun getTargetWidth(): Double {
+        var targetWidth = 0.0
 
         for (index in childComponents.indices) {
-            targetHeight = max(targetHeight, childComponents[index].size.targetSize.height + index * gap)
+            targetWidth = max(targetWidth, childComponents[index].size.targetSize.width + index * gap)
         }
 
-        return targetHeight
+        return targetWidth
     }
 
     override fun calculateTargetSize() {
         LayoutUtils.setTargetSizeForExpansiveComponent(
             this,
             Dimensions(
-                LayoutUtils.getMaxWidth(childComponents),
-                getTargetHeight()
+                getTargetWidth(),
+                LayoutUtils.getMaxHeight(childComponents)
             )
         )
     }
 
     override fun determineChildrenPositions() {
-        val totalHeight = getTargetHeight()
-        var yOffset = when (verticalAlignment) {
-            VerticalAlignment.TOP -> 0.0
-            VerticalAlignment.CENTER -> (size.targetSize.height - totalHeight) / 2
-            VerticalAlignment.BOTTOM -> size.targetSize.height - totalHeight
+        val totalWidth = getTargetWidth()
+        var xOffset = when (horizontalAlignment) {
+            HorizontalAlignment.LEFT -> 0.0
+            HorizontalAlignment.MIDDLE -> (size.targetSize.width - totalWidth) / 2
+            HorizontalAlignment.RIGHT -> size.targetSize.width - totalWidth
         }
-        if (yOffset < 0) {
-            yOffset = 0.0
+        if (xOffset < 0) {
+            xOffset = 0.0
         }
 
         childComponents.forEach {
             it.position = Position(
+                xOffset,
                 LayoutUtils.calculateAlignmentOffset(
-                    size.targetSize.width,
-                    it.size.targetSize.width,
-                    horizontalAlignment
-                ),
-                yOffset
+                    size.targetSize.height,
+                    it.size.targetSize.height,
+                    verticalAlignment
+                )
             )
 
-            yOffset += gap
+            xOffset += gap
         }
     }
 }

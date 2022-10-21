@@ -1,5 +1,7 @@
 package art.scidsgn.layoutgen.layout
 
+import art.scidsgn.layoutgen.layout.components.Component
+import art.scidsgn.layoutgen.layout.components.ContainerComponent
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions

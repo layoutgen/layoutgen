@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.debug.layout
 
-import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.ContainerComponent
+import art.scidsgn.layoutgen.layout.components.Component
+import art.scidsgn.layoutgen.layout.components.ContainerComponent
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage

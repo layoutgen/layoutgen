@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout.tree
 
-import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.ContainerComponent
+import art.scidsgn.layoutgen.layout.components.Component
+import art.scidsgn.layoutgen.layout.components.ContainerComponent
 
 internal class LeafIterator(start: Component) : Iterator<Component> {
     private var component: Component?

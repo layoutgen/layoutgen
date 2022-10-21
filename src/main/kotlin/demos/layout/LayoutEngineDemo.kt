@@ -1,12 +1,19 @@
 package demos
 
-import art.scidsgn.layoutgen.layout.Component
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.components.*
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
-import art.scidsgn.layoutgen.layout.withHeight
-import art.scidsgn.layoutgen.layout.withSize
-import art.scidsgn.layoutgen.layout.withWidth
+import art.scidsgn.layoutgen.layout.components.grid.Grid
+import art.scidsgn.layoutgen.layout.components.stack.HStack
+import art.scidsgn.layoutgen.layout.components.stack.OverlapHStack
+import art.scidsgn.layoutgen.layout.components.stack.OverlapVStack
+import art.scidsgn.layoutgen.layout.components.stack.VStack
+import art.scidsgn.layoutgen.layout.components.tiling.HTiling
+import art.scidsgn.layoutgen.layout.components.tiling.VTiling
+import art.scidsgn.layoutgen.layout.components.withHeight
+import art.scidsgn.layoutgen.layout.components.withSize
+import art.scidsgn.layoutgen.layout.components.withWidth
 import demos.layout.LayoutDemoBase
 
 fun createRootComponent(): Component {

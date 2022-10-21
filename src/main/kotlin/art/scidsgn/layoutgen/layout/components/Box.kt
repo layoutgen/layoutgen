@@ -1,7 +1,5 @@
 package art.scidsgn.layoutgen.layout.components
 
-import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.ContainerComponent
 import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position

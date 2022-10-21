@@ -1,15 +1,15 @@
 package demos.layout
 
-import art.scidsgn.layoutgen.layout.Component
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.components.Box
-import art.scidsgn.layoutgen.layout.components.VTiling
+import art.scidsgn.layoutgen.layout.components.tiling.VTiling
 import art.scidsgn.layoutgen.layout.components.flexbox.Flexbox
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
-import art.scidsgn.layoutgen.layout.withFlexGrow
-import art.scidsgn.layoutgen.layout.withHeight
-import art.scidsgn.layoutgen.layout.withSize
+import art.scidsgn.layoutgen.layout.components.withFlexGrow
+import art.scidsgn.layoutgen.layout.components.withHeight
+import art.scidsgn.layoutgen.layout.components.withSize
 
 fun createFlexbox(): Component {
     return VTiling(
