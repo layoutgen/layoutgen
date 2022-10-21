@@ -10,6 +10,8 @@ abstract class Component {
     abstract val size: Size
     abstract var position: Position
 
+    var flexGrow = 0.0
+
     abstract fun propagateRequestedSize(parentRequestedSize: UnclearDimensions)
     abstract fun calculateTargetSize()
 
@@ -56,5 +58,10 @@ fun <T : Component> T.withWidth(width: Double): T {
 
 fun <T : Component> T.withHeight(height: Double): T {
     size.definedSize.height = height
+    return this
+}
+
+fun <T : Component> T.withFlexGrow(flexGrow: Double): T {
+    this.flexGrow = flexGrow
     return this
 }

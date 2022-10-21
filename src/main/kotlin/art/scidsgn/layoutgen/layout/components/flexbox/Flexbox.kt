@@ -2,6 +2,7 @@ package art.scidsgn.layoutgen.layout.components.flexbox
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.ContainerComponent
+import art.scidsgn.layoutgen.layout.LayoutEngine
 import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
@@ -109,6 +110,18 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
                 algorithm.crossSize = size.targetSize.width
             }
             algorithm.distributeFlexLines()
+        }
+
+        algorithm.items.forEach {
+            val flexWidth = if (flexDirection == FlexDirection.ROW) it.mainSize else it.crossSize
+            val flexHeight = if (flexDirection == FlexDirection.ROW) it.crossSize else it.mainSize
+
+            if (
+                flexWidth != it.component.size.targetSize.width ||
+                        flexHeight != it.component.size.targetSize.height
+            ) {
+                LayoutEngine.layOut(it.component, Dimensions(flexWidth, flexHeight))
+            }
         }
     }
 

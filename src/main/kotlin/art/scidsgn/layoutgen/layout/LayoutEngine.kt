@@ -8,10 +8,14 @@ import art.scidsgn.layoutgen.layout.tree.BreadthUpIterable
 object LayoutEngine {
     fun layOut(root: Component, rootDimensions: Dimensions) {
         root.propagateRequestedSize(UnclearDimensions(rootDimensions.width, rootDimensions.height))
-        BreadthUpIterable(root).forEach {
+        for (it in BreadthUpIterable(root)) {
             it.calculateTargetSize()
             if (it is ContainerComponent) {
                 it.determineChildrenPositions()
+            }
+
+            if (it == root) {
+                break
             }
         }
     }

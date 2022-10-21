@@ -80,4 +80,21 @@ class FlexLine(
             }
         }
     }
+
+    private fun totalFlexGrow(): Double {
+        return items.sumOf { it.component.flexGrow }
+    }
+
+    fun commitLine() {
+        val totalFlexGrow = totalFlexGrow()
+        val spaceAvailable = mainSize - getTotalMainSize()
+
+        if (totalFlexGrow == 0.0) {
+            return
+        }
+
+        items.forEach {
+            it.mainSize += (it.component.flexGrow / totalFlexGrow) * spaceAvailable
+        }
+    }
 }

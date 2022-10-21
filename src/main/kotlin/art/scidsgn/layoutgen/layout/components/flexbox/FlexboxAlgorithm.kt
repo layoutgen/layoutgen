@@ -25,10 +25,12 @@ class FlexboxAlgorithm(
         lines = mutableListOf(makeLine())
         items.forEach {
             if (!lines.last().willFit(it) && flexWrap) {
+                lines.last().commitLine()
                 lines += makeLine()
             }
             lines.last().items += it
         }
+        lines.last().commitLine()
     }
 
     fun getTotalCrossSize(): Double {

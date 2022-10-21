@@ -7,6 +7,7 @@ import art.scidsgn.layoutgen.layout.components.flexbox.Flexbox
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
+import art.scidsgn.layoutgen.layout.withFlexGrow
 import art.scidsgn.layoutgen.layout.withHeight
 import art.scidsgn.layoutgen.layout.withSize
 
@@ -15,11 +16,13 @@ fun createFlexbox(): Component {
         listOf(
             Flexbox(
                 listOf(
+                    Box().withHeight(40.0).withFlexGrow(1.0),
                     Box().withSize(40.0, 40.0),
                     Box().withSize(40.0, 40.0),
                     Box().withSize(40.0, 40.0),
-                    Box().withSize(40.0, 40.0),
-                    Box().withSize(40.0, 40.0),
+                    Box(
+                        Box().withSize(20.0, 20.0)
+                    ).withFlexGrow(2.0),
                     Box().withSize(40.0, 40.0)
                 )
             ).withGap(32.0)
@@ -32,9 +35,9 @@ fun createFlexbox(): Component {
             Flexbox(
                 listOf(
                     Box().withSize(120.0, 120.0),
-                    Box().withSize(80.0, 80.0),
+                    Box().withHeight(80.0).withFlexGrow(1.5),
                     Box().withSize(20.0, 20.0),
-                    Box().withSize(100.0, 100.0),
+                    Box().withHeight(100.0).withFlexGrow(1.0),
                     Box().withSize(50.0, 50.0),
                     Box().withSize(90.0, 90.0)
                 )
