@@ -42,7 +42,7 @@ TODO
 | OffsetBox   |   ✅    |
 | MarginBox   |   ❌    |
 | AbsoluteBox |   ❌    |
-| CenterBox   |   ❌    |
+| CenterBox   |   ✅    |
 
 #### 1D layouts
 
