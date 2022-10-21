@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.layout.components.layout
+package art.scidsgn.layoutgen.layout.components
 
 import art.scidsgn.layoutgen.layout.ContainerComponent
 import kotlin.math.max

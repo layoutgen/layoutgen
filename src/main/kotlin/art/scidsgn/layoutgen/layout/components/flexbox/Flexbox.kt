@@ -1,11 +1,11 @@
-package art.scidsgn.layoutgen.layout.components.layout.flexbox
+package art.scidsgn.layoutgen.layout.components.flexbox
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.ContainerComponent
 import art.scidsgn.layoutgen.layout.LayoutUtils
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexDirection
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size

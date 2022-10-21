@@ -1,10 +1,9 @@
 package demos
 
 import art.scidsgn.layoutgen.layout.Component
-import art.scidsgn.layoutgen.layout.components.Box
-import art.scidsgn.layoutgen.layout.components.layout.*
-import art.scidsgn.layoutgen.layout.components.layout.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.components.layout.enums.VerticalAlignment
+import art.scidsgn.layoutgen.layout.components.*
+import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
+import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.withHeight
 import art.scidsgn.layoutgen.layout.withSize
 import art.scidsgn.layoutgen.layout.withWidth
@@ -65,7 +64,8 @@ fun createRootComponent(): Component {
                             )
                         ).withGap(16.0).withVerticalAlignment(VerticalAlignment.CENTER)
                     )
-                ).withHorizontalAlignment(HorizontalAlignment.MIDDLE).withVerticalAlignment(VerticalAlignment.CENTER)
+                ).withHorizontalAlignment(HorizontalAlignment.MIDDLE).withVerticalAlignment(
+                    VerticalAlignment.CENTER)
                     .withHeight(250.0)
                     .withGap(8.0),
                 OverlapVStack(

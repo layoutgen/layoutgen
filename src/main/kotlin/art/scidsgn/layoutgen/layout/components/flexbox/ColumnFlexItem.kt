@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.layout.components.layout.flexbox
+package art.scidsgn.layoutgen.layout.components.flexbox
 
 import art.scidsgn.layoutgen.layout.Component
 

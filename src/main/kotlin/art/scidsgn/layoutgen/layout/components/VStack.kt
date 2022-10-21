@@ -1,16 +1,15 @@
-package art.scidsgn.layoutgen.layout.components.layout
+package art.scidsgn.layoutgen.layout.components
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.LayoutUtils
-import art.scidsgn.layoutgen.layout.components.layout.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.components.layout.enums.VerticalAlignment
+import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
+import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
-import kotlin.math.max
 
-class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerComponent() {
+class VStack(children: List<Component> = emptyList()) : GappedContainerComponent() {
     override var parent: Component? = null
     override val childComponents = children
 
@@ -25,17 +24,17 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         LayoutUtils.setChildrenParent(this)
     }
 
-    fun withVerticalAlignment(alignment: VerticalAlignment): OverlapVStack {
+    fun withVerticalAlignment(alignment: VerticalAlignment): VStack {
         this.verticalAlignment = alignment
         return this
     }
 
-    fun withHorizontalAlignment(alignment: HorizontalAlignment): OverlapVStack {
+    fun withHorizontalAlignment(alignment: HorizontalAlignment): VStack {
         this.horizontalAlignment = alignment
         return this
     }
 
-    fun withHorizontalStretch(stretch: Boolean): OverlapVStack {
+    fun withHorizontalStretch(stretch: Boolean): VStack {
         this.horizontalStretch = stretch
         return this
     }
@@ -49,6 +48,7 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         childComponents.forEach {
             it.propagateRequestedSize(
                 UnclearDimensions(
+                    // TODO: should this stretch to requested size or max child defined size??
                     if (horizontalStretch) LayoutUtils.getMaxDefinedWidthOrNull(childComponents) else null,
                     null
                 )
@@ -56,28 +56,18 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         }
     }
 
-    private fun getTargetHeight(): Double {
-        var targetHeight = 0.0
-
-        for (index in childComponents.indices) {
-            targetHeight = max(targetHeight, childComponents[index].size.targetSize.height + index * gap)
-        }
-
-        return targetHeight
-    }
-
     override fun calculateTargetSize() {
         LayoutUtils.setTargetSizeForExpansiveComponent(
             this,
             Dimensions(
                 LayoutUtils.getMaxWidth(childComponents),
-                getTargetHeight()
+                LayoutUtils.getFittingHeight(childComponents) + getTotalGap()
             )
         )
     }
 
     override fun determineChildrenPositions() {
-        val totalHeight = getTargetHeight()
+        val totalHeight = LayoutUtils.getFittingHeight(childComponents) + getTotalGap()
         var yOffset = when (verticalAlignment) {
             VerticalAlignment.TOP -> 0.0
             VerticalAlignment.CENTER -> (size.targetSize.height - totalHeight) / 2
@@ -97,7 +87,7 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
                 yOffset
             )
 
-            yOffset += gap
+            yOffset += it.size.targetSize.height + gap
         }
     }
 }

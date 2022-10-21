@@ -2,11 +2,11 @@ package demos.layout
 
 import art.scidsgn.layoutgen.layout.Component
 import art.scidsgn.layoutgen.layout.components.Box
-import art.scidsgn.layoutgen.layout.components.layout.VTiling
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.Flexbox
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexDirection
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
+import art.scidsgn.layoutgen.layout.components.VTiling
+import art.scidsgn.layoutgen.layout.components.flexbox.Flexbox
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.layout.withHeight
 import art.scidsgn.layoutgen.layout.withSize
 

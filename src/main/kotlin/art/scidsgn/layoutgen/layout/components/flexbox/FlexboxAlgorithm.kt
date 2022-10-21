@@ -1,7 +1,7 @@
-package art.scidsgn.layoutgen.layout.components.layout.flexbox
+package art.scidsgn.layoutgen.layout.components.flexbox
 
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexContentAlignment
-import art.scidsgn.layoutgen.layout.components.layout.flexbox.enums.FlexItemAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
 import kotlin.math.max
 import kotlin.math.min
 
