@@ -26,23 +26,31 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
     }
 
     fun getIsRule(name: RuleName): IsRule {
-        if (name.moduleName == null) {
-            return getIsRule(name.name)
-        }
-        if (!importedModules.containsKey(name.moduleName)) {
-            throw InFileError(Errors.MODULE_NOT_FOUND, arrayOf(name.moduleName), name.codePosition)
-        }
+        try {
+            if (name.moduleName == null) {
+                return getIsRule(name.name)
+            }
+            if (!importedModules.containsKey(name.moduleName)) {
+                throw InFileError(
+                    Errors.MODULE_NOT_FOUND,
+                    arrayOf(name.moduleName),
+                    name.codePosition
+                )
+            }
 
-        return importedModules[name.moduleName]!!.getIsRule(name.name)
+            return importedModules[name.moduleName]!!.getIsRule(name.name)
+        } catch (e: GeneralError) {
+            throw InFileError(e, name.codePosition)
+        }
     }
 
     fun getIsRule(name: String): IsRule {
         return rules.find { it.name.name == name && it.name.moduleName == null && it is IsRule } as IsRule?
-            ?: TODO("no rule found!")
+            ?: throw GeneralError(Errors.IS_RULE_NOT_FOUND, arrayOf(name))
     }
 
     fun getRewriteRule(name: String): RewriteRule {
         return rules.find { it.name.name == name && it.name.moduleName == null && it is RewriteRule } as RewriteRule?
-            ?: TODO("no rule found!")
+            ?: throw GeneralError(Errors.REWRITE_RULE_NOT_FOUND, arrayOf(name))
     }
 }

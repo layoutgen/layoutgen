@@ -16,7 +16,7 @@ class RuletreeEnvironment(val generator: RuletreeGenerator) {
             val code = try {
                 File(absoluteFilePath).readText()
             } catch (_: IOException) {
-                throw GeneralError(Errors.COULDNT_LOAD_SOURCE_FILE, arrayOf(absoluteFilePath))
+                throw GeneralError(Errors.COULD_NOT_LOAD_SOURCE_FILE, arrayOf(absoluteFilePath))
             }
             val sourceFile = SourceFile(absoluteFilePath, code)
 

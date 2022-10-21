@@ -1,5 +1,8 @@
 package art.scidsgn.layoutgen.interpreter
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
+import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.stdlib.StandardLibrary
 import art.scidsgn.layoutgen.ruletree.Ruletree
 import art.scidsgn.layoutgen.ruletree.ast.*
@@ -15,13 +18,13 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
             return emptyList()
         }
 
-        // TODO: test if arguments match variables
+        // TODO: needs to be better, allow accessing codePosition here
         if (ruleArguments.size != rule.variables.size) {
-            TODO("wrong variable count")
+            throw GeneralError(Errors.RULE_INCORRECT_ARGUMENT_COUNT, arrayOf(rule.name.name, rule.variables.size.toString(), ruleArguments.size.toString()))
         }
         ruleArguments.forEach { key, _ ->
             if (rule.variables.none { it.name == key }) {
-                TODO("unknown argument!!")
+                throw GeneralError(Errors.RULE_UNEXPECTED_ARGUMENT, arrayOf(key))
             }
         }
 
@@ -42,7 +45,9 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
             is NumberElement -> element.number
             is StringElement -> element.string
             is BooleanElement -> element.boolean
-            is Variable -> ruleArguments[element.name] ?: TODO("unknown parameter!")
+            is Variable -> ruleArguments[element.name] ?: InFileError(
+                Errors.RULE_UNDEFINED_VARIABLE, arrayOf(element.name), element.codePosition
+            )
             is RuleCall -> interpretRuleCall(ruleTree, element, ruleArguments, depth)
             is BuiltinCall -> interpretBuiltinCall(ruleTree, element, ruleArguments, depth)
 
@@ -59,6 +64,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
         val function = StandardLibrary.getFunction(builtinCall.name)
         val functionContext = FunctionContext(this, ruleTree, builtinCall, ruleArguments, depth)
 
+
         return function.execute(functionContext)
     }
 
@@ -74,8 +80,12 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
         ruleCall.arguments.forEach { key, element ->
             ruleCallArguments[key] = interpretElement(ruleTree, element, ruleArguments, depth)
         }
-        
-        return execute(rule, ruleCallArguments, depth + 1)
+
+        try {
+            return execute(rule, ruleCallArguments, depth + 1)
+        } catch(e: GeneralError) {
+            throw InFileError(e, ruleCall.codePosition)
+        }
     }
 
     private fun <T> pickBranch(branches: List<RuleBranch<T>>): RuleBranch<T> {

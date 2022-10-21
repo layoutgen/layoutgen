@@ -1,5 +1,7 @@
 package art.scidsgn.layoutgen.interpreter.stdlib
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.AddFunction
@@ -24,9 +26,13 @@ object StandardLibrary {
 
         // List
         CountFunction(),
+
+        TestFunction()
     )
 
     fun getFunction(name: BuiltinName): BuiltinFunction {
-        return functions.find { "\$${it.name}" == name.name } ?: TODO("function ${name.name} not found")
+        return functions.find { "\$${it.name}" == name.name } ?: throw InFileError(
+            Errors.BUILTIN_FUNCTION_NOT_FOUND, arrayOf(name.name), name.codePosition
+        )
     }
 }

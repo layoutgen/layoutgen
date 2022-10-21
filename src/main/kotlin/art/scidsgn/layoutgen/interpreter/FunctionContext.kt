@@ -1,8 +1,9 @@
 package art.scidsgn.layoutgen.interpreter
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.ruletree.Ruletree
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinCall
-import kotlin.reflect.typeOf
 
 class FunctionContext(
     val interpreter: Interpreter,
@@ -13,7 +14,10 @@ class FunctionContext(
 ) {
     fun expectArgumentIsPresent(name: String) {
         if (!builtinCall.arguments.containsKey(name)) {
-            TODO("argument $name not present!")
+            throw InFileError(
+                Errors.BUILTIN_FUNCTION_ARGUMENT_NOT_PRESENT, arrayOf(name),
+                builtinCall.codePosition
+            )
         }
     }
 
@@ -24,12 +28,19 @@ class FunctionContext(
 
     inline fun <reified T> argumentSingleValue(name: String): T {
         val rawValue = argumentRawValue(name)
+        val codePosition = builtinCall.arguments[name]!!.codePosition
 
         if (rawValue is List<*>) {
             if (rawValue.size == 0) {
-                TODO("error about recursion depth limit possibly for arg $name")
+                throw InFileError(
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_ZERO_PROVIDED, arrayOf(name),
+                    codePosition
+                )
             } else if (rawValue.size > 1) {
-                TODO("function expects only 1 item")
+                throw InFileError(
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_MORE_PROVIDED, arrayOf(name),
+                    codePosition
+                )
             }
 
             if (rawValue[0] is T) {
@@ -39,11 +50,16 @@ class FunctionContext(
             return rawValue
         }
 
-        TODO("error: expected $name be of type ${typeOf<T>()}")
+        throw InFileError(
+            // TODO: type names
+            Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE, arrayOf(name, "???"),
+            codePosition
+        )
     }
 
     inline fun <reified T> argumentList(name: String): List<T> {
         val rawValue = argumentRawValue(name)
+        val codePosition = builtinCall.arguments[name]!!.codePosition
 
         val rawList = if (rawValue is List<*>) rawValue else listOf(rawValue)
 
@@ -54,6 +70,15 @@ class FunctionContext(
         }
 
         return rawList as List<T>
+    }
+
+    fun noBody() {
+        if (builtinCall.body.size > 0) {
+            throw InFileError(
+                Errors.BUILTIN_FUNCTION_USELESS_BODY, arrayOf(builtinCall.name.name),
+                builtinCall.body[0].codePosition
+            )
+        }
     }
 
     inline fun <reified T> body(): List<T> {

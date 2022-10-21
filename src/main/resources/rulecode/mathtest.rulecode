@@ -1,6 +1,6 @@
 import "digits.rulecode" as Digits
 
-List :=
+List(_x) :=
     "add" $Add { 1 2 3 4 }
     "sub" $Sub { 1 2 3 4 }
     "mul" $Mul { 1 2 3 4 }
@@ -8,7 +8,8 @@ List :=
     "min" $Min { 1 2 3 4 }
     "max" $Max { 1 2 3 4 }
 
+A := A
+
 Result :=
-    $Count { List }
-    List
-    Digitss.Abcd()
+    $Test(x = A)
+    List(_x=5)
