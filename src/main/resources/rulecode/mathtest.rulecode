@@ -8,8 +8,8 @@ List(_x) :=
     "min" $Min { 1 2 3 4 }
     "max" $Max { 1 2 3 4 }
 
-A := A;
+As := 3 2 5 6
 
 Result :=
-    $Test(x = A)
+    $Test(x = As)
     List(_x=5)

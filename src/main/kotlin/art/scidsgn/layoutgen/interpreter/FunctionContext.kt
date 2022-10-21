@@ -1,6 +1,7 @@
 package art.scidsgn.layoutgen.interpreter
 
 import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.ruletree.Ruletree
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinCall
@@ -26,7 +27,7 @@ class FunctionContext(
         return interpreter.interpretElement(ruleTree, builtinCall.arguments[name]!!, ruleArguments, depth)
     }
 
-    inline fun <reified T> argumentSingleValue(name: String): T {
+    inline fun <reified T> argumentSingleValue(name: String, typeName: TypeName, checkBlock: (value: T) -> Unit = {}): T {
         val rawValue = argumentRawValue(name)
         val codePosition = builtinCall.arguments[name]!!.codePosition
 
@@ -44,20 +45,31 @@ class FunctionContext(
             }
 
             if (rawValue[0] is T) {
+                try {
+                    checkBlock(rawValue[0] as T)
+                } catch (e: GeneralError) {
+                    throw InFileError(e, codePosition)
+                }
+
                 return rawValue[0] as T
             }
         } else if (rawValue is T) {
+            try {
+                checkBlock(rawValue)
+            } catch (e: GeneralError) {
+                throw InFileError(e, codePosition)
+            }
+
             return rawValue
         }
 
         throw InFileError(
-            // TODO: type names
-            Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE, arrayOf(name, "???"),
+            Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE, arrayOf(name, typeName.typeName),
             codePosition
         )
     }
 
-    inline fun <reified T> argumentList(name: String): List<T> {
+    inline fun <reified T> argumentList(name: String, typeName: TypeName): List<T> {
         val rawValue = argumentRawValue(name)
         val codePosition = builtinCall.arguments[name]!!.codePosition
 
@@ -65,7 +77,10 @@ class FunctionContext(
 
         rawList.forEach {
             if (it !is T) {
-                TODO("at least one of the items in $name ain't good!!")
+                throw InFileError(
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE, arrayOf(name, typeName.typeName),
+                    codePosition
+                )
             }
         }
 
@@ -81,14 +96,18 @@ class FunctionContext(
         }
     }
 
-    inline fun <reified T> body(): List<T> {
+    inline fun <reified T> body(typeName: TypeName): List<T> {
         val rawList = builtinCall.body.map {
             interpreter.interpretElement(ruleTree, it, ruleArguments, depth)
         }.flat()
 
         rawList.forEach {
             if (it !is T) {
-                TODO("at least one of the items in the function body ain't good!!")
+                // TODO: per-item codePosition would be useful here
+                throw InFileError(
+                    Errors.BUILTIN_FUNCTION_BODY_INCORRECT_TYPE, arrayOf(typeName.typeName),
+                    builtinCall.body[0].codePosition
+                )
             }
         }
 
