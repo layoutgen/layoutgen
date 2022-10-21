@@ -38,7 +38,6 @@ ruleCallArg: variableName EQUALS element;
 
 // Single element
 element:
-// TODO: rule calls?
 	ruleFn
 	| number
 	| color

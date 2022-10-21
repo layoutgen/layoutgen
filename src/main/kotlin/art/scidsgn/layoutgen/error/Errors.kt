@@ -21,5 +21,8 @@ enum class Errors(val message: String) {
     BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE("Argument %s must be of type %s"),
 
     BUILTIN_FUNCTION_USELESS_BODY("Function %s does not require a body"),
-    BUILTIN_FUNCTION_BODY_INCORRECT_TYPE("All body arguments must be of type %s")
+    BUILTIN_FUNCTION_BODY_INCORRECT_TYPE("All body arguments must be of type %s"),
+
+    // TODO: ANTLR errors suck
+    ANTLR_SYNTAX_ERROR("ANTLR parser error - %s")
 }

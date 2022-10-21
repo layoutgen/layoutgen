@@ -12,6 +12,7 @@ import art.scidsgn.layoutgen.ruletree.io.CodePosition
 import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.Token
+import org.antlr.v4.runtime.tree.ErrorNode
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 
 class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
@@ -22,9 +23,15 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
             val parser = RulecodeParser(tokens)
             val walker = ParseTreeWalker()
 
+            parser.addErrorListener(AntlrRuletreeErrorListener(ruleTree))
+
             walker.walk(AntlrRuletreeGenerator(ruleTree), parser.program())
         }
 
+    }
+
+    override fun visitErrorNode(node: ErrorNode?) {
+        println("uh")
     }
 
     override fun enterImportStatement(ctx: RulecodeParser.ImportStatementContext) {

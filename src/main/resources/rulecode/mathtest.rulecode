@@ -8,7 +8,7 @@ List(_x) :=
     "min" $Min { 1 2 3 4 }
     "max" $Max { 1 2 3 4 }
 
-A := A
+A := A;
 
 Result :=
     $Test(x = A)
