@@ -23,6 +23,8 @@ enum class Errors(val message: String) {
     BUILTIN_FUNCTION_USELESS_BODY("Function %s does not require a body"),
     BUILTIN_FUNCTION_BODY_INCORRECT_TYPE("All body arguments must be of type %s"),
 
+    LAYOUT_GAP_CANNOT_BE_NEGATIVE("Gap cannot be negative"),
+
     // TODO: ANTLR errors suck
     ANTLR_SYNTAX_ERROR("ANTLR parser error - %s")
 }

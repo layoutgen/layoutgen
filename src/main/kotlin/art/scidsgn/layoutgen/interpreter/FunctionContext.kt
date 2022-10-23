@@ -13,6 +13,10 @@ class FunctionContext(
     val ruleArguments: Map<String, Any>,
     val depth: Int
 ) {
+    fun hasArgument(name: String): Boolean {
+        return builtinCall.arguments.containsKey(name)
+    }
+
     fun expectArgumentIsPresent(name: String) {
         if (!builtinCall.arguments.containsKey(name)) {
             throw InFileError(

@@ -1,0 +1,9 @@
+@Root
+Main := $HTiling(gap = 4) {
+    $Box
+    $VTiling(gap = 10) {
+        $Box
+        $Box
+        $Box
+    }
+}
