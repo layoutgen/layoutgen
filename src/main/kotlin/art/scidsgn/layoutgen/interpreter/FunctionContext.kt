@@ -84,6 +84,22 @@ class FunctionContext(
         )
     }
 
+    fun <T> argumentEnumValue(name: String, enumMap: Map<String, T>): T {
+        val codePosition = builtinCall.arguments[name]!!.codePosition
+
+        val strValue = try {
+            argumentSingleValue<String>(name, TypeName.STRING)
+        } catch (e: InFileError) {
+            TODO("enum value error")
+        }
+
+        if (!enumMap.containsKey(strValue)) {
+            TODO("enum value error")
+        }
+
+        return enumMap[strValue]!!
+    }
+
     inline fun <reified T> argumentList(name: String, typeName: TypeName): List<T> {
         val rawValue = argumentRawValue(name)
         val codePosition = builtinCall.arguments[name]!!.codePosition

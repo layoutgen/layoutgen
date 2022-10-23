@@ -11,6 +11,10 @@ class OffsetBoxFunction : BuiltinFunction("OffsetBox") {
         val offsetX = context.argumentSingleValue<Double>("offsetX", TypeName.NUMBER)
         val offsetY = context.argumentSingleValue<Double>("offsetY", TypeName.NUMBER)
 
-        return OffsetBox(Position(offsetX, offsetY), context.body(TypeName.COMPONENT))
+        val component = OffsetBox(Position(offsetX, offsetY), context.body(TypeName.COMPONENT))
+        LayoutFunctionUtils.handleSizeArguments(component, context)
+
+        return component
+
     }
 }

@@ -23,6 +23,13 @@ object StandardLibrary {
         HTilingFunction(),
         VTilingFunction(),
 
+        HStackFunction(),
+        VStackFunction(),
+        OverlapHStackFunction(),
+        OverlapVStackFunction(),
+
+        GridFunction(),
+
         // Math: arithmetic
         AddFunction(),
         SubFunction(),

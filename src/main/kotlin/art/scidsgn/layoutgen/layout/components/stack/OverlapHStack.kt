@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout.components.stack
 
-import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.LayoutUtils
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.components.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment

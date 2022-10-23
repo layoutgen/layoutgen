@@ -1,9 +1,23 @@
 @Root
 Main := $HTiling(gap = 4) {
-    $Box
-    $VTiling(gap = 10) {
+    $HStack(gap = 8, alignAll = "middle") {
+        $Box(width = 20, height = 20)
+        $Box(width = 40, height = 40)
+        $Box(width = 80, height = 80)
+    }
+    $VTiling(gap = 10, alignItems = "middle") {
         $Box
+        $Box(width = 80)
         $Box
-        $Box
+        $Grid(
+            rows = 2, cols = 2, gap = 4,
+            alignCellsHorizontally = "middle",
+            alignCellsVertically = "center"
+        ) {
+            $Box
+            $Box(width = 16, height = 16)
+            $Box
+            $Box
+        }
     }
 }

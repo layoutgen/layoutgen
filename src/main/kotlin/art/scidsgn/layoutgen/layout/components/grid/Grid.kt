@@ -2,7 +2,7 @@ package art.scidsgn.layoutgen.layout.components.grid
 
 import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
+import art.scidsgn.layoutgen.layout.components.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
@@ -12,14 +12,12 @@ import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import kotlin.math.floor
 
 class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()) :
-    ContainerComponent() {
+    GappedContainerComponent() {
     override var parent: Component? = null
     override val childComponents = children
 
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
-
-    private var gap: Double = 0.0
 
     private var cellHorizontalAlignment = HorizontalAlignment.LEFT
     private var cellVerticalAlignment = VerticalAlignment.TOP
@@ -30,11 +28,6 @@ class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()
         require(childComponents.size <= rows * cols) { "Cannot have more children components than grid cells" }
 
         LayoutUtils.setChildrenParent(this)
-    }
-
-    fun withGap(gap: Double): Grid {
-        this.gap = gap
-        return this
     }
 
     fun withCellVerticalAlignment(alignment: VerticalAlignment): Grid {

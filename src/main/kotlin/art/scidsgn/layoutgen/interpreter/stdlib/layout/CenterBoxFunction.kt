@@ -7,6 +7,9 @@ import art.scidsgn.layoutgen.layout.components.utils.CenterBox
 
 class CenterBoxFunction : BuiltinFunction("CenterBox") {
     override fun execute(context: FunctionContext): CenterBox {
-        return CenterBox(context.body(TypeName.COMPONENT))
+        val component = CenterBox(context.body(TypeName.COMPONENT))
+        LayoutFunctionUtils.handleSizeArguments(component, context)
+
+        return component
     }
 }

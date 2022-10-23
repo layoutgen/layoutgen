@@ -1,9 +1,9 @@
 package art.scidsgn.layoutgen.layout.components.flexbox
 
-import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
 import art.scidsgn.layoutgen.layout.LayoutEngine
 import art.scidsgn.layoutgen.layout.LayoutUtils
+import art.scidsgn.layoutgen.layout.components.Component
+import art.scidsgn.layoutgen.layout.components.ContainerComponent
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment

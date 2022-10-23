@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout.components.tiling
 
-import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.LayoutUtils
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.components.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
 import art.scidsgn.layoutgen.layout.sizing.Dimensions
@@ -16,7 +16,7 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
 
-    private var alignment = HorizontalAlignment.LEFT
+    var alignment = HorizontalAlignment.LEFT
 
     init {
         LayoutUtils.setChildrenParent(this)

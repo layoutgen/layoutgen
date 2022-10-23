@@ -7,6 +7,9 @@ import art.scidsgn.layoutgen.layout.components.Box
 
 class BoxFunction : BuiltinFunction("Box") {
     override fun execute(context: FunctionContext): Box {
-        return Box(context.body(TypeName.COMPONENT))
+        val component = Box(context.body(TypeName.COMPONENT))
+        LayoutFunctionUtils.handleSizeArguments(component, context)
+
+        return component
     }
 }

@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout.components.utils
 
-import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.components.Box
+import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 

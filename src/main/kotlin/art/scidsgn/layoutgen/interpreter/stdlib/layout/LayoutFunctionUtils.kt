@@ -1,0 +1,72 @@
+package art.scidsgn.layoutgen.interpreter.stdlib.layout
+
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
+import art.scidsgn.layoutgen.interpreter.FunctionContext
+import art.scidsgn.layoutgen.interpreter.TypeName
+import art.scidsgn.layoutgen.layout.components.*
+import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
+import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
+import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
+
+object LayoutFunctionUtils {
+    val horizontalAlignmentMap = mapOf(
+        Pair("left", HorizontalAlignment.LEFT),
+        Pair("middle", HorizontalAlignment.MIDDLE),
+        Pair("right", HorizontalAlignment.RIGHT),
+    )
+
+    val verticalAlignmentMap = mapOf(
+        Pair("top", VerticalAlignment.TOP),
+        Pair("center", VerticalAlignment.CENTER),
+        Pair("bottom", VerticalAlignment.BOTTOM),
+    )
+
+    val flexContentAlignmentMap = mapOf(
+        Pair("flexStart", FlexContentAlignment.FLEX_START),
+        Pair("flexEnd", FlexContentAlignment.FLEX_END),
+        Pair("center", FlexContentAlignment.CENTER),
+        Pair("spaceBetween", FlexContentAlignment.SPACE_BETWEEN),
+        Pair("spaceAround", FlexContentAlignment.SPACE_AROUND),
+    )
+
+    val flexDirectionMap = mapOf(
+        Pair("row", FlexDirection.ROW),
+        Pair("column", FlexDirection.COLUMN),
+    )
+
+    val flexItemAlignmentMap = mapOf(
+        Pair("flexStart", FlexItemAlignment.FLEX_START),
+        Pair("flexEnd", FlexItemAlignment.FLEX_END),
+        Pair("center", FlexItemAlignment.CENTER),
+    )
+
+    fun handleSizeArguments(component: Component, context: FunctionContext) {
+        if (context.hasArgument("width")) {
+            component.withWidth(context.argumentSingleValue("width", TypeName.NUMBER) {
+                if (it < 0) {
+                    TODO("width error")
+                }
+            })
+        }
+        if (context.hasArgument("height")) {
+            component.withHeight(context.argumentSingleValue("height", TypeName.NUMBER) {
+                if (it < 0) {
+                    TODO("height error")
+                }
+            })
+        }
+    }
+
+    fun handleGapArgument(component: GappedContainerComponent, context: FunctionContext) {
+        if (context.hasArgument("gap")) {
+            component.withGap(context.argumentSingleValue("gap", TypeName.NUMBER) {
+                if (it < 0) {
+                    throw GeneralError(Errors.LAYOUT_GAP_CANNOT_BE_NEGATIVE, emptyArray())
+                }
+            })
+        }
+    }
+}
