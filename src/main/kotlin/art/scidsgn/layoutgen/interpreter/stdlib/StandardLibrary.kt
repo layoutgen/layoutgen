@@ -5,12 +5,14 @@ import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.AddFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.DivFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.MulFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.SubFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MaxFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MinFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinName
 
 object StandardLibrary {
@@ -19,6 +21,7 @@ object StandardLibrary {
         BoxFunction(),
         OffsetBoxFunction(),
         CenterBoxFunction(),
+        MarginBoxFunction(),
 
         HTilingFunction(),
         VTilingFunction(),
@@ -40,8 +43,12 @@ object StandardLibrary {
         MinFunction(),
         MaxFunction(),
 
+        // Random
+        RandomIntFunction(),
+
         // List
         CountFunction(),
+        RepeatFunction(),
 
         TestFunction()
     )

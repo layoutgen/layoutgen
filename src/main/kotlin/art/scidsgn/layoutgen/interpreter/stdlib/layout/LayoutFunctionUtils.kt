@@ -47,14 +47,14 @@ object LayoutFunctionUtils {
         if (context.hasArgument("width")) {
             component.withWidth(context.argumentSingleValue("width", TypeName.NUMBER) {
                 if (it < 0) {
-                    TODO("width error")
+                    throw GeneralError(Errors.LAYOUT_WIDTH_CANNOT_BE_NEGATIVE, emptyArray())
                 }
             })
         }
         if (context.hasArgument("height")) {
             component.withHeight(context.argumentSingleValue("height", TypeName.NUMBER) {
                 if (it < 0) {
-                    TODO("height error")
+                    throw GeneralError(Errors.LAYOUT_HEIGHT_CANNOT_BE_NEGATIVE, emptyArray())
                 }
             })
         }

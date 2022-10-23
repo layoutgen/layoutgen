@@ -1,23 +1,12 @@
+Card := $Box(width = 160, height = 220)
+
+CardStack := $OverlapVStack(gap = 32) {
+    $Repeat(count = $RandomInt(from = 2, to = 8)) { Card }
+}
+
 @Root
-Main := $HTiling(gap = 4) {
-    $HStack(gap = 8, alignAll = "middle") {
-        $Box(width = 20, height = 20)
-        $Box(width = 40, height = 40)
-        $Box(width = 80, height = 80)
-    }
-    $VTiling(gap = 10, alignItems = "middle") {
-        $Box
-        $Box(width = 80)
-        $Box
-        $Grid(
-            rows = 2, cols = 2, gap = 4,
-            alignCellsHorizontally = "middle",
-            alignCellsVertically = "center"
-        ) {
-            $Box
-            $Box(width = 16, height = 16)
-            $Box
-            $Box
-        }
+Main := $MarginBox(all = 32) {
+    $HStack(gap = 32, alignAll = "middle") {
+        $Repeat(count = 6) { CardStack }
     }
 }
