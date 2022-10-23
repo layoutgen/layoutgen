@@ -5,7 +5,7 @@ import art.scidsgn.layoutgen.layout.components.Box
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 
-class CenterBox(child: Component? = null) : Box(child) {
+class CenterBox(children: List<Component>) : Box(children) {
     override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         size.requestedSize = UnclearDimensions(
             size.definedSize.width ?: parentRequestedSize.width,

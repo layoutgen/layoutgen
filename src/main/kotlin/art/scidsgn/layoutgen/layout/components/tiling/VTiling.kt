@@ -36,8 +36,10 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         var childHeight: Double? = null
 
         if (height != null) {
-            val nonDefinedHeight = height - LayoutUtils.getCombinedDefinedHeight(childComponents) - getTotalGap()
-            val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
+            val nonDefinedHeight =
+                height - LayoutUtils.getCombinedDefinedHeight(childComponents) - getTotalGap()
+            val nonDefinedItemCount =
+                LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
 
             childHeight = nonDefinedHeight / nonDefinedItemCount
         }
@@ -59,12 +61,17 @@ class VTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         val nonDefinedHeight = size.targetSize.height - LayoutUtils.getCombinedDefinedHeight(
             childComponents
         ) - getTotalGap()
-        val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
+        val nonDefinedItemCount =
+            LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size
         var yOffset = 0.0
 
         childComponents.forEach {
             it.position = Position(
-                LayoutUtils.calculateAlignmentOffset(size.targetSize.width, it.size.targetSize.width, alignment),
+                LayoutUtils.calculateAlignmentOffset(
+                    size.targetSize.width,
+                    it.size.targetSize.width,
+                    alignment
+                ),
                 yOffset
             )
 

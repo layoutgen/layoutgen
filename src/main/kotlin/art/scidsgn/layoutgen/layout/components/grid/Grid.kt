@@ -11,7 +11,8 @@ import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import kotlin.math.floor
 
-class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()) : ContainerComponent() {
+class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()) :
+    ContainerComponent() {
     override var parent: Component? = null
     override val childComponents = children
 
@@ -51,10 +52,12 @@ class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()
         var height: Double? = size.definedSize.height ?: parentRequestedSize.height
 
         if (width == null && LayoutUtils.getComponentsWithoutDefinedWidth(childComponents).size < childComponents.size) {
-            width = (LayoutUtils.getMaxDefinedWidthOrNull(childComponents) ?: 0.0) * cols + gap * (cols - 1)
+            width = (LayoutUtils.getMaxDefinedWidthOrNull(childComponents)
+                ?: 0.0) * cols + gap * (cols - 1)
         }
         if (height == null && LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size < childComponents.size) {
-            height = (LayoutUtils.getMaxDefinedHeightOrNull(childComponents) ?: 0.0) * rows + gap * (rows - 1)
+            height = (LayoutUtils.getMaxDefinedHeightOrNull(childComponents)
+                ?: 0.0) * rows + gap * (rows - 1)
         }
 
         size.requestedSize = UnclearDimensions(width, height)
@@ -69,7 +72,14 @@ class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()
             cellHeight = (height - (rows - 1) * gap) / rows
         }
 
-        childComponents.forEach { it.propagateRequestedSize(UnclearDimensions(cellWidth, cellHeight)) }
+        childComponents.forEach {
+            it.propagateRequestedSize(
+                UnclearDimensions(
+                    cellWidth,
+                    cellHeight
+                )
+            )
+        }
     }
 
     override fun calculateTargetSize() {

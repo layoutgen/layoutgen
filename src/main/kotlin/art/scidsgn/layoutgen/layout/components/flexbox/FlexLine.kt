@@ -75,8 +75,15 @@ class FlexLine(
                 FlexContentAlignment.CENTER,
                 FlexContentAlignment.FLEX_END -> gap
 
-                FlexContentAlignment.SPACE_BETWEEN -> max(gap, (mainSize - totalGaplessMainSize) / (items.size - 1))
-                FlexContentAlignment.SPACE_AROUND -> max(gap, (mainSize - totalGaplessMainSize) / items.size)
+                FlexContentAlignment.SPACE_BETWEEN -> max(
+                    gap,
+                    (mainSize - totalGaplessMainSize) / (items.size - 1)
+                )
+
+                FlexContentAlignment.SPACE_AROUND -> max(
+                    gap,
+                    (mainSize - totalGaplessMainSize) / items.size
+                )
             }
         }
     }

@@ -61,7 +61,8 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         var targetHeight = 0.0
 
         for (index in childComponents.indices) {
-            targetHeight = max(targetHeight, childComponents[index].size.targetSize.height + index * gap)
+            targetHeight =
+                max(targetHeight, childComponents[index].size.targetSize.height + index * gap)
         }
 
         return targetHeight

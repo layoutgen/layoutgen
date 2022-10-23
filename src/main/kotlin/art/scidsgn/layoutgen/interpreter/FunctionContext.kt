@@ -24,22 +24,33 @@ class FunctionContext(
 
     fun argumentRawValue(name: String): Any {
         expectArgumentIsPresent(name)
-        return interpreter.interpretElement(ruleTree, builtinCall.arguments[name]!!, ruleArguments, depth)
+        return interpreter.interpretElement(
+            ruleTree,
+            builtinCall.arguments[name]!!,
+            ruleArguments,
+            depth
+        )
     }
 
-    inline fun <reified T> argumentSingleValue(name: String, typeName: TypeName, checkBlock: (value: T) -> Unit = {}): T {
+    inline fun <reified T> argumentSingleValue(
+        name: String,
+        typeName: TypeName,
+        checkBlock: (value: T) -> Unit = {}
+    ): T {
         val rawValue = argumentRawValue(name)
         val codePosition = builtinCall.arguments[name]!!.codePosition
 
         if (rawValue is List<*>) {
             if (rawValue.size == 0) {
                 throw InFileError(
-                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_ZERO_PROVIDED, arrayOf(name),
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_ZERO_PROVIDED,
+                    arrayOf(name),
                     codePosition
                 )
             } else if (rawValue.size > 1) {
                 throw InFileError(
-                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_MORE_PROVIDED, arrayOf(name),
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_MORE_PROVIDED,
+                    arrayOf(name),
                     codePosition
                 )
             }
@@ -78,7 +89,8 @@ class FunctionContext(
         rawList.forEach {
             if (it !is T) {
                 throw InFileError(
-                    Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE, arrayOf(name, typeName.typeName),
+                    Errors.BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE,
+                    arrayOf(name, typeName.typeName),
                     codePosition
                 )
             }

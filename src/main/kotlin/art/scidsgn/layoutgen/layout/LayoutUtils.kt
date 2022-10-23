@@ -36,11 +36,13 @@ object LayoutUtils {
     }
 
     fun getMaxDefinedWidthOrNull(components: List<Component>): Double? {
-        return components.filter { it.hasDefinedWidth() }.maxOfOrNull { it.size.definedSize.width!! }
+        return components.filter { it.hasDefinedWidth() }
+            .maxOfOrNull { it.size.definedSize.width!! }
     }
 
     fun getMaxDefinedHeightOrNull(components: List<Component>): Double? {
-        return components.filter { it.hasDefinedHeight() }.maxOfOrNull { it.size.definedSize.height!! }
+        return components.filter { it.hasDefinedHeight() }
+            .maxOfOrNull { it.size.definedSize.height!! }
     }
 
     fun getFittingWidth(components: List<Component>): Double {
@@ -52,11 +54,11 @@ object LayoutUtils {
     }
 
     fun getMaxWidth(components: List<Component>): Double {
-        return components.maxOf { it.size.targetSize.width }
+        return components.maxOfOrNull { it.size.targetSize.width } ?: 0.0
     }
 
     fun getMaxHeight(components: List<Component>): Double {
-        return components.maxOf { it.size.targetSize.height }
+        return components.maxOfOrNull { it.size.targetSize.height } ?: 0.0
     }
 
     fun setTargetSizeForExpansiveComponent(
@@ -64,8 +66,10 @@ object LayoutUtils {
         fallbackSize: Dimensions = Dimensions(0.0, 0.0)
     ) {
         component.size.targetSize = Dimensions(
-            component.size.definedSize.width ?: component.size.requestedSize.width ?: fallbackSize.width,
-            component.size.definedSize.height ?: component.size.requestedSize.height ?: fallbackSize.height
+            component.size.definedSize.width ?: component.size.requestedSize.width
+            ?: fallbackSize.width,
+            component.size.definedSize.height ?: component.size.requestedSize.height
+            ?: fallbackSize.height
         )
     }
 

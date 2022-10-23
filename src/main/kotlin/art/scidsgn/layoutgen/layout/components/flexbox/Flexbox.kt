@@ -118,7 +118,7 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
 
             if (
                 flexWidth != it.component.size.targetSize.width ||
-                        flexHeight != it.component.size.targetSize.height
+                flexHeight != it.component.size.targetSize.height
             ) {
                 LayoutEngine.layOut(it.component, Dimensions(flexWidth, flexHeight))
             }

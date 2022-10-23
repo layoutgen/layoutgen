@@ -36,8 +36,10 @@ class HTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         var childWidth: Double? = null
 
         if (width != null) {
-            val nonDefinedWidth = width - LayoutUtils.getCombinedDefinedWidth(childComponents) - getTotalGap()
-            val nonDefinedItemCount = LayoutUtils.getComponentsWithoutDefinedWidth(childComponents).size
+            val nonDefinedWidth =
+                width - LayoutUtils.getCombinedDefinedWidth(childComponents) - getTotalGap()
+            val nonDefinedItemCount =
+                LayoutUtils.getComponentsWithoutDefinedWidth(childComponents).size
 
             childWidth = nonDefinedWidth / nonDefinedItemCount
         }
@@ -65,7 +67,11 @@ class HTiling(children: List<Component> = emptyList()) : GappedContainerComponen
         childComponents.forEach {
             it.position = Position(
                 xOffset,
-                LayoutUtils.calculateAlignmentOffset(size.targetSize.height, it.size.targetSize.height, alignment)
+                LayoutUtils.calculateAlignmentOffset(
+                    size.targetSize.height,
+                    it.size.targetSize.height,
+                    alignment
+                )
             )
 
             xOffset += it.size.definedSize.width ?: (nonDefinedWidth / nonDefinedItemCount)

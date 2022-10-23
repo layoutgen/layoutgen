@@ -40,8 +40,7 @@ TODO
 | Component   | Status |
 |-------------|:------:|
 | OffsetBox   |   ✅    |
-| MarginBox   |   ❌    |
-| AbsoluteBox |   ❌    |
+| MarginBox   |   ✅    |
 | CenterBox   |   ✅    |
 
 #### 1D layouts
@@ -61,13 +60,6 @@ TODO
 |---------------|:-------:|
 | Grid          |    ✅    |
 | Flexbox       |    🔵    |
-
-#### Responsive layouts
-
-| Component      | Status  |
-|----------------|:-------:|
-| AspectRatioBox |    ❌    |
-| ResponsiveBox  |    ❌    |
 
 ### Module progress - Renderer
 

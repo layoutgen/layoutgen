@@ -61,7 +61,8 @@ class OverlapHStack(children: List<Component> = emptyList()) : GappedContainerCo
         var targetWidth = 0.0
 
         for (index in childComponents.indices) {
-            targetWidth = max(targetWidth, childComponents[index].size.targetSize.width + index * gap)
+            targetWidth =
+                max(targetWidth, childComponents[index].size.targetSize.width + index * gap)
         }
 
         return targetWidth

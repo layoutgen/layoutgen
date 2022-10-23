@@ -2,7 +2,8 @@ package art.scidsgn.layoutgen.error
 
 import art.scidsgn.layoutgen.ruletree.io.CodePosition
 
-data class InFileError(override val cause: Throwable, val codePosition: CodePosition) : Throwable() {
+data class InFileError(override val cause: Throwable, val codePosition: CodePosition) :
+    Throwable() {
     override val message: String
         get() {
             val lines = codePosition.sourceFile.fileContents.split(Regex("\r?\n"))
@@ -17,7 +18,11 @@ data class InFileError(override val cause: Throwable, val codePosition: CodePosi
             )
         }
 
-    constructor(errorType: Errors, formatStringArgs: Array<String>, codePosition: CodePosition) : this(
+    constructor(
+        errorType: Errors,
+        formatStringArgs: Array<String>,
+        codePosition: CodePosition
+    ) : this(
         GeneralError(errorType, formatStringArgs), codePosition
     )
 }

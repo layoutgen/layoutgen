@@ -90,7 +90,11 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
                 codePosition(moduleRuleNameCtx.start)
             )
         } else {
-            return RuleName(moduleRuleNameCtx.ID(0).text, null, codePosition(moduleRuleNameCtx.start))
+            return RuleName(
+                moduleRuleNameCtx.ID(0).text,
+                null,
+                codePosition(moduleRuleNameCtx.start)
+            )
         }
     }
 
@@ -139,7 +143,8 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
     }
 
     private fun builtinCall(builtinFnCtx: RulecodeParser.BuiltinFnContext): BuiltinCall {
-        val builtinCall = BuiltinCall(builtinName(builtinFnCtx.builtinName()), codePosition(builtinFnCtx.start))
+        val builtinCall =
+            BuiltinCall(builtinName(builtinFnCtx.builtinName()), codePosition(builtinFnCtx.start))
 
         if (builtinFnCtx.fnCallArgs() != null) {
             builtinFnCtx.fnCallArgs().fnCallArg().forEach {
@@ -155,7 +160,8 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
     }
 
     private fun ruleCall(ruleCallCtx: RulecodeParser.RuleFnContext): RuleCall {
-        val ruleCall = RuleCall(moduleRuleName(ruleCallCtx.moduleRuleName()), codePosition(ruleCallCtx.start))
+        val ruleCall =
+            RuleCall(moduleRuleName(ruleCallCtx.moduleRuleName()), codePosition(ruleCallCtx.start))
 
         if (ruleCallCtx.ruleCallArgs() != null) {
             ruleCallCtx.ruleCallArgs().ruleCallArg().forEach {

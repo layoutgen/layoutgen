@@ -67,8 +67,15 @@ class FlexboxAlgorithm(
                 FlexContentAlignment.CENTER,
                 FlexContentAlignment.FLEX_END -> gap
 
-                FlexContentAlignment.SPACE_BETWEEN -> max(gap, (crossSize - totalGaplessCrossSize) / (lines.size - 1))
-                FlexContentAlignment.SPACE_AROUND -> max(gap, (crossSize - totalGaplessCrossSize) / lines.size)
+                FlexContentAlignment.SPACE_BETWEEN -> max(
+                    gap,
+                    (crossSize - totalGaplessCrossSize) / (lines.size - 1)
+                )
+
+                FlexContentAlignment.SPACE_AROUND -> max(
+                    gap,
+                    (crossSize - totalGaplessCrossSize) / lines.size
+                )
 
             }
         }

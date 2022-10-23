@@ -9,7 +9,13 @@ import kotlin.math.round
 import kotlin.random.Random
 
 object LayoutDebugGenerator {
-    private fun drawComponent(gfx: Graphics2D, component: Component, x: Double, y: Double, random: Random) {
+    private fun drawComponent(
+        gfx: Graphics2D,
+        component: Component,
+        x: Double,
+        y: Double,
+        random: Random
+    ) {
         val componentX = round(x + component.position.x).toInt()
         val componentY = round(y + component.position.y).toInt()
         val componentWidth = round(component.size.targetSize.width).toInt()

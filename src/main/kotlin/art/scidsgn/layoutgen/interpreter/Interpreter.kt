@@ -20,7 +20,14 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
 
         // TODO: needs to be better, allow accessing codePosition here
         if (ruleArguments.size != rule.variables.size) {
-            throw GeneralError(Errors.RULE_INCORRECT_ARGUMENT_COUNT, arrayOf(rule.name.name, rule.variables.size.toString(), ruleArguments.size.toString()))
+            throw GeneralError(
+                Errors.RULE_INCORRECT_ARGUMENT_COUNT,
+                arrayOf(
+                    rule.name.name,
+                    rule.variables.size.toString(),
+                    ruleArguments.size.toString()
+                )
+            )
         }
         ruleArguments.forEach { key, _ ->
             if (rule.variables.none { it.name == key }) {
@@ -40,7 +47,12 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
         return branch.items.map { interpretElement(ruleTree, it, arguments, depth) }.flat()
     }
 
-    fun interpretElement(ruleTree: Ruletree, element: Element, ruleArguments: Map<String, Any>, depth: Int): Any {
+    fun interpretElement(
+        ruleTree: Ruletree,
+        element: Element,
+        ruleArguments: Map<String, Any>,
+        depth: Int
+    ): Any {
         return when (element) {
             is NumberElement -> element.number
             is StringElement -> element.string
@@ -48,6 +60,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
             is Variable -> ruleArguments[element.name] ?: InFileError(
                 Errors.RULE_UNDEFINED_VARIABLE, arrayOf(element.name), element.codePosition
             )
+
             is RuleCall -> interpretRuleCall(ruleTree, element, ruleArguments, depth)
             is BuiltinCall -> interpretBuiltinCall(ruleTree, element, ruleArguments, depth)
 
@@ -83,7 +96,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
 
         try {
             return execute(rule, ruleCallArguments, depth + 1)
-        } catch(e: GeneralError) {
+        } catch (e: GeneralError) {
             throw InFileError(e, ruleCall.codePosition)
         }
     }

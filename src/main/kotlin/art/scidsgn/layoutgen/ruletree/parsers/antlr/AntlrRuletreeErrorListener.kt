@@ -18,7 +18,11 @@ class AntlrRuletreeErrorListener(val ruleTree: Ruletree) : ANTLRErrorListener {
         msg: String?,
         e: RecognitionException?
     ) {
-        throw InFileError(Errors.ANTLR_SYNTAX_ERROR, arrayOf(msg!!), CodePosition(ruleTree.sourceFile, line, charPositionInLine))
+        throw InFileError(
+            Errors.ANTLR_SYNTAX_ERROR,
+            arrayOf(msg!!),
+            CodePosition(ruleTree.sourceFile, line, charPositionInLine)
+        )
     }
 
     override fun reportAmbiguity(

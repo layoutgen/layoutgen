@@ -6,20 +6,14 @@ import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 
-open class Box(child: Component? = null) : ContainerComponent() {
+open class Box(children: List<Component> = emptyList()) : ContainerComponent() {
     override var parent: Component? = null
-    final override val childComponents: List<Component>
+    override val childComponents = children
 
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
 
     init {
-        if (child == null) {
-            childComponents = emptyList()
-        } else {
-            childComponents = listOf(child)
-        }
-
         LayoutUtils.setChildrenParent(this)
     }
 
@@ -35,7 +29,10 @@ open class Box(child: Component? = null) : ContainerComponent() {
     override fun calculateTargetSize() {
         LayoutUtils.setTargetSizeForExpansiveComponent(
             this,
-            if (childComponents.size > 0) childComponents[0].size.targetSize else Dimensions(0.0, 0.0)
+            Dimensions(
+                LayoutUtils.getMaxWidth(childComponents),
+                LayoutUtils.getMaxHeight(childComponents)
+            )
         )
     }
 
