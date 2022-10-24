@@ -86,15 +86,20 @@ class FunctionContext(
 
     fun <T> argumentEnumValue(name: String, enumMap: Map<String, T>): T {
         val codePosition = builtinCall.arguments[name]!!.codePosition
+        val error = InFileError(
+            Errors.BUILTIN_FUNCTION_ARGUMENT_ENUM_INCORRECT_VALUE, arrayOf(
+                name, enumMap.keys.map { "\"${it}\"" }.joinToString(", ")
+            ), codePosition
+        )
 
         val strValue = try {
             argumentSingleValue<String>(name, TypeName.STRING)
         } catch (e: InFileError) {
-            TODO("enum value error")
+            throw error
         }
 
         if (!enumMap.containsKey(strValue)) {
-            TODO("enum value error")
+            throw error
         }
 
         return enumMap[strValue]!!

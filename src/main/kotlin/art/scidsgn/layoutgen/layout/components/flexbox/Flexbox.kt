@@ -73,7 +73,6 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
     }
 
     override fun calculateTargetSize() {
-        // TODO: THIS IS UGLY
         val flexContainerWidth = size.requestedSize.width ?: Double.MAX_VALUE
         val flexContainerHeight = size.requestedSize.height ?: Double.MAX_VALUE
 

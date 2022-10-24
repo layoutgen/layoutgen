@@ -19,6 +19,7 @@ enum class Errors(val message: String) {
     BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_ZERO_PROVIDED("Function expects only one value for argument %s, but none was provided (might be a recursion depth issue)"),
     BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_MORE_PROVIDED("Function expects only one value for argument %s, but more was provided"),
     BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE("Argument %s must be of type %s"),
+    BUILTIN_FUNCTION_ARGUMENT_ENUM_INCORRECT_VALUE("Argument %s must be one of the following: %s"),
 
     BUILTIN_FUNCTION_USELESS_BODY("Function %s does not require a body"),
     BUILTIN_FUNCTION_BODY_INCORRECT_TYPE("All body arguments must be of type %s"),
@@ -37,6 +38,8 @@ enum class Errors(val message: String) {
     LAYOUT_GRID_COLS_MUST_BE_AN_INTEGER("Column count must be an integer"),
 
     LAYOUT_MARGIN_CANNOT_BE_NEGATIVE("Margin value cannot be negative"),
+
+    SHAPE_ROUNDING_RADIUS_CANNOT_BE_NEGATIVE("Rounding radius cannot be negative"),
 
     // TODO: ANTLR errors suck
     ANTLR_SYNTAX_ERROR("ANTLR parser error - %s")

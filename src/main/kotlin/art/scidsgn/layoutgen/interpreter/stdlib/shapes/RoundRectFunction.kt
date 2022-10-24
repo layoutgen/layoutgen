@@ -1,5 +1,7 @@
 package art.scidsgn.layoutgen.interpreter.stdlib.shapes
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
@@ -10,7 +12,7 @@ class RoundRectFunction : BuiltinFunction("RoundRect") {
     override fun execute(context: FunctionContext): RoundRect {
         val radius = context.argumentSingleValue<Double>("radius", TypeName.NUMBER) {
             if (it < 0) {
-                TODO("radius >= 0!!")
+                throw GeneralError(Errors.SHAPE_ROUNDING_RADIUS_CANNOT_BE_NEGATIVE)
             }
         }
         val component = RoundRect(radius, context.body(TypeName.COMPONENT))
