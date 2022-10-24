@@ -8,8 +8,7 @@ import art.scidsgn.layoutgen.layout.components.tiling.VTiling
 class VTilingFunction : BuiltinFunction("VTiling") {
     override fun execute(context: FunctionContext): VTiling {
         val component = VTiling(context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
-        LayoutFunctionUtils.handleGapArgument(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignItems")) {
             component.withHorizontalAlignment(

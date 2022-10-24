@@ -3,8 +3,10 @@ package art.scidsgn.layoutgen.layout.components
 import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
+import art.scidsgn.layoutgen.visual.components.VisualComponent
+import java.awt.Graphics2D
 
-abstract class Component {
+abstract class Component : VisualComponent() {
     abstract var parent: Component?
 
     abstract val size: Size
@@ -43,6 +45,19 @@ abstract class Component {
 
     fun hasDefinedHeight(): Boolean {
         return size.definedSize.hasHeight()
+    }
+
+    open fun renderItself(gfx: Graphics2D) {
+        gfx.fillRect(0, 0, size.targetSize.width.toInt(), size.targetSize.height.toInt())
+    }
+
+    override fun render(gfx: Graphics2D) {
+        gfx.translate(position.x, position.y)
+
+        gfx.paint = fill.toAwtPaint(this)
+        renderItself(gfx)
+
+        gfx.translate(-position.x, -position.y)
     }
 }
 

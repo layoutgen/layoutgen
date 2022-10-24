@@ -1,11 +1,24 @@
-Card := $Box(width = 160, height = 220)
+Card := $RoundRect(
+    width = 160,
+    height = 220,
+    radius = 8,
+    fill = $RGB(
+        r = $RandomInt(from = 0, to = 255),
+        g = $RandomInt(from = 0, to = 255),
+        b = $RandomInt(from = 0, to = 255)
+    )
+) {
+    $CenterBox {
+        $Circle(width = 80, height = 80, fill = $RGB(r = 255, g = 255, b = 255))
+    }
+}
 
 CardStack := $OverlapVStack(gap = 32) {
     $Repeat(count = $RandomInt(from = 2, to = 8)) { Card }
 }
 
 @Root
-Main := $MarginBox(all = 32) {
+Main := $MarginBox(all = 32, fill = $RGB(r = 20, g = 20, b = 20)) {
     $HStack(gap = 32, alignAll = "middle") {
         $Repeat(count = 6) { CardStack }
     }

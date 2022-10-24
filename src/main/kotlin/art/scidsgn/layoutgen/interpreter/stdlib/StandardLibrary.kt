@@ -3,6 +3,7 @@ package art.scidsgn.layoutgen.interpreter.stdlib
 import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.fill.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
@@ -13,6 +14,8 @@ import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.SubFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MaxFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinName
 
 object StandardLibrary {
@@ -33,6 +36,13 @@ object StandardLibrary {
 
         GridFunction(),
 
+        // Shapes
+        RoundRectFunction(),
+        CircleFunction(),
+
+        // Fills
+        RGBFunction(),
+
         // Math: arithmetic
         AddFunction(),
         SubFunction(),
@@ -49,8 +59,6 @@ object StandardLibrary {
         // List
         CountFunction(),
         RepeatFunction(),
-
-        TestFunction()
     )
 
     fun getFunction(name: BuiltinName): BuiltinFunction {

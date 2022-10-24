@@ -25,8 +25,7 @@ class GridFunction : BuiltinFunction("Grid") {
         }.toInt()
 
         val component = Grid(rows, cols, context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
-        LayoutFunctionUtils.handleGapArgument(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignCellsHorizontally")) {
             component.withCellHorizontalAlignment(

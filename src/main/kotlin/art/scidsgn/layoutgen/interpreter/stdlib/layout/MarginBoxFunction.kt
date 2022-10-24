@@ -54,7 +54,7 @@ class MarginBoxFunction : BuiltinFunction("MarginBox") {
         }
 
         val component = MarginBox(Margins(top, right, bottom, left), context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         return component
     }

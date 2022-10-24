@@ -8,7 +8,7 @@
 | Ruletree AST  | 🔵 In progress |
 | Interpreter   | 🔵 In progress |
 | Layout Engine | 🔵 In progress |
-| Renderer      | 🅿️ Prototype  |
+| Renderer      | 🔵 In progress  |
 
 ### Module progress - ANTLR parser
 

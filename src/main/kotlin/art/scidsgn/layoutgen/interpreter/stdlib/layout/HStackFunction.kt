@@ -8,8 +8,7 @@ import art.scidsgn.layoutgen.layout.components.stack.HStack
 class HStackFunction : BuiltinFunction("HStack") {
     override fun execute(context: FunctionContext): HStack {
         val component = HStack(context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
-        LayoutFunctionUtils.handleGapArgument(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignItems")) {
             component.withVerticalAlignment(

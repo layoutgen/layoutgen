@@ -8,8 +8,7 @@ import art.scidsgn.layoutgen.layout.components.tiling.HTiling
 class HTilingFunction : BuiltinFunction("HTiling") {
     override fun execute(context: FunctionContext): HTiling {
         val component = HTiling(context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
-        LayoutFunctionUtils.handleGapArgument(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignItems")) {
             component.withVerticalAlignment(

@@ -8,8 +8,7 @@ import art.scidsgn.layoutgen.layout.components.stack.OverlapVStack
 class OverlapVStackFunction : BuiltinFunction("OverlapVStack") {
     override fun execute(context: FunctionContext): OverlapVStack {
         val component = OverlapVStack(context.body(TypeName.COMPONENT))
-        LayoutFunctionUtils.handleSizeArguments(component, context)
-        LayoutFunctionUtils.handleGapArgument(component, context)
+        LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignItems")) {
             component.withHorizontalAlignment(
