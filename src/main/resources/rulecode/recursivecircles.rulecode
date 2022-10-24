@@ -1,0 +1,15 @@
+GrayOrWhite := [2] $RGB(r = 255, g = 255, b = 255)
+            |  $RGB(r = 128, g = 128, b = 128)
+            |  $RGB(r = 255, g = 0, b = 0)
+
+GridOrCircle := $Circle(fill = GrayOrWhite)
+             |  $Grid(rows = 2, cols = 2) {
+                    $Repeat(count = 4) { GridOrCircle }
+                }
+
+@Root
+Main := $Box(fill = $RGB(r = 0, g = 0, b = 0)) {
+    $Grid(rows = 2, cols = 2) {
+        $Repeat(count = 4) { GridOrCircle }
+    }
+}

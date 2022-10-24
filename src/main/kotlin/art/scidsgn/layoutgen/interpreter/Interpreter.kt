@@ -8,13 +8,13 @@ import art.scidsgn.layoutgen.ruletree.Ruletree
 import art.scidsgn.layoutgen.ruletree.ast.*
 import kotlin.random.Random
 
-class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
+class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
     fun execute(rule: IsRule, ruleArguments: Map<String, Any> = emptyMap()): List<Any> {
         return execute(rule, ruleArguments, 0)
     }
 
     private fun execute(rule: IsRule, ruleArguments: Map<String, Any>, depth: Int): List<Any> {
-        if (depth >= maxDepth) {
+        if (!rule.safe && depth >= maxDepth) {
             return emptyList()
         }
 
@@ -95,7 +95,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 100) {
         }
 
         try {
-            return execute(rule, ruleCallArguments, depth + 1)
+            return execute(rule, ruleCallArguments, if (rule.safe) depth else depth + 1)
         } catch (e: GeneralError) {
             throw InFileError(e, ruleCall.codePosition)
         }

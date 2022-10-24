@@ -52,6 +52,10 @@ abstract class Component : VisualComponent() {
     }
 
     override fun render(gfx: Graphics2D) {
+        if (size.targetSize.width.toInt() == 0 || size.targetSize.height.toInt() == 0) {
+            return
+        }
+
         gfx.translate(position.x, position.y)
 
         gfx.paint = fill.toAwtPaint(this)
