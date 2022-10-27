@@ -18,8 +18,16 @@ abstract class ContainerComponent : Component() {
     override fun render(gfx: Graphics2D) {
         gfx.translate(position.x, position.y)
 
+        val shape = createShape()
+
         gfx.paint = fill.toAwtPaint(this)
-        gfx.fill(createShape())
+        gfx.fill(shape)
+
+        if (stroke != null) {
+            gfx.stroke = stroke!!.toAwtStroke()
+            gfx.paint = stroke!!.fill.toAwtPaint(this)
+            gfx.draw(shape)
+        }
 
         for (component in childComponents) {
             component.render(gfx)

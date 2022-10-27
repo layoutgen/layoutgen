@@ -6,5 +6,6 @@ enum class TypeName(val typeName: String) {
     STRING("String"),
     BOOLEAN("Boolean"),
     COMPONENT("Component"),
-    FILL("Fill")
+    FILL("Fill"),
+    STROKE("Stroke")
 }

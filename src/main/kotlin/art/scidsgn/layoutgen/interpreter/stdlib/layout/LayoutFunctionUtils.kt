@@ -12,6 +12,7 @@ import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.visual.components.VisualComponent
 import art.scidsgn.layoutgen.visual.components.withFill
+import art.scidsgn.layoutgen.visual.components.withStroke
 
 object LayoutFunctionUtils {
     val horizontalAlignmentMap = mapOf(
@@ -57,6 +58,9 @@ object LayoutFunctionUtils {
     private fun handleVisualArguments(component: VisualComponent, context: FunctionContext) {
         if (context.hasArgument("fill")) {
             component.withFill(context.argumentSingleValue("fill", TypeName.FILL))
+        }
+        if (context.hasArgument("stroke")) {
+            component.withStroke(context.argumentSingleValue("stroke", TypeName.STROKE))
         }
     }
 

@@ -60,8 +60,16 @@ abstract class Component : VisualComponent() {
 
         gfx.translate(position.x, position.y)
 
+        val shape = createShape()
+
         gfx.paint = fill.toAwtPaint(this)
-        gfx.fill(createShape())
+        gfx.fill(shape)
+
+        if (stroke != null) {
+            gfx.stroke = stroke!!.toAwtStroke()
+            gfx.paint = stroke!!.fill.toAwtPaint(this)
+            gfx.draw(shape)
+        }
 
         gfx.translate(-position.x, -position.y)
     }

@@ -1,6 +1,8 @@
-GrayOrWhite := [2] #fff | #888 | #f00
+CircleFill := [2] #fff | #888 | #f00
 
-GridOrCircle := $Circle(fill = GrayOrWhite)
+CircleStroke := $Stroke(fill = #00f, width = 4)
+
+GridOrCircle := $Circle(fill = CircleFill, stroke = CircleStroke)
              |  $Grid(rows = 2, cols = 2) {
                     $Repeat(count = 4) { GridOrCircle }
                 }
