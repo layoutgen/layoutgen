@@ -19,7 +19,7 @@ abstract class ContainerComponent : Component() {
         gfx.translate(position.x, position.y)
 
         gfx.paint = fill.toAwtPaint(this)
-        renderItself(gfx)
+        gfx.fill(createShape())
 
         for (component in childComponents) {
             component.render(gfx)

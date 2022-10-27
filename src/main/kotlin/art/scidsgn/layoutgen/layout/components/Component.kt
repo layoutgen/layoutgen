@@ -5,6 +5,8 @@ import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.visual.components.VisualComponent
 import java.awt.Graphics2D
+import java.awt.Shape
+import java.awt.geom.Rectangle2D
 
 abstract class Component : VisualComponent() {
     abstract var parent: Component?
@@ -47,8 +49,8 @@ abstract class Component : VisualComponent() {
         return size.definedSize.hasHeight()
     }
 
-    open fun renderItself(gfx: Graphics2D) {
-        gfx.fillRect(0, 0, size.targetSize.width.toInt(), size.targetSize.height.toInt())
+    open fun createShape(): Shape {
+        return Rectangle2D.Double(0.0, 0.0, size.targetSize.width, size.targetSize.height)
     }
 
     override fun render(gfx: Graphics2D) {
@@ -59,7 +61,7 @@ abstract class Component : VisualComponent() {
         gfx.translate(position.x, position.y)
 
         gfx.paint = fill.toAwtPaint(this)
-        renderItself(gfx)
+        gfx.fill(createShape())
 
         gfx.translate(-position.x, -position.y)
     }
