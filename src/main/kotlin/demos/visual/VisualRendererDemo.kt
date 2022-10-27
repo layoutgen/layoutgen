@@ -12,7 +12,7 @@ fun main() {
     try {
         val ruleCodePath = Path.of(
             {}.javaClass.classLoader.getResource(
-                "rulecode/recursivecircles.rulecode"
+                "rulecode/shape.rulecode"
             )!!.toURI()
         ).toString()
 

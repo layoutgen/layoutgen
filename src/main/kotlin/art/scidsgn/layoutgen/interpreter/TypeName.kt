@@ -7,5 +7,7 @@ enum class TypeName(val typeName: String) {
     BOOLEAN("Boolean"),
     COMPONENT("Component"),
     FILL("Fill"),
-    STROKE("Stroke")
+    STROKE("Stroke"),
+    POINT("Point"),
+    PATH_INSTRUCTION("PathInstruction")
 }

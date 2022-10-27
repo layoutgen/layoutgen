@@ -15,8 +15,10 @@ import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.visual.RGBFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.visual.StrokeFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.StrokeFunction
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinName
 
 object StandardLibrary {
@@ -41,9 +43,20 @@ object StandardLibrary {
         RoundRectFunction(),
         CircleFunction(),
 
+        // Path
+        PathFunction(),
+        PathMoveFunction(),
+        PathLineFunction(),
+        PathQuadraticFunction(),
+        PathCubicFunction(),
+        PathCloseFunction(),
+
         // Fills & strokes
         RGBFunction(),
         StrokeFunction(),
+
+        // Visual types
+        PointFunction(),
 
         // Math: arithmetic
         AddFunction(),

@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.interpreter.stdlib.visual
+package art.scidsgn.layoutgen.interpreter.stdlib.visual.render
 
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
