@@ -1,6 +1,4 @@
-GrayOrWhite := [2] $RGB(r = 255, g = 255, b = 255)
-            |  $RGB(r = 128, g = 128, b = 128)
-            |  $RGB(r = 255, g = 0, b = 0)
+GrayOrWhite := [2] #fff | #888 | #f00
 
 GridOrCircle := $Circle(fill = GrayOrWhite)
              |  $Grid(rows = 2, cols = 2) {

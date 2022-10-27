@@ -13,6 +13,8 @@ enum class Errors(val message: String) {
 
     RULE_UNDEFINED_VARIABLE("Undefined variable %s"),
 
+    COLOR_SYNTAX_INCORRECT("Hex colors must be in one of the following formats: #RGB, #RGBA, #RRGGBB, or #RRGGBBAA"),
+
     BUILTIN_FUNCTION_NOT_FOUND("%s is not a defined built-in function"),
 
     BUILTIN_FUNCTION_ARGUMENT_NOT_PRESENT("Required argument %s is not present"),

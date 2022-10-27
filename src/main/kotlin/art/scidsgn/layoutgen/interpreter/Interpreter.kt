@@ -64,6 +64,7 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
             is RuleCall -> interpretRuleCall(ruleTree, element, ruleArguments, depth)
             is BuiltinCall -> interpretBuiltinCall(ruleTree, element, ruleArguments, depth)
 
+            is ColorElement -> element.toFill()
             else -> TODO("unknown element, sorry")
         }
     }
