@@ -50,7 +50,7 @@ class HStack(children: List<Component> = emptyList()) : GappedContainerComponent
             it.propagateRequestedSize(
                 UnclearDimensions(
                     null,
-                    if (verticalStretch) LayoutUtils.getMaxDefinedHeightOrNull(childComponents) else null
+                    if (verticalStretch) size.requestedSize.height else null
                 )
             )
         }

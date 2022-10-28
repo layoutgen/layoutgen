@@ -50,7 +50,7 @@ class OverlapVStack(children: List<Component> = emptyList()) : GappedContainerCo
         childComponents.forEach {
             it.propagateRequestedSize(
                 UnclearDimensions(
-                    if (horizontalStretch) LayoutUtils.getMaxDefinedWidthOrNull(childComponents) else null,
+                    if (horizontalStretch) size.requestedSize.width else null,
                     null
                 )
             )
