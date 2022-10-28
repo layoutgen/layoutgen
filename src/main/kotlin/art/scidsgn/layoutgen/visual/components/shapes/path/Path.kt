@@ -2,16 +2,24 @@ package art.scidsgn.layoutgen.visual.components.shapes.path
 
 import art.scidsgn.layoutgen.layout.components.Box
 import java.awt.Shape
+import java.awt.geom.AffineTransform
 import java.awt.geom.Path2D
 
-class Path(val instructions: List<PathInstruction>) : Box() {
+class Path(val instructions: List<PathInstruction>, val fillContainer: Boolean = false) : Box() {
     override fun createShape(): Shape {
         val path = Path2D.Double()
 
-        // TODO: should the coordinate system be dependent on the component
-        // TODO: maybe introduce relative units?
         instructions.forEach { it.perform(path) }
 
-        return path
+        if (fillContainer) {
+            val bounds = path.bounds2D
+            val xform = AffineTransform()
+            xform.scale(size.targetSize.width / bounds.width, size.targetSize.height / bounds.height)
+            xform.translate(-bounds.x, -bounds.y)
+
+            return path.createTransformedShape(xform)
+        } else {
+            return path
+        }
     }
 }

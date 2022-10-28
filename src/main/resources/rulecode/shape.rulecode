@@ -1,9 +1,10 @@
 
 @Root
 Main := $Box(fill = #fff) {
-    $Path(fill = #00f) {
+    $Path(fill = #00f, fillContainer = true) {
         $PathMove(to = $Point(x = 100, y = 100))
-        $PathLine(to = $Point(x = 200, y = 200))
-        $PathLine(to = $Point(x = 100, y = 200))
+        $PathLine(to = $Point(x = 400, y = 400))
+        $PathLine(to = $Point(x = 100, y = 400))
+        $PathQuadratic(through = $Point(x = 50, y = 300), to = $Point(x = 100, y = 100))
     }
 }

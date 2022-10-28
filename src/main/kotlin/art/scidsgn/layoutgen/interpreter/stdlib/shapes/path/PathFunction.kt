@@ -8,7 +8,12 @@ import art.scidsgn.layoutgen.visual.components.shapes.path.Path
 
 class PathFunction : BuiltinFunction("Path") {
     override fun execute(context: FunctionContext): Path {
-        val component = Path(context.body(TypeName.PATH_INSTRUCTION))
+        var fillContainer = false
+        if (context.hasArgument("fillContainer")) {
+            fillContainer = context.argumentSingleValue("fillContainer", TypeName.BOOLEAN)
+        }
+
+        val component = Path(context.body(TypeName.PATH_INSTRUCTION), fillContainer)
         LayoutFunctionUtils.handleContainerArguments(component, context)
 
         return component
