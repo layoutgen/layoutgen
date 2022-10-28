@@ -16,6 +16,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
+import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.StrokeFunction
@@ -50,6 +51,9 @@ object StandardLibrary {
         PathQuadraticFunction(),
         PathCubicFunction(),
         PathCloseFunction(),
+
+        // Text
+        TextFunction(),
 
         // Fills & strokes
         RGBFunction(),

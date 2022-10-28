@@ -1,0 +1,7 @@
+@Root
+Main := $Box(fill = #fff) {
+    $VStack {
+        $Text(fill = #000) { "test fdsg fdsgdfs gdfsg dsg df" }
+        $Text(fill = #000) { "dsfsdf dsf dsg dfshdf hsdf hfgd" }
+    }
+}

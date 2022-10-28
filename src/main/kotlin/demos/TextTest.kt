@@ -1,8 +1,10 @@
 package demos
 
 import java.awt.*
+import java.awt.font.FontRenderContext
 import java.awt.font.LineBreakMeasurer
 import java.awt.font.TextAttribute
+import java.awt.geom.AffineTransform
 import java.text.AttributedString
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -28,9 +30,10 @@ class LineBreakPanel : JPanel() {
         string.addAttribute(TextAttribute.FOREGROUND, Color.RED, 0, 10)
 
         val paragraph = string.iterator
-        val lineBreakMeasurer = LineBreakMeasurer(paragraph, gfx.fontRenderContext)
+        val frc = FontRenderContext(AffineTransform(), true, true)
+        val lineBreakMeasurer = LineBreakMeasurer(paragraph, frc)
 
-        val breakWidth = getSize().width.toFloat()
+        val breakWidth = Float.POSITIVE_INFINITY
         var offsetY = 0.toFloat()
 
         lineBreakMeasurer.position = paragraph.beginIndex
