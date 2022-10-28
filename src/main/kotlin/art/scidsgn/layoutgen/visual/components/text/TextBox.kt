@@ -7,7 +7,7 @@ import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 import java.awt.Graphics2D
 
-class TextBox(val text: String) : Component() {
+class TextBox(val text: String, val font: Font) : Component() {
     override var parent: Component? = null
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
@@ -20,7 +20,7 @@ class TextBox(val text: String) : Component() {
 
     override fun calculateTargetSize() {
         algorithm =
-            TextBoxAlgorithm(text, size.definedSize.width ?: size.requestedSize.width ?: Double.POSITIVE_INFINITY)
+            TextBoxAlgorithm(text, size.definedSize.width ?: size.requestedSize.width ?: Double.POSITIVE_INFINITY, font)
         algorithm.layOut()
 
         size.targetSize = Dimensions(algorithm.targetWidth, algorithm.targetHeight)

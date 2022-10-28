@@ -1,7 +1,45 @@
-@Root
-Main := $Box(fill = #fff) {
-    $VStack(stretchItems = true) {
-        $Text(fill = #000) { "test fdsg fdsgdfs gdfsg dsg df" }
-        $Text(fill = #000) { "dsfsdf dsf dsg dfshdf hsdf hfgd" }
+BaseButton(_text, _fill, _outline, _color) := $RoundRect(
+    radius = 8,
+    fill = _fill,
+    stroke = $Stroke(fill = _outline, width = 2)
+) {
+    $MarginBox(horizontal = 16, vertical = 8) {
+        $Text(fill = _color, font = $Font(family = "Arial", size = 14)) {
+            _text
+        }
     }
+}
+
+Button(_text) := BaseButton(_text = _text, _fill = #ddd, _outline = #bbb, _color = #000)
+PrimaryButton(_text) := BaseButton(_text = _text, _fill = #08f, _outline = #06c, _color = #fff)
+
+Popup(_children) := $RoundRect(
+    fill = #fff,
+    stroke = $Stroke(fill = #ddd, width = 2),
+    radius = 8,
+    width = 400
+) {
+    $MarginBox(all = 8) { _children }
+}
+
+PopupContents := $VStack(stretchItems = true) {
+    $MarginBox(bottom = 8) {
+        $VStack(stretchItems = true) {
+            $Text(fill = #000, font = $Font(family = "Arial", size = 24, style = "bold")) {
+                "Hello there"
+            }
+            $Text(fill = #000, font = $Font(family = "Arial", size = 14)) {
+                "Lorem ipsum dolor sit amet"
+            }
+        }
+    }
+    $HStack(fill = #fff, gap = 8, alignAll = "right") {
+        PrimaryButton(_text = "OK")
+        Button(_text = "Cancel")
+    }
+}
+
+@Root
+Main := $CenterBox(fill = #eee) {
+    Popup(_children = PopupContents)
 }

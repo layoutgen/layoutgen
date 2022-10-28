@@ -16,6 +16,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
+import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
@@ -54,6 +55,7 @@ object StandardLibrary {
 
         // Text
         TextFunction(),
+        FontFunction(),
 
         // Fills & strokes
         RGBFunction(),
