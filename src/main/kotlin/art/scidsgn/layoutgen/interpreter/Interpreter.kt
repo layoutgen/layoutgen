@@ -9,6 +9,19 @@ import art.scidsgn.layoutgen.ruletree.ast.*
 import kotlin.random.Random
 
 class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
+    val registeredObjects = mutableMapOf<String, Any>()
+
+    fun <T : Any> createOrGetObject(id: String, creator: () -> T): T {
+        if (id in registeredObjects) {
+            return registeredObjects[id] as T
+        } else {
+            val obj = creator()
+            registeredObjects[id] = obj
+
+            return obj
+        }
+    }
+
     fun execute(rule: IsRule, ruleArguments: Map<String, Any> = emptyMap()): List<Any> {
         return execute(rule, ruleArguments, 0)
     }

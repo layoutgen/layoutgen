@@ -14,15 +14,20 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
     val importedModules = mutableMapOf<String, Ruletree>()
     val rules = mutableListOf<Rule>()
 
+    fun absolutePathRelativeToRuleTree(relativePath: String): String {
+        val basePath = FileSystems.getDefault().getPath(sourceFile.absoluteFilePath)
+        val absolutePath = basePath.parent.resolve(relativePath).normalize()
+
+        return absolutePath.toString()
+    }
+
     fun import(moduleName: String, relativePath: String) {
         if (importedModules.containsKey(moduleName)) {
             throw GeneralError(Errors.MODULE_ALREADY_EXISTS, arrayOf(moduleName))
         }
 
-        val basePath = FileSystems.getDefault().getPath(sourceFile.absoluteFilePath)
-        val absoluteImportPath = basePath.parent.resolve(relativePath).normalize()
-
-        importedModules[moduleName] = environment.loadFile(absoluteImportPath.toString())
+        importedModules[moduleName] =
+            environment.loadFile(absolutePathRelativeToRuleTree(relativePath))
     }
 
     fun getIsRule(name: RuleName): IsRule {
