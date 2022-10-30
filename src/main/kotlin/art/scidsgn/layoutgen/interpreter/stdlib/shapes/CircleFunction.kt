@@ -4,7 +4,7 @@ import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.LayoutFunctionUtils
-import art.scidsgn.layoutgen.visual.components.shapes.Circle
+import art.scidsgn.layoutgen.components.shapes.Circle
 
 class CircleFunction : BuiltinFunction("Circle") {
     override fun execute(context: FunctionContext): Circle {

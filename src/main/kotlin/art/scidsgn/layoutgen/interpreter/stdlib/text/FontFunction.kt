@@ -3,8 +3,8 @@ package art.scidsgn.layoutgen.interpreter.stdlib.text
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.visual.components.text.Font
-import art.scidsgn.layoutgen.visual.components.text.FontStyle
+import art.scidsgn.layoutgen.components.text.Font
+import art.scidsgn.layoutgen.components.text.FontStyle
 
 class FontFunction : BuiltinFunction("Font") {
     private val fontStyleMap = mapOf(

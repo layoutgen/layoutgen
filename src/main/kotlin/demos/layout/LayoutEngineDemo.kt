@@ -1,15 +1,16 @@
 package demos
 
-import art.scidsgn.layoutgen.layout.components.*
-import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
-import art.scidsgn.layoutgen.layout.components.grid.Grid
-import art.scidsgn.layoutgen.layout.components.stack.HStack
-import art.scidsgn.layoutgen.layout.components.stack.OverlapHStack
-import art.scidsgn.layoutgen.layout.components.stack.OverlapVStack
-import art.scidsgn.layoutgen.layout.components.stack.VStack
-import art.scidsgn.layoutgen.layout.components.tiling.HTiling
-import art.scidsgn.layoutgen.layout.components.tiling.VTiling
+import art.scidsgn.layoutgen.components.*
+import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
+import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
+import art.scidsgn.layoutgen.components.layout.grid.Grid
+import art.scidsgn.layoutgen.components.layout.stack.HStack
+import art.scidsgn.layoutgen.components.layout.stack.OverlapHStack
+import art.scidsgn.layoutgen.components.layout.stack.OverlapVStack
+import art.scidsgn.layoutgen.components.layout.stack.VStack
+import art.scidsgn.layoutgen.components.layout.tiling.HTiling
+import art.scidsgn.layoutgen.components.layout.tiling.VTiling
+import art.scidsgn.layoutgen.components.layout.withGap
 import demos.layout.LayoutDemoBase
 
 fun createRootComponent(): Component {

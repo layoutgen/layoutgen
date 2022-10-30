@@ -1,9 +1,9 @@
 package demos.layout
 
+import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.debug.layout.LayoutDebugGenerator
 import art.scidsgn.layoutgen.layout.LayoutEngine
-import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
+import art.scidsgn.layoutgen.components.sizing.Dimensions
 import java.awt.Dimension
 import java.awt.event.ComponentAdapter
 import java.awt.event.ComponentEvent

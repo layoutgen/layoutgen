@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.layout.tree
 
-import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
+import art.scidsgn.layoutgen.components.Component
+import art.scidsgn.layoutgen.components.ContainerComponent
 
 internal class BreadthUpIterator(start: Component) : Iterator<Component> {
     var component: Component?

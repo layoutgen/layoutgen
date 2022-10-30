@@ -1,10 +1,10 @@
 package art.scidsgn.layoutgen.layout
 
-import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
-import art.scidsgn.layoutgen.layout.sizing.Position
-import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
+import art.scidsgn.layoutgen.components.Component
+import art.scidsgn.layoutgen.components.ContainerComponent
+import art.scidsgn.layoutgen.components.sizing.Dimensions
+import art.scidsgn.layoutgen.components.sizing.Position
+import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.tree.BreadthUpIterable
 
 object LayoutEngine {

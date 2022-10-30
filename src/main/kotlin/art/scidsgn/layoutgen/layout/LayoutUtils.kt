@@ -1,10 +1,10 @@
 package art.scidsgn.layoutgen.layout
 
-import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
-import art.scidsgn.layoutgen.layout.components.enums.HorizontalAlignment
-import art.scidsgn.layoutgen.layout.components.enums.VerticalAlignment
-import art.scidsgn.layoutgen.layout.sizing.Dimensions
+import art.scidsgn.layoutgen.components.Component
+import art.scidsgn.layoutgen.components.ContainerComponent
+import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
+import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
+import art.scidsgn.layoutgen.components.sizing.Dimensions
 
 object LayoutUtils {
     fun getComponentsWithoutDefinedWidth(components: List<Component>): List<Component> {

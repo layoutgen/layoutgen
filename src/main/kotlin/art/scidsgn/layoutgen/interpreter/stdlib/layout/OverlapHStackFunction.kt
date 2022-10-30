@@ -3,7 +3,7 @@ package art.scidsgn.layoutgen.interpreter.stdlib.layout
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.layout.components.stack.OverlapHStack
+import art.scidsgn.layoutgen.components.layout.stack.OverlapHStack
 
 class OverlapHStackFunction : BuiltinFunction("OverlapHStack") {
     override fun execute(context: FunctionContext): OverlapHStack {

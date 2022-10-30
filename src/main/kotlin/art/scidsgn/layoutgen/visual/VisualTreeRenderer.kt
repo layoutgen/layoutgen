@@ -1,6 +1,6 @@
 package art.scidsgn.layoutgen.visual
 
-import art.scidsgn.layoutgen.layout.components.Component
+import art.scidsgn.layoutgen.components.Component
 import java.awt.RenderingHints
 import java.awt.image.BufferedImage
 
@@ -19,7 +19,10 @@ class VisualTreeRenderer(private val root: Component) {
         val gfx = image.createGraphics()
 
         gfx.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-        gfx.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
+        gfx.setRenderingHint(
+            RenderingHints.KEY_TEXT_ANTIALIASING,
+            RenderingHints.VALUE_TEXT_ANTIALIAS_ON
+        )
 
         root.render(gfx)
 

@@ -1,10 +1,10 @@
 package demos.layout
 
-import art.scidsgn.layoutgen.layout.components.Box
-import art.scidsgn.layoutgen.layout.components.utils.CenterBox
-import art.scidsgn.layoutgen.layout.components.utils.MarginBox
-import art.scidsgn.layoutgen.layout.components.withSize
-import art.scidsgn.layoutgen.layout.sizing.Margins
+import art.scidsgn.layoutgen.components.Box
+import art.scidsgn.layoutgen.components.layout.utils.CenterBox
+import art.scidsgn.layoutgen.components.layout.utils.MarginBox
+import art.scidsgn.layoutgen.components.withSize
+import art.scidsgn.layoutgen.components.sizing.Margins
 
 fun main() {
     LayoutDemoBase.runDemoOf(

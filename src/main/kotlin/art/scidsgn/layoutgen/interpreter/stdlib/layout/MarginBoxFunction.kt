@@ -5,8 +5,8 @@ import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.layout.components.utils.MarginBox
-import art.scidsgn.layoutgen.layout.sizing.Margins
+import art.scidsgn.layoutgen.components.layout.utils.MarginBox
+import art.scidsgn.layoutgen.components.sizing.Margins
 
 class MarginBoxFunction : BuiltinFunction("MarginBox") {
     private val marginGuard = { it: Double ->
@@ -53,7 +53,8 @@ class MarginBoxFunction : BuiltinFunction("MarginBox") {
             bottom = context.argumentSingleValue("bottom", TypeName.NUMBER, marginGuard)
         }
 
-        val component = MarginBox(Margins(top, right, bottom, left), context.body(TypeName.COMPONENT))
+        val component =
+            MarginBox(Margins(top, right, bottom, left), context.body(TypeName.COMPONENT))
         LayoutFunctionUtils.handleContainerArguments(component, context)
 
         return component

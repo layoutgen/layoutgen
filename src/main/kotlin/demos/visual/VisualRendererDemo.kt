@@ -1,7 +1,7 @@
 package demos
 
+import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.interpreter.Interpreter
-import art.scidsgn.layoutgen.layout.components.Component
 import art.scidsgn.layoutgen.ruletree.RuletreeEnvironment
 import art.scidsgn.layoutgen.ruletree.depsgraph.Depsgraph
 import art.scidsgn.layoutgen.ruletree.parsers.antlr.AntlrRuletreeGenerator
@@ -27,7 +27,7 @@ fun main() {
 
         val output = interpreter.execute(resultRule)
 
-        if (output is List<*> && output.all { it is Component }) {
+        if (output.all { it is Component }) {
             VisualDemoBase.runDemoOf(output[0] as Component, "test")
         }
     } catch (e: Throwable) {

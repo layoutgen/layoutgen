@@ -3,8 +3,8 @@ package art.scidsgn.layoutgen.interpreter.stdlib.layout
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.layout.components.utils.OffsetBox
-import art.scidsgn.layoutgen.layout.sizing.Position
+import art.scidsgn.layoutgen.components.layout.utils.OffsetBox
+import art.scidsgn.layoutgen.components.sizing.Position
 
 class OffsetBoxFunction : BuiltinFunction("OffsetBox") {
     override fun execute(context: FunctionContext): OffsetBox {
