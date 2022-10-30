@@ -14,13 +14,21 @@ class TextBox(val text: String, val font: Font) : Component() {
 
     lateinit var algorithm: TextBoxAlgorithm
 
+    init {
+        require(text.length > 0) { "Text must be non-empty" }
+    }
+
     override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         size.requestedSize = parentRequestedSize
     }
 
     override fun calculateTargetSize() {
         algorithm =
-            TextBoxAlgorithm(text, size.definedSize.width ?: size.requestedSize.width ?: Double.POSITIVE_INFINITY, font)
+            TextBoxAlgorithm(
+                text,
+                size.definedSize.width ?: size.requestedSize.width ?: Double.POSITIVE_INFINITY,
+                font
+            )
         algorithm.layOut()
 
         size.targetSize = Dimensions(algorithm.targetWidth, algorithm.targetHeight)
