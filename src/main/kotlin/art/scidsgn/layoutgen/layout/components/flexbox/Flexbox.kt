@@ -3,7 +3,7 @@ package art.scidsgn.layoutgen.layout.components.flexbox
 import art.scidsgn.layoutgen.layout.LayoutEngine
 import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.layout.components.Component
-import art.scidsgn.layoutgen.layout.components.ContainerComponent
+import art.scidsgn.layoutgen.layout.components.GappedContainerComponent
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.layout.components.flexbox.enums.FlexItemAlignment
@@ -12,7 +12,7 @@ import art.scidsgn.layoutgen.layout.sizing.Position
 import art.scidsgn.layoutgen.layout.sizing.Size
 import art.scidsgn.layoutgen.layout.sizing.UnclearDimensions
 
-class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
+class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponent() {
     override var parent: Component? = null
     override val childComponents = children
 
@@ -20,8 +20,6 @@ class Flexbox(children: List<Component> = emptyList()) : ContainerComponent() {
     override var position: Position = Position(0.0, 0.0)
 
     lateinit var algorithm: FlexboxAlgorithm
-
-    private var gap: Double = 0.0
 
     private var flexDirection = FlexDirection.ROW
     private var flexWrap = false

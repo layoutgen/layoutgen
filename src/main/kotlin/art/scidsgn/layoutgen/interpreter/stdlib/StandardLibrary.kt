@@ -20,6 +20,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.CosFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.SinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.TanFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomColorFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
@@ -55,6 +56,7 @@ object StandardLibrary {
         OverlapVStackFunction(),
 
         GridFunction(),
+        FlexboxFunction(),
 
         // Shapes
         RoundRectFunction(),
@@ -106,6 +108,7 @@ object StandardLibrary {
         // Random
         RandomFunction(),
         RandomIntFunction(),
+        RandomColorFunction(),
 
         // List
         CountFunction(),
