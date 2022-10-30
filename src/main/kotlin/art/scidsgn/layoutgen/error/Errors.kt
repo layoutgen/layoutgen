@@ -41,6 +41,8 @@ enum class Errors(val message: String) {
 
     LAYOUT_MARGIN_CANNOT_BE_NEGATIVE("Margin value cannot be negative"),
 
+    LAYOUT_FLEX_GROW_CANNOT_BE_NEGATIVE("Flex grow cannot be negative"),
+
     SHAPE_ROUNDING_RADIUS_CANNOT_BE_NEGATIVE("Rounding radius cannot be negative"),
 
     // TODO: ANTLR errors suck

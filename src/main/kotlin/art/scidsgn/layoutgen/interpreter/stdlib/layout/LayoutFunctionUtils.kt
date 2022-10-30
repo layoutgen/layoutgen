@@ -96,7 +96,7 @@ object LayoutFunctionUtils {
         if (context.hasArgument("flexGrow")) {
             component.withFlexGrow(context.argumentSingleValue("flexGrow", TypeName.NUMBER) {
                 if (it < 0) {
-                    TODO("flex grow > 0")
+                    throw GeneralError(Errors.LAYOUT_FLEX_GROW_CANNOT_BE_NEGATIVE)
                 }
             })
         }
