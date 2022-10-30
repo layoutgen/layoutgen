@@ -4,10 +4,16 @@ plugins {
     id("java")
     kotlin("jvm") version "1.7.0"
     application
+    id("org.openjfx.javafxplugin") version "0.0.13"
 }
 
 group = "art.scidsgn"
 version = "1.0-SNAPSHOT"
+
+javafx {
+    version = "17"
+    modules("javafx.controls")
+}
 
 repositories {
     mavenCentral()
