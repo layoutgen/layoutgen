@@ -49,6 +49,7 @@ object LayoutFunctionUtils {
     fun handleContainerArguments(component: Component, context: FunctionContext) {
         handleVisualArguments(component, context)
         handleSizeArguments(component, context)
+        handleFlexGrowArgument(component, context)
 
         if (component is GappedContainerComponent) {
             handleGapArgument(component, context)
@@ -86,6 +87,16 @@ object LayoutFunctionUtils {
             component.withGap(context.argumentSingleValue("gap", TypeName.NUMBER) {
                 if (it < 0) {
                     throw GeneralError(Errors.LAYOUT_GAP_CANNOT_BE_NEGATIVE, emptyArray())
+                }
+            })
+        }
+    }
+
+    private fun handleFlexGrowArgument(component: Component, context: FunctionContext) {
+        if (context.hasArgument("flexGrow")) {
+            component.withFlexGrow(context.argumentSingleValue("flexGrow", TypeName.NUMBER) {
+                if (it < 0) {
+                    TODO("flex grow > 0")
                 }
             })
         }

@@ -1,10 +1,12 @@
-RB(_size) := $Box(width = _size, height = _size, fill = $RandomColor)
+RB(_size) := $Box(
+    width = _size, height = _size, fill = $RandomColor
+)
 
 @Root
 Main := $Flexbox(
     fill = #000,
     alignItems = "center", justifyContent = "center", alignContent = "center",
-    wrap = true
+    wrap = true, gap = 8
 ) {
     $Repeat(count = 15) {
         RB(_size = $RandomInt(from = 50, to = 250))

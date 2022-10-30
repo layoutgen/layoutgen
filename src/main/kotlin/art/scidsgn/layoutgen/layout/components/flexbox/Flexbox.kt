@@ -88,6 +88,7 @@ class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponen
             )
         }
 
+        // TODO: flexGrow shouldn't affect defined sizes!!
         algorithm.distributeFlexLines()
 
         LayoutUtils.setTargetSizeForExpansiveComponent(
