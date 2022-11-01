@@ -1,10 +1,9 @@
-package demos
+package demos.layout
 
 import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.interpreter.Interpreter
 import art.scidsgn.layoutgen.ruletree.RuletreeEnvironment
 import art.scidsgn.layoutgen.ruletree.parsers.antlr.AntlrRuletreeGenerator
-import demos.layout.LayoutDemoBase
 import java.nio.file.Path
 
 fun main() {

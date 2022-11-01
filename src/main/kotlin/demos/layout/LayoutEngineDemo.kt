@@ -1,4 +1,4 @@
-package demos
+package demos.layout
 
 import art.scidsgn.layoutgen.components.*
 import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
@@ -11,7 +11,6 @@ import art.scidsgn.layoutgen.components.layout.stack.VStack
 import art.scidsgn.layoutgen.components.layout.tiling.HTiling
 import art.scidsgn.layoutgen.components.layout.tiling.VTiling
 import art.scidsgn.layoutgen.components.layout.withGap
-import demos.layout.LayoutDemoBase
 
 fun createRootComponent(): Component {
     return HTiling(

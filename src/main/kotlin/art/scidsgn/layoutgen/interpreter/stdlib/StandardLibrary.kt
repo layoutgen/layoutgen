@@ -17,9 +17,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.math.comparison.LessFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.comparison.LessOrEqualFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MaxFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.statistics.MinFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.CosFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.SinFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.TanFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.*
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomColorFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
@@ -98,6 +96,10 @@ object StandardLibrary {
         SinFunction(),
         CosFunction(),
         TanFunction(),
+        ASinFunction(),
+        ACosFunction(),
+        ATanFunction(),
+        ATan2Function(),
 
         // Math: comparison
         LessFunction(),

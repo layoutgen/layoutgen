@@ -1,18 +1,17 @@
-package demos
+package demos.visual
 
 import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.interpreter.Interpreter
 import art.scidsgn.layoutgen.ruletree.RuletreeEnvironment
 import art.scidsgn.layoutgen.ruletree.depsgraph.Depsgraph
 import art.scidsgn.layoutgen.ruletree.parsers.antlr.AntlrRuletreeGenerator
-import demos.visual.VisualDemoBase
 import java.nio.file.Path
 
 fun main() {
     try {
         val ruleCodePath = Path.of(
             {}.javaClass.classLoader.getResource(
-                "rulecode/image.rulecode"
+                "rulecode/trig.rulecode"
             )!!.toURI()
         ).toString()
 

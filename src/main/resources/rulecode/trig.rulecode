@@ -3,9 +3,9 @@ Main := $Box(fill = #000) {
     $MarginBox(all = 16) {
         $Text(fill = #eee, font = $Font(family = "Arial", size = 20)) {
             $ToString(separator = ", ") {
-                $Sin(deg = 180)
-                $Cos(deg = 180)
-                $Tan(deg = 180)
+                $Sin(x = 180, unit = "deg")
+                $Cos(x = 180, unit = "deg")
+                $Tan(x = 180, unit = "deg")
                 $Greater(x = 3, than = 5)
             }
         }
