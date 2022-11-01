@@ -26,6 +26,10 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
         return execute(rule, ruleArguments, 0)
     }
 
+    fun evaluateRewrite(rule: RewriteRule): List<RuleName> {
+        return pickBranch(rule.branches).items
+    }
+
     private fun execute(rule: IsRule, ruleArguments: Map<String, Any>, depth: Int): List<Any> {
         if (!rule.safe && depth >= maxDepth) {
             return emptyList()

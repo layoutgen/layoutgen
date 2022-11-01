@@ -1,0 +1,19 @@
+One := $Box(fill = #000)
+One -> One Zero One
+
+Zero := $Box(fill = #fff)
+Zero -> Zero Zero Zero
+
+CantorSet(_n) := $HTiling {
+    $LSystem(depth = _n) { One }
+}
+
+@Root
+Main := $VTiling {
+    CantorSet(_n = 0)
+    CantorSet(_n = 1)
+    CantorSet(_n = 2)
+    CantorSet(_n = 3)
+    CantorSet(_n = 4)
+    CantorSet(_n = 5)
+}

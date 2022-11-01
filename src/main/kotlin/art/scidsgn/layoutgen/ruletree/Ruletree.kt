@@ -58,4 +58,8 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
         return rules.find { it.name.name == name && it.name.moduleName == null && it is RewriteRule } as RewriteRule?
             ?: throw GeneralError(Errors.REWRITE_RULE_NOT_FOUND, arrayOf(name))
     }
+
+    fun hasRewriteRule(name: String): Boolean {
+        return rules.any { it.name.name == name }
+    }
 }

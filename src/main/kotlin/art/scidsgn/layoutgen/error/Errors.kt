@@ -45,6 +45,12 @@ enum class Errors(val message: String) {
 
     SHAPE_ROUNDING_RADIUS_CANNOT_BE_NEGATIVE("Rounding radius cannot be negative"),
 
+    LSYSTEM_DEPTH_CANNOT_BE_NEGATIVE("Depth cannot be negative"),
+    LSYSTEM_DEPTH_MUST_BE_AN_INTEGER("Depth must be an integer"),
+    LSYSTEM_MUST_BE_A_RULENAME("Element must be a rule name"),
+    LSYSTEM_CANNOT_BE_A_MODULENAME("Rule name must be local"),
+    LSYSTEM_CANNOT_BE_PARAMETRIZED("Rule must not be parametrized"),
+
     // TODO: ANTLR errors suck
     ANTLR_SYNTAX_ERROR("ANTLR parser error - %s")
 }

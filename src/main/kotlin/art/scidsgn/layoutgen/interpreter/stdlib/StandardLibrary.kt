@@ -11,6 +11,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.image.WidthFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.lsystem.LSystemFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.AddFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.DivFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.math.arithmetic.MulFunction
@@ -128,6 +129,9 @@ object StandardLibrary {
         ConcatenateFunction(),
         LengthFunction(),
         SplitFunction(),
+
+        // L-System
+        LSystemFunction(),
     )
 
     fun getFunction(name: BuiltinName): BuiltinFunction {
