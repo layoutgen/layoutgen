@@ -4,6 +4,10 @@ import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.flow.BlockFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.image.HeightFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.image.ImageBoxFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.image.ImageFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.image.WidthFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
@@ -24,11 +28,11 @@ import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
+import art.scidsgn.layoutgen.interpreter.stdlib.string.ConcatenateFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.string.LengthFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.string.SplitFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.utils.ToStringFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.visual.ImageBoxFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.visual.ImageFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.StrokeFunction
@@ -79,8 +83,12 @@ object StandardLibrary {
         // Visual types
         PointFunction(),
 
+
+        // Image types
         ImageFunction(),
         ImageBoxFunction(),
+        WidthFunction(),
+        HeightFunction(),
 
         // Math: arithmetic
         AddFunction(),
@@ -116,8 +124,10 @@ object StandardLibrary {
         CountFunction(),
         RepeatFunction(),
 
-        // Utils
-        ToStringFunction(),
+        // String
+        ConcatenateFunction(),
+        LengthFunction(),
+        SplitFunction(),
     )
 
     fun getFunction(name: BuiltinName): BuiltinFunction {

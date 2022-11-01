@@ -2,7 +2,7 @@
 Main := $Box(fill = #000) {
     $MarginBox(all = 16) {
         $Text(fill = #eee, font = $Font(family = "Arial", size = 20)) {
-            $ToString(separator = ", ") {
+            $Concatenate(separator = ", ") {
                 $Sin(x = 180, unit = "deg")
                 $Cos(x = 180, unit = "deg")
                 $Tan(x = 180, unit = "deg")
