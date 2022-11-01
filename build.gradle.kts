@@ -24,6 +24,7 @@ dependencies {
     testImplementation(kotlin("test"))
 
     implementation("org.antlr:antlr4-runtime:4.11.1")
+    implementation("org.fxmisc.richtext:richtextfx:0.10.9")
 }
 
 tasks.test {
@@ -35,5 +36,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("art.scidsgn.layoutgen.ui.UIMain")
 }
