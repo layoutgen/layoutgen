@@ -1,4 +1,4 @@
 Cif := $Image(path = "../images/cif.jpg")
 
 @Root
-Main := $ImageBox(image = Cif)
+Main := $ImageBox(image = Cif, height = 200)

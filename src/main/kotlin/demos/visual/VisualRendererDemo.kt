@@ -12,7 +12,7 @@ fun main() {
     try {
         val ruleCodePath = Path.of(
             {}.javaClass.classLoader.getResource(
-                "rulecode/flexbox.rulecode"
+                "rulecode/image.rulecode"
             )!!.toURI()
         ).toString()
 

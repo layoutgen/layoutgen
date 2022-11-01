@@ -9,11 +9,16 @@ class ImageBox(val image: Image) : Box() {
     override fun propagateRequestedSize(parentRequestedSize: UnclearDimensions) {
         val imageWidth = image.getWidth(null).toDouble()
         val imageHeight = image.getHeight(null).toDouble()
+        val aspectRatio = imageWidth / imageHeight
+
         if (!hasDefinedWidth() && !hasDefinedHeight()) {
             size.definedSize.width = imageWidth
             size.definedSize.height = imageHeight
+        } else if (!hasDefinedWidth()) {
+            size.definedSize.width = size.definedSize.height!! * aspectRatio
+        } else if (!hasDefinedHeight()) {
+            size.definedSize.height = size.definedSize.width!! / aspectRatio
         }
-        // TODO: more...
 
         super.propagateRequestedSize(parentRequestedSize)
     }
