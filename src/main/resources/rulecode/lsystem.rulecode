@@ -4,16 +4,25 @@ One -> One Zero One
 Zero := $Box(fill = #fff)
 Zero -> Zero Zero Zero
 
-CantorSet(_n) := $HTiling {
-    $LSystem(depth = _n) { One }
+CantorSet(_n) := $VTiling(gap = 4) {
+    $Flexbox(justifyContent = "center", alignContent = "center") {
+        $Text(fill = #000, font = $Font(family = "Times New Roman", size = 15)) {
+            $Concatenate(separator = "") { "n = " _n }
+        }
+    }
+    $HTiling(stroke = $Stroke(fill = #000, width = 1)) {
+        $LSystem(depth = _n) { One }
+    }
 }
 
 @Root
-Main := $VTiling {
-    CantorSet(_n = 0)
-    CantorSet(_n = 1)
-    CantorSet(_n = 2)
-    CantorSet(_n = 3)
-    CantorSet(_n = 4)
-    CantorSet(_n = 5)
+Main := $MarginBox(all = 8, fill = #fff) {
+    $VTiling(gap = 8) {
+        CantorSet(_n = 0)
+        CantorSet(_n = 1)
+        CantorSet(_n = 2)
+        CantorSet(_n = 3)
+        CantorSet(_n = 4)
+        CantorSet(_n = 5)
+    }
 }

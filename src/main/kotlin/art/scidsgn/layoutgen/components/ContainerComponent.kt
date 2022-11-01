@@ -23,14 +23,14 @@ abstract class ContainerComponent : Component() {
         gfx.paint = fill.toAwtPaint(this)
         gfx.fill(shape)
 
+        for (component in childComponents) {
+            component.render(gfx)
+        }
+
         if (stroke != null) {
             gfx.stroke = stroke!!.toAwtStroke()
             gfx.paint = stroke!!.fill.toAwtPaint(this)
             gfx.draw(shape)
-        }
-
-        for (component in childComponents) {
-            component.render(gfx)
         }
 
         gfx.translate(-position.x, -position.y)
