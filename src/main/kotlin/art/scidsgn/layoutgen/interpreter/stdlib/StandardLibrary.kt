@@ -35,6 +35,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.string.SplitFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.NineSliceFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.StrokeFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.TextureFunction
@@ -81,6 +82,7 @@ object StandardLibrary {
         // Fills & strokes
         RGBFunction(),
         TextureFunction(),
+        NineSliceFunction(),
         StrokeFunction(),
 
         // Visual types

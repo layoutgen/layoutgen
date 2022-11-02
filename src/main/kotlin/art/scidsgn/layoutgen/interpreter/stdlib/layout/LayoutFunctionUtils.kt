@@ -9,6 +9,7 @@ import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustific
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.components.layout.withGap
+import art.scidsgn.layoutgen.components.sizing.Margins
 import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.interpreter.FunctionContext
@@ -55,6 +56,12 @@ object LayoutFunctionUtils {
         Pair("center", FlexItemAlignment.CENTER),
         Pair("stretch", FlexItemAlignment.STRETCH),
     )
+    
+    private val marginGuard = { it: Double ->
+        if (it < 0.0) {
+            throw GeneralError(Errors.LAYOUT_MARGIN_CANNOT_BE_NEGATIVE)
+        }
+    }
 
     fun handleContainerArguments(component: Component, context: FunctionContext) {
         handleVisualArguments(component, context)
@@ -64,6 +71,47 @@ object LayoutFunctionUtils {
         if (component is GappedContainerComponent) {
             handleGapArgument(component, context)
         }
+    }
+
+    fun getMargins(context: FunctionContext): Margins {
+        var left = 0.0
+        var top = 0.0
+        var right = 0.0
+        var bottom = 0.0
+        if (context.hasArgument("all")) {
+            val value = context.argumentSingleValue("all", TypeName.NUMBER, marginGuard)
+
+            left = value
+            top = value
+            right = value
+            bottom = value
+        }
+        if (context.hasArgument("vertical")) {
+            val value = context.argumentSingleValue("vertical", TypeName.NUMBER, marginGuard)
+
+            top = value
+            bottom = value
+        }
+        if (context.hasArgument("horizontal")) {
+            val value = context.argumentSingleValue("horizontal", TypeName.NUMBER, marginGuard)
+
+            left = value
+            right = value
+        }
+        if (context.hasArgument("left")) {
+            left = context.argumentSingleValue("left", TypeName.NUMBER, marginGuard)
+        }
+        if (context.hasArgument("top")) {
+            top = context.argumentSingleValue("top", TypeName.NUMBER, marginGuard)
+        }
+        if (context.hasArgument("right")) {
+            right = context.argumentSingleValue("right", TypeName.NUMBER, marginGuard)
+        }
+        if (context.hasArgument("bottom")) {
+            bottom = context.argumentSingleValue("bottom", TypeName.NUMBER, marginGuard)
+        }
+
+        return Margins(top, right, bottom, left)
     }
 
     private fun handleVisualArguments(component: Component, context: FunctionContext) {

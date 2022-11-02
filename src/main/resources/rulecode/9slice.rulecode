@@ -1,0 +1,18 @@
+SliceImage := $Image(path = "../images/9slice.png")
+
+SliceTexture := $NineSlice(image = SliceImage, top = 16, bottom = 48, left = 6, right = 48)
+
+RB(_size) := $Box(
+    width = _size, height = _size, fill = SliceTexture
+)
+
+@Root
+Main := $Flexbox(
+    fill = #000,
+    wrap = true, gap = 8,
+    justifyContent = "center"
+) {
+    $Repeat(count = 25) {
+        RB(_size = $RandomInt(from = 64, to = 200))
+    }
+}
