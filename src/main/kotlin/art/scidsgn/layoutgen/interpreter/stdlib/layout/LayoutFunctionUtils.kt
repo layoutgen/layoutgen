@@ -43,6 +43,7 @@ object LayoutFunctionUtils {
         Pair("flexStart", FlexItemAlignment.FLEX_START),
         Pair("flexEnd", FlexItemAlignment.FLEX_END),
         Pair("center", FlexItemAlignment.CENTER),
+        Pair("stretch", FlexItemAlignment.STRETCH),
     )
 
     fun handleContainerArguments(component: Component, context: FunctionContext) {

@@ -62,10 +62,13 @@ class FlexLine(
 
         items.forEach {
             val itemCrossOffset = when (alignItems) {
-                FlexItemAlignment.FLEX_START -> 0.0
+                FlexItemAlignment.FLEX_START,
+                FlexItemAlignment.STRETCH -> 0.0
+
                 FlexItemAlignment.CENTER -> (crossSize - it.crossSize) / 2
                 FlexItemAlignment.FLEX_END -> crossSize - it.crossSize
             }
+
             block(it, mainOffset, itemCrossOffset)
 
             mainOffset += it.mainSize
@@ -102,6 +105,16 @@ class FlexLine(
 
         items.forEach {
             it.mainSize += (it.component.flexGrow / totalFlexGrow) * spaceAvailable
+        }
+    }
+
+    fun commitCrossSize() {
+        val crossSize = getCrossSize()
+
+        items.forEach {
+            if (alignItems == FlexItemAlignment.STRETCH) {
+                it.crossSize = crossSize
+            }
         }
     }
 }

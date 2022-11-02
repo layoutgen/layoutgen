@@ -31,6 +31,10 @@ class FlexboxAlgorithm(
             lines.last().items += it
         }
         lines.last().commitLine()
+
+        // TODO: alignContent = stretch
+
+        lines.forEach { it.commitCrossSize() }
     }
 
     fun getTotalCrossSize(): Double {
