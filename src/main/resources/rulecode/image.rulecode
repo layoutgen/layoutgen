@@ -1,4 +1,20 @@
 Cif := $Image(path = "../images/cif.jpg")
 
+CifPaint := $Texture(image = Cif, stretch = "both")
+
+RB(_size) := $Box(
+    width = _size, fill = CifPaint
+)
+
 @Root
-Main := $ImageBox(image = Cif, height = 200)
+Main := $Flexbox(
+    fill = #000,
+    wrap = true, gap = 8,
+    justifyContent = "center",
+    alignItems = "stretch",
+    alignContent = "stretch"
+) {
+    $Repeat(count = 25) {
+        RB(_size = $RandomInt(from = 20, to = 150))
+    }
+}

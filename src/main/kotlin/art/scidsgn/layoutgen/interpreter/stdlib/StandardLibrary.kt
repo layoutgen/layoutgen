@@ -37,6 +37,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.StrokeFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.render.TextureFunction
 import art.scidsgn.layoutgen.ruletree.ast.BuiltinName
 
 object StandardLibrary {
@@ -79,6 +80,7 @@ object StandardLibrary {
 
         // Fills & strokes
         RGBFunction(),
+        TextureFunction(),
         StrokeFunction(),
 
         // Visual types
