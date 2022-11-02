@@ -9,6 +9,7 @@ RB(_size) := $Box(
 Main := $Flexbox(
     fill = #000,
     alignItems = "stretch",
+    alignContent = "stretch",
     wrap = true, gap = 8
 ) {
     $Repeat(count = 25) {

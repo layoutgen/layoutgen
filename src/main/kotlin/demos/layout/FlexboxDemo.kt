@@ -3,6 +3,7 @@ package demos.layout
 import art.scidsgn.layoutgen.components.*
 import art.scidsgn.layoutgen.components.layout.flexbox.Flexbox
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.components.layout.tiling.VTiling
@@ -22,7 +23,7 @@ fun createFlexbox(): Component {
                     Box().withSize(40.0, 40.0)
                 )
             ).withGap(32.0)
-                .withJustifyContent(FlexContentAlignment.SPACE_BETWEEN)
+                .withJustifyContent(FlexContentJustification.SPACE_BETWEEN)
                 .withAlignContent(FlexContentAlignment.SPACE_BETWEEN)
                 .withAlignItems(FlexItemAlignment.FLEX_END)
                 .withFlexWrap(true)
@@ -38,7 +39,7 @@ fun createFlexbox(): Component {
                     Box().withSize(90.0, 90.0)
                 )
             ).withGap(8.0)
-                .withJustifyContent(FlexContentAlignment.CENTER)
+                .withJustifyContent(FlexContentJustification.CENTER)
                 .withAlignContent(FlexContentAlignment.CENTER)
                 .withAlignItems(FlexItemAlignment.FLEX_END)
                 .withFlexWrap(true)

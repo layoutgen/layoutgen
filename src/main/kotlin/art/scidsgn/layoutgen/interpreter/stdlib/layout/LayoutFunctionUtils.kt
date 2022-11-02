@@ -5,6 +5,7 @@ import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
 import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
 import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.components.layout.withGap
@@ -32,6 +33,15 @@ object LayoutFunctionUtils {
         Pair("center", FlexContentAlignment.CENTER),
         Pair("spaceBetween", FlexContentAlignment.SPACE_BETWEEN),
         Pair("spaceAround", FlexContentAlignment.SPACE_AROUND),
+        Pair("stretch", FlexContentAlignment.STRETCH),
+    )
+
+    val flexContentJustificationMap = mapOf(
+        Pair("flexStart", FlexContentJustification.FLEX_START),
+        Pair("flexEnd", FlexContentJustification.FLEX_END),
+        Pair("center", FlexContentJustification.CENTER),
+        Pair("spaceBetween", FlexContentJustification.SPACE_BETWEEN),
+        Pair("spaceAround", FlexContentJustification.SPACE_AROUND),
     )
 
     val flexDirectionMap = mapOf(

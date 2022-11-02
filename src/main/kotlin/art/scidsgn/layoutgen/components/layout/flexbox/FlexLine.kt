@@ -1,6 +1,6 @@
 package art.scidsgn.layoutgen.components.layout.flexbox
 
-import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import kotlin.math.max
 import kotlin.math.min
@@ -8,7 +8,7 @@ import kotlin.math.min
 class FlexLine(
     private val mainSize: Double,
     private val gap: Double,
-    private val justifyContent: FlexContentAlignment,
+    private val justifyContent: FlexContentJustification,
     private val alignItems: FlexItemAlignment
 ) {
     val items: MutableList<FlexItem> = mutableListOf()
@@ -48,13 +48,13 @@ class FlexLine(
         val crossSize = getCrossSize()
 
         var mainOffset = when (justifyContent) {
-            FlexContentAlignment.FLEX_START,
-            FlexContentAlignment.SPACE_BETWEEN -> 0.0
+            FlexContentJustification.FLEX_START,
+            FlexContentJustification.SPACE_BETWEEN -> 0.0
 
-            FlexContentAlignment.CENTER -> (mainSize - totalMainSize) / 2
-            FlexContentAlignment.FLEX_END -> mainSize - totalMainSize
+            FlexContentJustification.CENTER -> (mainSize - totalMainSize) / 2
+            FlexContentJustification.FLEX_END -> mainSize - totalMainSize
 
-            FlexContentAlignment.SPACE_AROUND -> min(
+            FlexContentJustification.SPACE_AROUND -> min(
                 (mainSize - totalGaplessMainSize) / (items.size * 2),
                 (mainSize - totalMainSize) / 2
             )
@@ -74,16 +74,16 @@ class FlexLine(
             mainOffset += it.mainSize
 
             mainOffset += when (justifyContent) {
-                FlexContentAlignment.FLEX_START,
-                FlexContentAlignment.CENTER,
-                FlexContentAlignment.FLEX_END -> gap
+                FlexContentJustification.FLEX_START,
+                FlexContentJustification.CENTER,
+                FlexContentJustification.FLEX_END -> gap
 
-                FlexContentAlignment.SPACE_BETWEEN -> max(
+                FlexContentJustification.SPACE_BETWEEN -> max(
                     gap,
                     (mainSize - totalGaplessMainSize) / (items.size - 1)
                 )
 
-                FlexContentAlignment.SPACE_AROUND -> max(
+                FlexContentJustification.SPACE_AROUND -> max(
                     gap,
                     (mainSize - totalGaplessMainSize) / items.size
                 )

@@ -1,6 +1,7 @@
 package art.scidsgn.layoutgen.components.layout.flexbox
 
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import kotlin.math.max
 import kotlin.math.min
@@ -11,7 +12,7 @@ class FlexboxAlgorithm(
     var crossSize: Double,
     val gap: Double,
     val flexWrap: Boolean,
-    val justifyContent: FlexContentAlignment,
+    val justifyContent: FlexContentJustification,
     val alignContent: FlexContentAlignment,
     var alignItems: FlexItemAlignment
 ) {
@@ -32,9 +33,21 @@ class FlexboxAlgorithm(
         }
         lines.last().commitLine()
 
-        // TODO: alignContent = stretch
+        if (alignContent == FlexContentAlignment.STRETCH) {
+            stretchLines()
+        }
 
         lines.forEach { it.commitCrossSize() }
+    }
+
+    private fun stretchLines() {
+        val freeCrossSpace = crossSize - getTotalCrossSize()
+
+        if (freeCrossSpace >= 0) {
+            lines.forEach {
+                it.enforcedCrossSize = it.getCrossSize() + freeCrossSpace / lines.size
+            }
+        }
     }
 
     fun getTotalCrossSize(): Double {
@@ -51,7 +64,8 @@ class FlexboxAlgorithm(
 
         var crossOffset = when (alignContent) {
             FlexContentAlignment.FLEX_START,
-            FlexContentAlignment.SPACE_BETWEEN -> 0.0
+            FlexContentAlignment.SPACE_BETWEEN,
+            FlexContentAlignment.STRETCH -> 0.0
 
             FlexContentAlignment.CENTER -> (crossSize - totalCrossSize) / 2
             FlexContentAlignment.FLEX_END -> crossSize - totalCrossSize
@@ -69,7 +83,8 @@ class FlexboxAlgorithm(
             crossOffset += when (alignContent) {
                 FlexContentAlignment.FLEX_START,
                 FlexContentAlignment.CENTER,
-                FlexContentAlignment.FLEX_END -> gap
+                FlexContentAlignment.FLEX_END,
+                FlexContentAlignment.STRETCH -> gap
 
                 FlexContentAlignment.SPACE_BETWEEN -> max(
                     gap,
@@ -80,7 +95,6 @@ class FlexboxAlgorithm(
                     gap,
                     (crossSize - totalGaplessCrossSize) / lines.size
                 )
-
             }
         }
     }

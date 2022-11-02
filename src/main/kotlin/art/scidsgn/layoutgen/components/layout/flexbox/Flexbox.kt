@@ -1,16 +1,17 @@
 package art.scidsgn.layoutgen.components.layout.flexbox
 
-import art.scidsgn.layoutgen.layout.LayoutEngine
-import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
+import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexDirection
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import art.scidsgn.layoutgen.components.sizing.Dimensions
 import art.scidsgn.layoutgen.components.sizing.Position
 import art.scidsgn.layoutgen.components.sizing.Size
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
+import art.scidsgn.layoutgen.layout.LayoutEngine
+import art.scidsgn.layoutgen.layout.LayoutUtils
 
 class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponent() {
     override var parent: Component? = null
@@ -23,7 +24,7 @@ class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponen
 
     private var flexDirection = FlexDirection.ROW
     private var flexWrap = false
-    private var flexJustifyContent = FlexContentAlignment.FLEX_START
+    private var flexJustifyContent = FlexContentJustification.FLEX_START
     private var flexAlignContent = FlexContentAlignment.FLEX_START
     private var flexAlignItems = FlexItemAlignment.FLEX_START
 
@@ -46,7 +47,7 @@ class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponen
         return this
     }
 
-    fun withJustifyContent(flexJustifyContent: FlexContentAlignment): Flexbox {
+    fun withJustifyContent(flexJustifyContent: FlexContentJustification): Flexbox {
         this.flexJustifyContent = flexJustifyContent
         return this
     }
