@@ -11,11 +11,7 @@ class Depsgraph(val environment: RuletreeEnvironment) {
 
     private fun reset() {
         environment.ruleTrees.values.forEach { ruleTree ->
-            ruleTree.rules.forEach {
-                if (it is IsRule) {
-                    it.safe = true
-                }
-            }
+            ruleTree.isRules.forEach { it.safe = true }
         }
     }
 

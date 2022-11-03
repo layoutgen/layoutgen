@@ -11,14 +11,14 @@ fun main() {
     try {
         val ruleCodePath = Path.of(
             {}.javaClass.classLoader.getResource(
-                "rulecode/9slice.rulecode"
+                "rulecode/lsystem.rulecode"
             )!!.toURI()
         ).toString()
 
         val environment = RuletreeEnvironment(AntlrRuletreeGenerator)
 
         val ruletree = environment.loadFile(ruleCodePath)
-        val resultRule = ruletree.getIsRule("Main")
+        val resultRule = ruletree.getRootRule()
         val interpreter = Interpreter()
 
         val depsgraph = Depsgraph(environment)

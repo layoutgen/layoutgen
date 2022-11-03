@@ -1,5 +1,6 @@
 package art.scidsgn.layoutgen.ruletree.parsers.antlr
 
+import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.rulecode.RulecodeBaseListener
@@ -44,6 +45,9 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
 
     override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
         val isRule = IsRule(ruleTree, ruleName(ctx.ruleName()), codePosition(ctx.start))
+        if (ruleTree.hasIsRule(isRule.name.name)) {
+            throw InFileError(Errors.IS_RULE_ALREADY_DEFINED, arrayOf(isRule.name.name), isRule.name.codePosition)
+        }
 
         if (ctx.annotationName() != null) {
             ctx.annotationName().forEach {
@@ -57,11 +61,17 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
 
         parseIsRuleBranches(isRule, ctx.isBranch)
 
-        ruleTree.rules += isRule
+        ruleTree.isRules += isRule
     }
 
     override fun enterRewriteRule(ctx: RulecodeParser.RewriteRuleContext) {
         val rewriteRule = RewriteRule(ruleTree, ruleName(ctx.ruleName()), codePosition(ctx.start))
+        if (ruleTree.hasRewriteRule(rewriteRule.name.name))
+            throw InFileError(
+                Errors.REWRITE_RULE_ALREADY_DEFINED,
+                arrayOf(rewriteRule.name.name),
+                rewriteRule.name.codePosition
+            )
 
         if (ctx.annotationName() != null) {
             ctx.annotationName().forEach {
@@ -71,7 +81,7 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
 
         parseRewriteRuleBranches(rewriteRule, ctx.rewriteBranch())
 
-        ruleTree.rules += rewriteRule
+        ruleTree.rewriteRules += rewriteRule
     }
 
     private fun codePosition(token: Token): CodePosition {

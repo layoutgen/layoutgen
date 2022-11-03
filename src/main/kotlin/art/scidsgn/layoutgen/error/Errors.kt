@@ -6,7 +6,12 @@ enum class Errors(val message: String) {
     MODULE_NOT_FOUND("Module %s not found"),
 
     IS_RULE_NOT_FOUND("Is-rule %s not found"),
+    IS_RULE_ALREADY_DEFINED("Is-rule %s already defined"),
     REWRITE_RULE_NOT_FOUND("Rewrite rule %s not found"),
+    REWRITE_RULE_ALREADY_DEFINED("Rewrite rule %s already defined"),
+
+    ROOT_RULE_NOT_PRESENT("@Root rule not present"),
+    ROOT_RULE_ALREADY_PRESENT("There can be only one @Root rule"),
 
     RULE_INCORRECT_ARGUMENT_COUNT("Rule %s expected %s arguments, provided %s"),
     RULE_UNEXPECTED_ARGUMENT("Unexpected argument %s"),
