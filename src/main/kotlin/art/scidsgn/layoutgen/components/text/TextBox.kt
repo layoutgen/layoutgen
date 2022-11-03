@@ -7,7 +7,7 @@ import art.scidsgn.layoutgen.components.sizing.Size
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
 import java.awt.Graphics2D
 
-class TextBox(val text: String, val font: Font) : Component() {
+class TextBox(val text: String, val font: Font, val alignment: TextAlignment) : Component() {
     override var parent: Component? = null
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
@@ -43,7 +43,13 @@ class TextBox(val text: String, val font: Font) : Component() {
         for (layout in algorithm.textLayouts) {
             offsetY += layout.ascent
 
-            layout.draw(gfx, 0.0f, offsetY)
+            val offsetX = when (alignment) {
+                TextAlignment.LEFT -> 0.0
+                TextAlignment.CENTER -> (size.targetSize.width - layout.advance) / 2
+                TextAlignment.RIGHT -> size.targetSize.width - layout.advance
+            }
+
+            layout.draw(gfx, offsetX.toFloat(), offsetY)
 
             offsetY += layout.descent + layout.leading
         }
