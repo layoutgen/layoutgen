@@ -1,0 +1,11 @@
+@Memo
+Color(_x) := $RandomColor
+
+@Root
+Main := $Flexbox(gap = 8, wrap = true, fill = #000) {
+    $Repeat(count = 10) {
+        $Box(width = 80, height = 80, fill = Color(_x = 1))
+        $Box(width = 80, height = 80, fill = Color(_x = 2))
+        $Box(width = 80, height = 80, fill = Color(_x = 3))
+    }
+}

@@ -10,6 +10,7 @@ import kotlin.random.Random
 
 class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
     val registeredObjects = mutableMapOf<String, Any>()
+    val memoizedRuleInvokations = mutableMapOf<RuleInvocationReference, List<Any>>()
 
     fun <T : Any> createOrGetObject(id: String, creator: () -> T): T {
         if (id in registeredObjects) {
@@ -49,6 +50,18 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
         ruleArguments.forEach { key, _ ->
             if (rule.variables.none { it.name == key }) {
                 throw GeneralError(Errors.RULE_UNEXPECTED_ARGUMENT, arrayOf(key))
+            }
+        }
+
+        if (rule.isMemo()) {
+            val invocation = RuleInvocationReference(rule, ruleArguments)
+
+            if (memoizedRuleInvokations.keys.any { it == invocation }) {
+                return memoizedRuleInvokations[invocation]!!
+            } else {
+                val value = execute(rule.ruleTree, pickBranch(rule.branches), ruleArguments, depth)
+                memoizedRuleInvokations[invocation] = value
+                return value
             }
         }
 

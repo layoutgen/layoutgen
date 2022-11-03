@@ -9,4 +9,12 @@ class IsRule(ruleTree: Ruletree, name: RuleName, codePosition: CodePosition) :
     var variables = mutableListOf<Variable>()
 
     var safe = false
+
+    fun isRoot(): Boolean {
+        return "@Root" in annotations
+    }
+
+    fun isMemo(): Boolean {
+        return "@Memo" in annotations
+    }
 }

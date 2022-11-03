@@ -32,7 +32,7 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
     }
 
     fun getRootRule(): IsRule {
-        val rootRules = isRules.filter { it.annotations.contains("@Root") }
+        val rootRules = isRules.filter { it.isRoot() }
         if (rootRules.isEmpty()) {
             throw InFileError(Errors.ROOT_RULE_NOT_PRESENT, emptyArray(), CodePosition(sourceFile, 1, 0))
         } else if (rootRules.size > 1) {
