@@ -4,6 +4,7 @@ enum class Errors(val message: String) {
     COULD_NOT_LOAD_SOURCE_FILE("Could not load source file %s"),
     MODULE_ALREADY_EXISTS("Module %s already imported"),
     MODULE_NOT_FOUND("Module %s not found"),
+    STD_MODULE_NOT_FOUND("Standard module %s does not exist"),
 
     IS_RULE_NOT_FOUND("Is-rule %s not found"),
     IS_RULE_ALREADY_DEFINED("Is-rule %s already defined"),

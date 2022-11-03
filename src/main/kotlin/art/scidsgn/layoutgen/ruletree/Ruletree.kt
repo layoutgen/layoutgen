@@ -9,6 +9,7 @@ import art.scidsgn.layoutgen.ruletree.ast.RuleName
 import art.scidsgn.layoutgen.ruletree.io.CodePosition
 import art.scidsgn.layoutgen.ruletree.io.SourceFile
 import java.nio.file.FileSystems
+import java.nio.file.Path
 
 class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile) {
     val importedModules = mutableMapOf<String, Ruletree>()
@@ -29,6 +30,20 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
 
         importedModules[moduleName] =
             environment.loadFile(absolutePathRelativeToRuleTree(relativePath))
+    }
+
+    fun importStd(moduleName: String) {
+        if (importedModules.containsKey(moduleName)) {
+            throw GeneralError(Errors.MODULE_ALREADY_EXISTS, arrayOf(moduleName))
+        }
+
+        val importPath = Path.of(
+            {}.javaClass.classLoader.getResource(
+                "std/$moduleName.rulecode"
+            )?.toURI() ?: throw GeneralError(Errors.STD_MODULE_NOT_FOUND, arrayOf(moduleName))
+        ).toString()
+
+        importedModules[moduleName] = environment.loadFile(importPath)
     }
 
     fun getRootRule(): IsRule {

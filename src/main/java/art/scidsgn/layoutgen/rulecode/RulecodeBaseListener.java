@@ -55,6 +55,24 @@ public class RulecodeBaseListener implements RulecodeListener {
      * <p>The default implementation does nothing.</p>
      */
     @Override
+    public void enterUseStatement(RulecodeParser.UseStatementContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
+    public void exitUseStatement(RulecodeParser.UseStatementContext ctx) {
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * <p>The default implementation does nothing.</p>
+     */
+    @Override
     public void enterIsRule(RulecodeParser.IsRuleContext ctx) {
     }
 

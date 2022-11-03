@@ -1,9 +1,12 @@
 grammar Rulecode;
 
-program: (importStatement | isRule | rewriteRule)+ EOF;
+program: (importStatement | useStatement | isRule | rewriteRule)+ EOF;
 
 // Import statement: import "icons.scirc" as Icons
 importStatement: IMPORT_KEYWORD string AS_KEYWORD ruleName;
+
+// Use statement: use CssColors
+useStatement: USE_KEYWORD ruleName;
 
 // Is-rule: X := Y Z | ABC
 isRule:
@@ -74,6 +77,7 @@ TRUE: 'true';
 FALSE: 'false';
 
 IMPORT_KEYWORD: 'import';
+USE_KEYWORD: 'use';
 AS_KEYWORD: 'as';
 
 BUILTIN_ID: '$' ID;

@@ -1,0 +1,4 @@
+use X11Colors
+
+@Root
+Main := $Box(fill = X11Colors.LimeGreen)

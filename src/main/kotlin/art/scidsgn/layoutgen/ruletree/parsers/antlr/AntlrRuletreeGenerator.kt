@@ -43,6 +43,14 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
         }
     }
 
+    override fun enterUseStatement(ctx: RulecodeParser.UseStatementContext) {
+        try {
+            ruleTree.importStd(ctx.ruleName().text)
+        } catch (e: GeneralError) {
+            throw InFileError(e, codePosition(ctx.start))
+        }
+    }
+
     override fun enterIsRule(ctx: RulecodeParser.IsRuleContext) {
         val isRule = IsRule(ruleTree, ruleName(ctx.ruleName()), codePosition(ctx.start))
         if (ruleTree.hasIsRule(isRule.name.name)) {

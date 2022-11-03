@@ -38,6 +38,20 @@ public interface RulecodeListener extends ParseTreeListener {
     void exitImportStatement(RulecodeParser.ImportStatementContext ctx);
 
     /**
+     * Enter a parse tree produced by {@link RulecodeParser#useStatement}.
+     *
+     * @param ctx the parse tree
+     */
+    void enterUseStatement(RulecodeParser.UseStatementContext ctx);
+
+    /**
+     * Exit a parse tree produced by {@link RulecodeParser#useStatement}.
+     *
+     * @param ctx the parse tree
+     */
+    void exitUseStatement(RulecodeParser.UseStatementContext ctx);
+
+    /**
      * Enter a parse tree produced by {@link RulecodeParser#isRule}.
      *
      * @param ctx the parse tree
