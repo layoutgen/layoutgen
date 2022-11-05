@@ -10,8 +10,8 @@ object TrigFunctionUtils {
         Pair("deg") { x: Double -> x * PI / 180 },
     )
 
-    fun getValue(context: FunctionContext): Double {
-        var x = context.argumentSingleValue<Double>("x", TypeName.NUMBER)
+    fun getValue(context: FunctionContext, argName: String = "x"): Double {
+        var x = context.argumentSingleValue<Double>(argName, TypeName.NUMBER)
 
         if (context.hasArgument("unit")) {
             val converter = context.argumentEnumValue("unit", unitConversionMap)
