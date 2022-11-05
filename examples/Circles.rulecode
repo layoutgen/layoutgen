@@ -1,0 +1,18 @@
+use X11Colors
+
+CircleFill := X11Colors.Cyan | X11Colors.Blue
+
+GridOrCircle := $Grid(rows = 2, cols = 2) {
+                    $Repeat(count = 4) {
+                        GridOrCircle
+                    }
+                }
+              | $Circle(fill = CircleFill)
+
+
+@Root
+Main := $Grid(rows = 2, cols = 2) {
+            $Repeat(count = 4) {
+                GridOrCircle
+            }
+        }

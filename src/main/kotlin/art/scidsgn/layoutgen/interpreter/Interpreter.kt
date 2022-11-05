@@ -1,5 +1,6 @@
 package art.scidsgn.layoutgen.interpreter
 
+import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.error.InFileError
@@ -60,6 +61,10 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
                 return memoizedRuleInvokations[invocation]!!
             } else {
                 val value = execute(rule.ruleTree, pickBranch(rule.branches), ruleArguments, depth)
+                if (value is Component) {
+                    throw InFileError(Errors.MEMO_RULE_CANNOT_RETURN_ELEMENT, emptyArray(), rule.codePosition)
+                }
+
                 memoizedRuleInvokations[invocation] = value
                 return value
             }

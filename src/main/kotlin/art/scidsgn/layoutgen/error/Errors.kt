@@ -14,6 +14,8 @@ enum class Errors(val message: String) {
     ROOT_RULE_NOT_PRESENT("@Root rule not present"),
     ROOT_RULE_ALREADY_PRESENT("There can be only one @Root rule"),
 
+    MEMO_RULE_CANNOT_RETURN_ELEMENT("@Memo rule cannot return an element"),
+
     RULE_INCORRECT_ARGUMENT_COUNT("Rule %s expected %s arguments, provided %s"),
     RULE_UNEXPECTED_ARGUMENT("Unexpected argument %s"),
 
@@ -56,6 +58,17 @@ enum class Errors(val message: String) {
     LSYSTEM_MUST_BE_A_RULENAME("Element must be a rule name"),
     LSYSTEM_CANNOT_BE_A_MODULENAME("Rule name must be local"),
     LSYSTEM_CANNOT_BE_PARAMETRIZED("Rule must not be parametrized"),
+
+    CLI_INPUT_PATH_NOT_PRESENT("An input file is required with --input or -i"),
+    CLI_UNKNOWN_ARGUMENT("Unknown command line argument %s"),
+    CLI_WIDTH_CANNOT_BE_LESS_THAN_ONE("Width cannot be less than 1"),
+    CLI_HEIGHT_CANNOT_BE_LESS_THAN_ONE("Height cannot be less than 1"),
+
+    CLI_ROOT_MUST_BE_A_SINGLE_COMPONENT("Root element must be a single component"),
+    CLI_ROOT_MUST_BE_A_COMPONENT("Root must be a renderable element"),
+
+    CLI_IMAGE_UNKNOWN_EXTENSION("Unsupported image file extension %s"),
+    CLI_IMAGE_COULD_NOT_SAVE("Could not save image"),
 
     // TODO: ANTLR errors suck
     ANTLR_SYNTAX_ERROR("ANTLR parser error - %s")
