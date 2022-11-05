@@ -6,7 +6,7 @@ import art.scidsgn.layoutgen.components.sizing.Size
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.LayoutUtils
 
-open class Box(children: List<Component> = emptyList()) : ContainerComponent() {
+open class Box(children: List<Component> = emptyList()) : Component() {
     override var parent: Component? = null
     override val childComponents = children
 

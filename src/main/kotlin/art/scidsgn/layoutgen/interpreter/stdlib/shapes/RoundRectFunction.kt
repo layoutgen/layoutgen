@@ -5,7 +5,7 @@ import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.interpreter.stdlib.layout.LayoutFunctionUtils
+import art.scidsgn.layoutgen.interpreter.stdlib.utils.LayoutFunctionUtils
 import art.scidsgn.layoutgen.components.shapes.RoundRect
 
 class RoundRectFunction : BuiltinFunction("RoundRect") {

@@ -4,6 +4,7 @@ import art.scidsgn.layoutgen.components.layout.utils.MarginBox
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
+import art.scidsgn.layoutgen.interpreter.stdlib.utils.LayoutFunctionUtils
 
 class MarginBoxFunction : BuiltinFunction("MarginBox") {
     override fun execute(context: FunctionContext): MarginBox {

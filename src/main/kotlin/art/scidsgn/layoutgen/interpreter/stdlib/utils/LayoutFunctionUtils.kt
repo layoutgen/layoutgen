@@ -1,7 +1,7 @@
-package art.scidsgn.layoutgen.interpreter.stdlib.layout
+package art.scidsgn.layoutgen.interpreter.stdlib.utils
 
 import art.scidsgn.layoutgen.components.*
-import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
+import art.scidsgn.layoutgen.components.layout.GappedComponent
 import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
 import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
@@ -56,7 +56,7 @@ object LayoutFunctionUtils {
         Pair("center", FlexItemAlignment.CENTER),
         Pair("stretch", FlexItemAlignment.STRETCH),
     )
-    
+
     private val marginGuard = { it: Double ->
         if (it < 0.0) {
             throw GeneralError(Errors.LAYOUT_MARGIN_CANNOT_BE_NEGATIVE)
@@ -68,7 +68,7 @@ object LayoutFunctionUtils {
         handleSizeArguments(component, context)
         handleFlexGrowArgument(component, context)
 
-        if (component is GappedContainerComponent) {
+        if (component is GappedComponent) {
             handleGapArgument(component, context)
         }
     }
@@ -140,7 +140,7 @@ object LayoutFunctionUtils {
         }
     }
 
-    private fun handleGapArgument(component: GappedContainerComponent, context: FunctionContext) {
+    private fun handleGapArgument(component: GappedComponent, context: FunctionContext) {
         if (context.hasArgument("gap")) {
             component.withGap(context.argumentSingleValue("gap", TypeName.NUMBER) {
                 if (it < 0) {

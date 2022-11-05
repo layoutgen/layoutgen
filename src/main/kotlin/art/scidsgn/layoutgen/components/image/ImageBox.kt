@@ -23,9 +23,7 @@ class ImageBox(val image: Image) : Box() {
         super.propagateRequestedSize(parentRequestedSize)
     }
 
-    override fun render(gfx: Graphics2D) {
-        gfx.translate(position.x, position.y)
-
+    override fun renderSelf(gfx: Graphics2D) {
         gfx.drawImage(
             image,
             0,
@@ -34,7 +32,5 @@ class ImageBox(val image: Image) : Box() {
             size.targetSize.height.toInt(),
             null
         )
-
-        gfx.translate(-position.x, -position.y)
     }
 }

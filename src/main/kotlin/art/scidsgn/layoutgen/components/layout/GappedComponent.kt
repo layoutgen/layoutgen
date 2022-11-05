@@ -1,9 +1,9 @@
 package art.scidsgn.layoutgen.components.layout
 
-import art.scidsgn.layoutgen.components.ContainerComponent
+import art.scidsgn.layoutgen.components.Component
 import kotlin.math.max
 
-abstract class GappedContainerComponent : ContainerComponent() {
+abstract class GappedComponent : Component() {
     var gap = 0.0
 
     fun getTotalGap(): Double {
@@ -11,7 +11,7 @@ abstract class GappedContainerComponent : ContainerComponent() {
     }
 }
 
-fun <T : GappedContainerComponent> T.withGap(gap: Double): T {
+fun <T : GappedComponent> T.withGap(gap: Double): T {
     this.gap = gap
     return this
 }

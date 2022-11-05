@@ -1,18 +1,18 @@
 package art.scidsgn.layoutgen.components.layout.grid
 
-import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
+import art.scidsgn.layoutgen.components.layout.GappedComponent
 import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
 import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
 import art.scidsgn.layoutgen.components.sizing.Dimensions
 import art.scidsgn.layoutgen.components.sizing.Position
 import art.scidsgn.layoutgen.components.sizing.Size
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
+import art.scidsgn.layoutgen.layout.LayoutUtils
 import kotlin.math.floor
 
 class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()) :
-    GappedContainerComponent() {
+    GappedComponent() {
     override var parent: Component? = null
     override val childComponents = children
 

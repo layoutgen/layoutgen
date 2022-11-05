@@ -8,6 +8,8 @@ import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
 import java.awt.Graphics2D
 
 class TextBox(val text: String, val font: Font, val alignment: TextAlignment) : Component() {
+    override val childComponents: List<Component> = emptyList()
+
     override var parent: Component? = null
     override val size: Size = Size()
     override var position: Position = Position(0.0, 0.0)
@@ -34,9 +36,9 @@ class TextBox(val text: String, val font: Font, val alignment: TextAlignment) : 
         size.targetSize = Dimensions(algorithm.targetWidth, algorithm.targetHeight)
     }
 
-    override fun render(gfx: Graphics2D) {
-        gfx.translate(position.x, position.y)
+    override fun determineChildrenPositions() {}
 
+    override fun renderSelf(gfx: Graphics2D) {
         gfx.paint = fill.toAwtPaint(this)
 
         var offsetY = 0.0f
@@ -53,7 +55,5 @@ class TextBox(val text: String, val font: Font, val alignment: TextAlignment) : 
 
             offsetY += layout.descent + layout.leading
         }
-
-        gfx.translate(-position.x, -position.y)
     }
 }

@@ -1,7 +1,6 @@
 package art.scidsgn.layoutgen.layout.tree
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 
 internal class LeafIterator(start: Component) : Iterator<Component> {
     private var component: Component?
@@ -17,7 +16,7 @@ internal class LeafIterator(start: Component) : Iterator<Component> {
     override fun next(): Component {
         val current = component!!
 
-        if (current is ContainerComponent && current.hasChildren()) {
+        if (current.hasChildren()) {
             component = current.childComponents[0]
         } else {
             component = null

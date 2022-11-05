@@ -1,7 +1,7 @@
 package art.scidsgn.layoutgen.components.layout.flexbox
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
+import art.scidsgn.layoutgen.components.layout.GappedComponent
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentAlignment
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexContentJustification
 import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexDirection
@@ -13,7 +13,7 @@ import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
 import art.scidsgn.layoutgen.layout.LayoutEngine
 import art.scidsgn.layoutgen.layout.LayoutUtils
 
-class Flexbox(children: List<Component> = emptyList()) : GappedContainerComponent() {
+class Flexbox(children: List<Component> = emptyList()) : GappedComponent() {
     override var parent: Component? = null
     override val childComponents = children
 

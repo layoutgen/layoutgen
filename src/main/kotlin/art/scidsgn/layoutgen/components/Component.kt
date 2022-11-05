@@ -11,6 +11,8 @@ import java.awt.Shape
 import java.awt.geom.Rectangle2D
 
 abstract class Component {
+    abstract val childComponents: List<Component>
+
     abstract var parent: Component?
 
     abstract val size: Size
@@ -23,13 +25,18 @@ abstract class Component {
 
     abstract fun propagateRequestedSize(parentRequestedSize: UnclearDimensions)
     abstract fun calculateTargetSize()
+    abstract fun determineChildrenPositions()
+
+    fun hasChildren(): Boolean {
+        return childComponents.isNotEmpty()
+    }
 
     fun nextSibling(): Component? {
-        if (parent == null || parent !is ContainerComponent) {
+        if (parent == null || parent !is Component) {
             return null
         }
 
-        val childComponents = (parent as ContainerComponent).childComponents
+        val childComponents = (parent as Component).childComponents
         val index = childComponents.indexOf(this)
         if (index == childComponents.size - 1) {
             return null
@@ -42,10 +49,6 @@ abstract class Component {
         return nextSibling() == null
     }
 
-    open fun isLaidOut(): Boolean {
-        return size.hasTargetSize()
-    }
-
     fun hasDefinedWidth(): Boolean {
         return size.definedSize.hasWidth()
     }
@@ -54,27 +57,39 @@ abstract class Component {
         return size.definedSize.hasHeight()
     }
 
+    fun isLaidOut(): Boolean {
+        return size.hasTargetSize() && childComponents.all { it.isLaidOut() }
+    }
+
     open fun createShape(): Shape {
         return Rectangle2D.Double(0.0, 0.0, size.targetSize.width, size.targetSize.height)
     }
 
-    open fun render(gfx: Graphics2D) {
-        if (size.targetSize.width.toInt() == 0 || size.targetSize.height.toInt() == 0) {
-            return
-        }
-
-        gfx.translate(position.x, position.y)
-
+    open fun renderSelf(gfx: Graphics2D) {
         val shape = createShape()
 
         gfx.paint = fill.toAwtPaint(this)
         gfx.fill(shape)
+
+        renderChildren(gfx)
 
         if (stroke != null) {
             gfx.stroke = stroke!!.toAwtStroke()
             gfx.paint = stroke!!.fill.toAwtPaint(this)
             gfx.draw(shape)
         }
+    }
+
+    fun renderChildren(gfx: Graphics2D) {
+        for (component in childComponents) {
+            component.render(gfx)
+        }
+    }
+
+    fun render(gfx: Graphics2D) {
+        gfx.translate(position.x, position.y)
+
+        renderSelf(gfx)
 
         gfx.translate(-position.x, -position.y)
     }

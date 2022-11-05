@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry
+package art.scidsgn.layoutgen.interpreter.stdlib.utils
 
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName

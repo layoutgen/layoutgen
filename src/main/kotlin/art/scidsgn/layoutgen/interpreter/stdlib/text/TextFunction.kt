@@ -5,7 +5,7 @@ import art.scidsgn.layoutgen.components.text.TextBox
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.interpreter.stdlib.layout.LayoutFunctionUtils
+import art.scidsgn.layoutgen.interpreter.stdlib.utils.LayoutFunctionUtils
 
 class TextFunction : BuiltinFunction("Text") {
     private val textAlignmentMap = mapOf(

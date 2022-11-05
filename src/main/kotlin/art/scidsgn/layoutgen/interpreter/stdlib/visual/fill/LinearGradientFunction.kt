@@ -3,7 +3,7 @@ package art.scidsgn.layoutgen.interpreter.stdlib.visual.fill
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.interpreter.stdlib.math.trigonometry.TrigFunctionUtils
+import art.scidsgn.layoutgen.interpreter.stdlib.utils.TrigFunctionUtils
 import art.scidsgn.layoutgen.visual.fill.LinearGradient
 import kotlin.math.PI
 

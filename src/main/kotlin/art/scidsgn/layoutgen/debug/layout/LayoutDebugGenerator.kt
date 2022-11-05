@@ -1,7 +1,6 @@
 package art.scidsgn.layoutgen.debug.layout
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 import java.awt.Color
 import java.awt.Graphics2D
 import java.awt.image.BufferedImage
@@ -37,10 +36,8 @@ object LayoutDebugGenerator {
             componentX + 4, componentY + 16
         )
 
-        if (component is ContainerComponent) {
-            component.childComponents.forEach {
-                drawComponent(gfx, it, x + component.position.x, y + component.position.y, random)
-            }
+        component.childComponents.forEach {
+            drawComponent(gfx, it, x + component.position.x, y + component.position.y, random)
         }
     }
 

@@ -1,15 +1,15 @@
 package art.scidsgn.layoutgen.components.layout.tiling
 
-import art.scidsgn.layoutgen.layout.LayoutUtils
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.layout.GappedContainerComponent
+import art.scidsgn.layoutgen.components.layout.GappedComponent
 import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
 import art.scidsgn.layoutgen.components.sizing.Dimensions
 import art.scidsgn.layoutgen.components.sizing.Position
 import art.scidsgn.layoutgen.components.sizing.Size
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
+import art.scidsgn.layoutgen.layout.LayoutUtils
 
-class HTiling(children: List<Component> = emptyList()) : GappedContainerComponent() {
+class HTiling(children: List<Component> = emptyList()) : GappedComponent() {
     override var parent: Component? = null
     override val childComponents = children
 

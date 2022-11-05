@@ -1,7 +1,6 @@
 package art.scidsgn.layoutgen.layout
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 import art.scidsgn.layoutgen.components.layout.alignment.HorizontalAlignment
 import art.scidsgn.layoutgen.components.layout.alignment.VerticalAlignment
 import art.scidsgn.layoutgen.components.sizing.Dimensions
@@ -73,7 +72,7 @@ object LayoutUtils {
         )
     }
 
-    fun setChildrenParent(parent: ContainerComponent) {
+    fun setChildrenParent(parent: Component) {
         parent.childComponents.forEach { it.parent = parent }
     }
 

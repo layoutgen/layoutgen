@@ -1,7 +1,6 @@
 package art.scidsgn.layoutgen.layout
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 import art.scidsgn.layoutgen.components.sizing.Dimensions
 import art.scidsgn.layoutgen.components.sizing.Position
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
@@ -12,9 +11,7 @@ object LayoutEngine {
         root.propagateRequestedSize(UnclearDimensions(rootDimensions.width, rootDimensions.height))
         for (it in BreadthUpIterable(root)) {
             it.calculateTargetSize()
-            if (it is ContainerComponent) {
-                it.determineChildrenPositions()
-            }
+            it.determineChildrenPositions()
 
             if (it == root) {
                 break
@@ -25,9 +22,6 @@ object LayoutEngine {
     fun resetLayout(component: Component) {
         component.position = Position(0.0, 0.0)
         component.size.requestedSize = UnclearDimensions(null, null)
-
-        if (component is ContainerComponent) {
-            component.childComponents.forEach { resetLayout(it) }
-        }
+        component.childComponents.forEach { resetLayout(it) }
     }
 }

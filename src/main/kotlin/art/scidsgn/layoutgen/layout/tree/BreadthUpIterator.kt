@@ -1,7 +1,6 @@
 package art.scidsgn.layoutgen.layout.tree
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 
 internal class BreadthUpIterator(start: Component) : Iterator<Component> {
     var component: Component?
@@ -22,7 +21,7 @@ internal class BreadthUpIterator(start: Component) : Iterator<Component> {
         } else {
             component = current.nextSibling()
 
-            if (component!! is ContainerComponent && (component!! as ContainerComponent).hasChildren()) {
+            if (component!!.hasChildren()) {
                 component = LeafIterable(component!!).last()
             }
         }

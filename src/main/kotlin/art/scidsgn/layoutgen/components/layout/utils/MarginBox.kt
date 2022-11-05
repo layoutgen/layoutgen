@@ -1,11 +1,10 @@
 package art.scidsgn.layoutgen.components.layout.utils
 
 import art.scidsgn.layoutgen.components.Component
-import art.scidsgn.layoutgen.components.ContainerComponent
 import art.scidsgn.layoutgen.components.sizing.*
 import art.scidsgn.layoutgen.layout.LayoutUtils
 
-class MarginBox(val margins: Margins, children: List<Component>) : ContainerComponent() {
+class MarginBox(val margins: Margins, children: List<Component>) : Component() {
     override var parent: Component? = null
     override val childComponents = children
 
