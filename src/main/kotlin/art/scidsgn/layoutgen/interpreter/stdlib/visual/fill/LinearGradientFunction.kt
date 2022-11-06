@@ -10,9 +10,9 @@ import kotlin.math.PI
 class LinearGradientFunction : BuiltinFunction("LinearGradient") {
     private val directionMap = mapOf(
         Pair("right", 0.0),
-        Pair("bottom", PI * 0.5),
+        Pair("down", PI * 0.5),
         Pair("left", PI),
-        Pair("top", PI * 1.5),
+        Pair("up", PI * 1.5),
     )
 
     override fun execute(context: FunctionContext): Any {

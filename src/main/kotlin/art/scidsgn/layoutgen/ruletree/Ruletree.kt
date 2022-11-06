@@ -37,6 +37,7 @@ class Ruletree(val environment: RuletreeEnvironment, val sourceFile: SourceFile)
             throw GeneralError(Errors.MODULE_ALREADY_EXISTS, arrayOf(moduleName))
         }
 
+        // TODO: doesn't work in jar
         val importPath = Path.of(
             {}.javaClass.classLoader.getResource(
                 "std/$moduleName.rulecode"

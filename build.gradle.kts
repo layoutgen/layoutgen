@@ -29,5 +29,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("MainKt")
+    mainClass.set("art.scidsgn.layoutgen.cli.MainKt")
 }

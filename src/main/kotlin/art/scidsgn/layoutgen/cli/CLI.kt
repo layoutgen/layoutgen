@@ -132,13 +132,16 @@ data class CLI(
     }
 
     private fun execute() {
-        saveImage(renderComponent(executeRulecode()))
+        try {
+            saveImage(renderComponent(executeRulecode()))
+        } catch (e: Throwable) {
+            System.err.println(e.message)
+        }
     }
 
     private fun watch() {
         // TODO: continue
         val dirPath = Path.of(inputPath).parent
-
         val watcher = FileSystems.getDefault().newWatchService()
 
         try {
@@ -147,17 +150,22 @@ data class CLI(
             println(e)
         }
 
+        var clock = System.currentTimeMillis()
+
         while (true) {
             val key = watcher.take()
-
-            println("a")
 
             for (event in key.pollEvents()) {
                 if (event.kind() != StandardWatchEventKinds.ENTRY_MODIFY) {
                     continue
                 }
 
-                println(event.context())
+                if (System.currentTimeMillis() - clock >= 1000) {
+                    println("File change detected - re-rendering...")
+                    execute()
+
+                    clock = System.currentTimeMillis()
+                }
             }
 
             if (!key.reset()) {
@@ -167,6 +175,12 @@ data class CLI(
     }
 
     fun run() {
-        execute()
+        if (watch) {
+            println("Running in watch mode - file changes will trigger a re-render.")
+            execute()
+            watch()
+        } else {
+            execute()
+        }
     }
 }
