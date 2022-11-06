@@ -59,6 +59,9 @@ enum class Errors(val message: String) {
     LSYSTEM_CANNOT_BE_A_MODULENAME("Rule name must be local"),
     LSYSTEM_CANNOT_BE_PARAMETRIZED("Rule must not be parametrized"),
 
+    TURTLE_STATE_STACK_IS_EMPTY("State stack is empty - cannot restore"),
+    TURTLE_STRIDE_ARGUMENTS_MISSING("Either of the following arguments must be present: \"set\", \"add\", \"scale\""),
+
     CLI_INPUT_PATH_NOT_PRESENT("An input file is required with --input or -i"),
     CLI_UNKNOWN_ARGUMENT("Unknown command line argument %s"),
     CLI_WIDTH_CANNOT_BE_LESS_THAN_ONE("Width cannot be less than 1"),

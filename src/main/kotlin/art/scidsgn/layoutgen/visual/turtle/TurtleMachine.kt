@@ -1,11 +1,18 @@
 package art.scidsgn.layoutgen.visual.turtle
 
+import art.scidsgn.layoutgen.error.Errors
+import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.visual.path.PathInstruction
 import art.scidsgn.layoutgen.visual.path.PathLineInstruction
 import art.scidsgn.layoutgen.visual.path.PathMoveInstruction
 import art.scidsgn.layoutgen.visual.types.Point
 
-class TurtleMachine(initialPosition: Point, initialAngle: Double, initialStride: Double, initialPressed: Boolean) {
+class TurtleMachine(
+    initialPosition: Point,
+    initialAngle: Double,
+    initialStride: Double,
+    initialPressed: Boolean
+) {
     var state = TurtleState(initialPosition, initialAngle, initialStride, initialPressed)
     private val memory: ArrayDeque<TurtleState> = ArrayDeque()
 
@@ -20,11 +27,11 @@ class TurtleMachine(initialPosition: Point, initialAngle: Double, initialStride:
     }
 
     fun save() {
-        memory.addLast(state.clone())
+        memory.addLast(state.copy())
     }
 
     fun restore() {
-        state = memory.removeLastOrNull() ?: TODO("no state to restore")
+        state = memory.removeLastOrNull() ?: throw GeneralError(Errors.TURTLE_STATE_STACK_IS_EMPTY)
         pathInstructions.add(PathMoveInstruction(state.position))
     }
 

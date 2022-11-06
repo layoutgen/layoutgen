@@ -150,6 +150,7 @@ object StandardLibrary {
         TurtlePressFunction(),
         TurtleRestoreFunction(),
         TurtleSaveFunction(),
+        TurtleStrideFunction(),
         TurtleTurnFunction(),
     )
 

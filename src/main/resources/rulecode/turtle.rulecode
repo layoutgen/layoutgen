@@ -1,20 +1,15 @@
-CurvedBranch := $TurtlePress $Repeat(count = 10) {
-    $TurtleForward $TurtleTurn(angle = 5, unit = "deg")
-} $TurtleLift
+CurvedBranch := $TurtlePress $TurtleForward $TurtleLift
 
-LeftBranch := $TurtleSave $TurtleTurn(angle = -45, unit = "deg") CurvedBranch BranchPoint $TurtleRestore
-RightBranch := $TurtleSave $TurtleTurn(angle = 45, unit = "deg") CurvedBranch BranchPoint $TurtleRestore
+LeftBranch := $TurtleSave $TurtleTurn(angle = -35, unit = "deg") CurvedBranch BranchPoint $TurtleRestore
+RightBranch := $TurtleSave $TurtleStride(scale = 0.7) $TurtleTurn(angle = 50, unit = "deg") CurvedBranch BranchPoint $TurtleRestore
 
-BranchPoint := $Nothing
-BranchPoint -> LeftBranch RightBranch
+BranchPoint := $TurtleStride(scale = 0.99) LeftBranch RightBranch
 
 @Root
 Main := $Box(fill = #000) {
     $Path(stroke = $Stroke(fill = #fff, width = 2)) {
-        $TurtleMachine(position = $Point(x = 100, y = 100)) {
-            $LSystem(depth = 2) {
-                CurvedBranch BranchPoint
-            }
+        $TurtleMachine(position = $Point(x = 200, y = 300), stride = 40) {
+            CurvedBranch BranchPoint
         }
     }
 }
