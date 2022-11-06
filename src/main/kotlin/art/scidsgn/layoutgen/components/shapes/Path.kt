@@ -1,15 +1,14 @@
-package art.scidsgn.layoutgen.components.shapes.path
+package art.scidsgn.layoutgen.components.shapes
 
 import art.scidsgn.layoutgen.components.Box
+import art.scidsgn.layoutgen.visual.path.PathInstruction
+import art.scidsgn.layoutgen.visual.path.PathShapeBuilder
 import java.awt.Shape
 import java.awt.geom.AffineTransform
-import java.awt.geom.Path2D
 
 class Path(val instructions: List<PathInstruction>, val fillContainer: Boolean = false) : Box() {
     override fun createShape(): Shape {
-        val path = Path2D.Double()
-
-        instructions.forEach { it.perform(path) }
+        val path = PathShapeBuilder.build(instructions)
 
         if (fillContainer) {
             val bounds = path.bounds2D

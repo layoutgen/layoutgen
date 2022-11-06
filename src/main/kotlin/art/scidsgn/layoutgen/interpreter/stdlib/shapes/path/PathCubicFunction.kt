@@ -3,7 +3,7 @@ package art.scidsgn.layoutgen.interpreter.stdlib.shapes.path
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.components.shapes.path.PathCubicInstruction
+import art.scidsgn.layoutgen.visual.path.PathCubicInstruction
 
 class PathCubicFunction : BuiltinFunction("PathCubic") {
     override fun execute(context: FunctionContext): PathCubicInstruction {

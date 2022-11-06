@@ -4,10 +4,7 @@ import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.InFileError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.flow.BlockFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.image.HeightFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.image.ImageBoxFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.image.ImageFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.image.WidthFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.image.*
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
@@ -95,6 +92,7 @@ object StandardLibrary {
 
         // Image types
         ImageFunction(),
+        SubImageFunction(),
         ImageBoxFunction(),
         WidthFunction(),
         HeightFunction(),

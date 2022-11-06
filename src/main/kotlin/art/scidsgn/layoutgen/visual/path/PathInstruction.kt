@@ -1,4 +1,4 @@
-package art.scidsgn.layoutgen.components.shapes.path
+package art.scidsgn.layoutgen.visual.path
 
 import java.awt.geom.Path2D
 

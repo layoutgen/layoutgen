@@ -3,7 +3,7 @@ package art.scidsgn.layoutgen.interpreter.stdlib.shapes.path
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.components.shapes.path.PathQuadraticInstruction
+import art.scidsgn.layoutgen.visual.path.PathQuadraticInstruction
 
 class PathQuadraticFunction : BuiltinFunction("PathQuadratic") {
     override fun execute(context: FunctionContext): PathQuadraticInstruction {
