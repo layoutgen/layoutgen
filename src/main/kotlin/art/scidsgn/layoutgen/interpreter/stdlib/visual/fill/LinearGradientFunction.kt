@@ -21,7 +21,7 @@ class LinearGradientFunction : BuiltinFunction("LinearGradient") {
         } else if (context.hasArgument("direction")) {
             context.argumentEnumValue("direction", directionMap)
         } else {
-            TODO("dsfsd")
+            0.0
         }
 
         return LinearGradient(angle, context.body(TypeName.GRADIENT_STOP))
