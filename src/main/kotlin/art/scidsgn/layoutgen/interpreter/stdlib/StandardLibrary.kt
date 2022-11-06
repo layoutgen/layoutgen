@@ -31,6 +31,8 @@ import art.scidsgn.layoutgen.interpreter.stdlib.string.LengthFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.string.SplitFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.turtle.*
+import art.scidsgn.layoutgen.interpreter.stdlib.utils.NothingFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.LinearGradientFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.RGBFunction
@@ -42,6 +44,8 @@ import art.scidsgn.layoutgen.ruletree.ast.BuiltinName
 
 object StandardLibrary {
     val functions = listOf(
+        NothingFunction(),
+
         // Flow
         BlockFunction(),
 
@@ -138,6 +142,15 @@ object StandardLibrary {
 
         // L-System
         LSystemFunction(),
+
+        // Turtle
+        TurtleMachineFunction(),
+        TurtleForwardFunction(),
+        TurtleLiftFunction(),
+        TurtlePressFunction(),
+        TurtleRestoreFunction(),
+        TurtleSaveFunction(),
+        TurtleTurnFunction(),
     )
 
     fun getFunction(name: BuiltinName): BuiltinFunction {

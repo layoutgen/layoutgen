@@ -12,6 +12,7 @@ enum class TypeName(val typeName: String) {
     STROKE("Stroke"),
     POINT("Point"),
     PATH_INSTRUCTION("PathInstruction"),
+    TURTLE_INSTRUCTION("TurtleInstruction"),
     FONT("Font"),
     IMAGE("Image")
 }
