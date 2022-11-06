@@ -1,0 +1,13 @@
+
+RenderRoot := $Circle(fill = #f00)
+
+@Root
+Main := $Grid(rows = 2, cols = 2) {
+    $Repeat(count = 4) {
+        $Box(fill = $RandomColor) {
+            $Box(fill = $Texture(
+                image = $Render(width = 80, height = 80, root = RenderRoot)
+            ))
+        }
+    }
+}

@@ -100,6 +100,7 @@ object StandardLibrary {
         ImageBoxFunction(),
         WidthFunction(),
         HeightFunction(),
+        RenderFunction(),
 
         // Math: arithmetic
         AddFunction(),
