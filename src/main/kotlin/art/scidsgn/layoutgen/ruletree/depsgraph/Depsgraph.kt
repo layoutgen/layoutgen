@@ -17,7 +17,10 @@ class Depsgraph(val environment: RuletreeEnvironment) {
 
     private fun traverse(rule: IsRule, history: List<IsRule>) {
         if (rule in history) {
-            history.forEach { it.safe = false }
+            val index = history.indexOf(rule)
+            for (i in index until history.size) {
+                history[i].safe = false
+            }
             rule.safe = false
 
             return
@@ -49,6 +52,9 @@ class Depsgraph(val environment: RuletreeEnvironment) {
         when (element) {
             is RuleCall -> {
                 dependencies += rule.ruleTree.getIsRule(element.name)
+                element.arguments.values.forEach {
+                    getDependencies(rule, it, dependencies)
+                }
             }
 
             is BuiltinCall -> {

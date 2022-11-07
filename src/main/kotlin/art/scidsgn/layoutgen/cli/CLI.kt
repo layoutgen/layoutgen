@@ -22,7 +22,13 @@ import kotlin.io.path.extension
 import kotlin.random.Random
 
 data class CLI(
-    val inputPath: String, val outputPath: String, var width: Int, var height: Int, var seed: Int, var watch: Boolean
+    val inputPath: String,
+    val outputPath: String,
+    var width: Int,
+    var height: Int,
+    var seed: Int,
+    var depth: Int,
+    var watch: Boolean
 ) {
     companion object {
         fun fromArgs(args: Array<String>): CLI {
@@ -31,6 +37,7 @@ data class CLI(
             var width = 1024
             var height = 1024
             var seed = Random.nextInt()
+            var depth = 16
             var watch = false
 
             var i = 0
@@ -70,6 +77,11 @@ data class CLI(
                         i += 1
                     }
 
+                    "-d", "--depth" -> {
+                        depth = args[i + 1].toInt()
+                        i += 1
+                    }
+
                     "--watch" -> {
                         watch = true
                     }
@@ -82,7 +94,7 @@ data class CLI(
             return CLI(
                 inputPath ?: throw GeneralError(Errors.CLI_INPUT_PATH_NOT_PRESENT),
                 outputPath ?: "$inputPath.png",
-                width, height, seed, watch
+                width, height, seed, depth, watch
             )
         }
     }
@@ -96,7 +108,7 @@ data class CLI(
         Depsgraph(environment).markCycles(rootRule)
 
         val interpreter = Interpreter(
-            Random(seed)
+            Random(seed), depth
         )
 
         val output = interpreter.execute(rootRule)
@@ -135,7 +147,7 @@ data class CLI(
         try {
             saveImage(renderComponent(executeRulecode()))
         } catch (e: Throwable) {
-            System.err.println(e.message)
+            System.err.println(e)
         }
     }
 
