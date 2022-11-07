@@ -27,7 +27,7 @@ class FlexLine(
     }
 
     private fun getInitialCrossSize(): Double {
-        return items.maxOf { it.crossSize }
+        return items.maxOfOrNull { it.crossSize } ?: 0.0
     }
 
     fun getCrossSize(): Double {
