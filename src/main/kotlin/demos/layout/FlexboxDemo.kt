@@ -31,7 +31,11 @@ fun createFlexbox(): Component {
                 .withHeight(300.0),
             Flexbox(
                 listOf(
-                    Box().withSize(120.0, 120.0),
+                    Box(
+                        listOf(
+                            Box().withSize(120.0, 120.0)
+                        )
+                    ),
                     Box().withHeight(80.0).withFlexGrow(1.5),
                     Box().withSize(20.0, 20.0),
                     Box().withHeight(100.0).withFlexGrow(1.0),

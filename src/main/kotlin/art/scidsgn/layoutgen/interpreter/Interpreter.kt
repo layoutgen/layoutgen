@@ -11,6 +11,8 @@ import kotlin.random.Random
 
 class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
     val registeredObjects = mutableMapOf<String, Any>()
+
+    // TODO: check if it works for rewrite rules
     val memoizedRuleInvokations = mutableMapOf<RuleInvocationReference, List<Any>>()
 
     fun <T : Any> createOrGetObject(id: String, creator: () -> T): T {

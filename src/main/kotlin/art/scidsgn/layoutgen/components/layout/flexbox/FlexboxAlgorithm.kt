@@ -6,6 +6,7 @@ import art.scidsgn.layoutgen.components.layout.flexbox.enums.FlexItemAlignment
 import kotlin.math.max
 import kotlin.math.min
 
+// TODO: look into flexGrow and stretch
 class FlexboxAlgorithm(
     val items: List<FlexItem>,
     var mainSize: Double,
