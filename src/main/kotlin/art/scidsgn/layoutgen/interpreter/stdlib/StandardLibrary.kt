@@ -34,6 +34,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.turtle.*
 import art.scidsgn.layoutgen.interpreter.stdlib.utils.NothingFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.PointFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.HSLFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.LinearGradientFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.RGBFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.visual.fill.StopFunction
@@ -84,6 +85,7 @@ object StandardLibrary {
 
         // Fills & strokes
         RGBFunction(),
+        HSLFunction(),
         StopFunction(),
         LinearGradientFunction(),
         TextureFunction(),
