@@ -142,11 +142,7 @@ object LayoutFunctionUtils {
 
     private fun handleGapArgument(component: GappedComponent, context: FunctionContext) {
         if (context.hasArgument("gap")) {
-            component.withGap(context.argumentSingleValue("gap", TypeName.NUMBER) {
-                if (it < 0) {
-                    throw GeneralError(Errors.LAYOUT_GAP_CANNOT_BE_NEGATIVE, emptyArray())
-                }
-            })
+            component.withGap(context.argumentSingleValue("gap", TypeName.NUMBER))
         }
     }
 

@@ -1,15 +1,17 @@
 package art.scidsgn.layoutgen.interpreter.stdlib.layout
 
+import art.scidsgn.layoutgen.components.layout.grid.Grid
 import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.GeneralError
 import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
-import art.scidsgn.layoutgen.components.layout.grid.Grid
 import art.scidsgn.layoutgen.interpreter.stdlib.utils.LayoutFunctionUtils
 
 class GridFunction : BuiltinFunction("Grid") {
     override fun execute(context: FunctionContext): Grid {
+        // TODO: "each" argument
+
         val rows = context.argumentSingleValue<Double>("rows", TypeName.NUMBER) {
             if (it < 1) {
                 throw GeneralError(Errors.LAYOUT_GRID_ROWS_MUST_CANNOT_BE_LESS_THAN_ONE)

@@ -18,7 +18,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker
 
 class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
     companion object : RuletreeGenerator {
-        override fun parse(ruleTree: Ruletree, code: String) {
+        override fun parse(ruleTree: Ruletree, code: String): Ruletree {
             val lexer = RulecodeLexer(CharStreams.fromString(code))
             val tokens = CommonTokenStream(lexer)
             val parser = RulecodeParser(tokens)
@@ -27,8 +27,9 @@ class AntlrRuletreeGenerator(val ruleTree: Ruletree) : RulecodeBaseListener() {
             parser.addErrorListener(AntlrRuletreeErrorListener(ruleTree))
 
             walker.walk(AntlrRuletreeGenerator(ruleTree), parser.program())
-        }
 
+            return ruleTree
+        }
     }
 
     override fun visitErrorNode(node: ErrorNode?) {

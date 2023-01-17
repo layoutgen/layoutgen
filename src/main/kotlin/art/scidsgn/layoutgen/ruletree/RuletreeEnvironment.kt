@@ -23,9 +23,7 @@ class RuletreeEnvironment(val generator: RuletreeGenerator) {
             val ruleTree = Ruletree(this, sourceFile)
             ruleTrees[absoluteFilePath] = ruleTree
 
-            generator.parse(ruleTree, code)
-
-            return ruleTree
+            return generator.parse(ruleTree, code)
         }
     }
 }

@@ -4,12 +4,12 @@ import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.components.sizing.Dimensions
 import art.scidsgn.layoutgen.components.sizing.Position
 import art.scidsgn.layoutgen.components.sizing.UnclearDimensions
-import art.scidsgn.layoutgen.layout.tree.BreadthUpIterable
+import art.scidsgn.layoutgen.layout.tree.PostOrderIterable
 
 object LayoutEngine {
     fun layOut(root: Component, rootDimensions: Dimensions) {
         root.propagateRequestedSize(UnclearDimensions(rootDimensions.width, rootDimensions.height))
-        for (it in BreadthUpIterable(root)) {
+        for (it in PostOrderIterable(root)) {
             it.calculateTargetSize()
             it.determineChildrenPositions()
 

@@ -83,7 +83,7 @@ fun createRootComponent(): Component {
                 .withSize(80.0, 150.0)
                 .withHorizontalStretch(true)
         )
-    ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(8.0)
+    ).withVerticalAlignment(VerticalAlignment.CENTER).withGap(-16.0)
 }
 
 fun main() {

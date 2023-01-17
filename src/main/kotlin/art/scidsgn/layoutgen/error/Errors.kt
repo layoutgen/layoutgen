@@ -28,6 +28,8 @@ enum class Errors(val message: String) {
     BUILTIN_FUNCTION_ARGUMENT_NOT_PRESENT("Required argument %s is not present"),
     BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_ZERO_PROVIDED("Function expects only one value for argument %s, but none was provided (might be a recursion depth issue)"),
     BUILTIN_FUNCTION_ARGUMENT_EXPECTED_ONE_ITEM_BUT_MORE_PROVIDED("Function expects only one value for argument %s, but more was provided"),
+
+    // TODO: Improve the readibility of this one
     BUILTIN_FUNCTION_ARGUMENT_INCORRECT_TYPE("Argument %s must be of type %s"),
     BUILTIN_FUNCTION_ARGUMENT_ENUM_INCORRECT_VALUE("Argument %s must be one of the following: %s"),
 
@@ -39,8 +41,6 @@ enum class Errors(val message: String) {
 
     LAYOUT_WIDTH_CANNOT_BE_NEGATIVE("Width cannot be negative"),
     LAYOUT_HEIGHT_CANNOT_BE_NEGATIVE("Height cannot be negative"),
-
-    LAYOUT_GAP_CANNOT_BE_NEGATIVE("Gap cannot be negative"),
 
     LAYOUT_GRID_ROWS_MUST_CANNOT_BE_LESS_THAN_ONE("Row count cannot be less than 1"),
     LAYOUT_GRID_ROWS_MUST_BE_AN_INTEGER("Row count must be an integer"),

@@ -2,7 +2,7 @@ package art.scidsgn.layoutgen.layout.tree
 
 import art.scidsgn.layoutgen.components.Component
 
-internal class BreadthUpIterator(start: Component) : Iterator<Component> {
+internal class PostOrderIterator(start: Component) : Iterator<Component> {
     var component: Component?
 
     init {
