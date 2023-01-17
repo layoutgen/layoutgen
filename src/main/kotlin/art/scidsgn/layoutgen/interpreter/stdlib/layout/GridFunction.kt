@@ -1,5 +1,6 @@
 package art.scidsgn.layoutgen.interpreter.stdlib.layout
 
+import art.scidsgn.layoutgen.components.Component
 import art.scidsgn.layoutgen.components.layout.grid.Grid
 import art.scidsgn.layoutgen.error.Errors
 import art.scidsgn.layoutgen.error.GeneralError
@@ -27,7 +28,14 @@ class GridFunction : BuiltinFunction("Grid") {
             }
         }.toInt()
 
-        val component = Grid(rows, cols, context.body(TypeName.COMPONENT))
+        val childComponents: List<Component>
+        if (context.hasArgument("each")) {
+            childComponents = context.argumentList("each", TypeName.COMPONENT)
+        } else {
+            childComponents = context.body(TypeName.COMPONENT)
+        }
+
+        val component = Grid(rows, cols, childComponents)
         LayoutFunctionUtils.handleContainerArguments(component, context)
 
         if (context.hasArgument("alignCellsHorizontally")) {

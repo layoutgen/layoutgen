@@ -13,9 +13,6 @@ import art.scidsgn.layoutgen.visual.VisualTreeRenderer
 import java.awt.image.BufferedImage
 import java.io.File
 import java.io.IOException
-import java.nio.file.FileSystems
-import java.nio.file.Path
-import java.nio.file.StandardWatchEventKinds
 import javax.imageio.ImageIO
 import kotlin.io.path.Path
 import kotlin.io.path.extension
@@ -27,8 +24,7 @@ data class CLI(
     var width: Int,
     var height: Int,
     var seed: Int,
-    var depth: Int,
-    var watch: Boolean
+    var depth: Int
 ) {
     companion object {
         fun fromArgs(args: Array<String>): CLI {
@@ -38,7 +34,6 @@ data class CLI(
             var height = 1024
             var seed = Random.nextInt()
             var depth = 16
-            var watch = false
 
             var i = 0
 
@@ -82,10 +77,6 @@ data class CLI(
                         i += 1
                     }
 
-                    "--watch" -> {
-                        watch = true
-                    }
-
                     else -> throw GeneralError(Errors.CLI_UNKNOWN_ARGUMENT, arrayOf(args[i]))
                 }
                 i += 1
@@ -94,7 +85,7 @@ data class CLI(
             return CLI(
                 inputPath ?: throw GeneralError(Errors.CLI_INPUT_PATH_NOT_PRESENT),
                 outputPath ?: "$inputPath.png",
-                width, height, seed, depth, watch
+                width, height, seed, depth
             )
         }
     }
@@ -151,48 +142,7 @@ data class CLI(
         }
     }
 
-    private fun watch() {
-        // TODO: continue
-        val dirPath = Path.of(inputPath).parent
-        val watcher = FileSystems.getDefault().newWatchService()
-
-        try {
-            Path.of(dirPath.toUri()).register(watcher, StandardWatchEventKinds.ENTRY_MODIFY)
-        } catch (e: IOException) {
-            println(e)
-        }
-
-        var clock = System.currentTimeMillis()
-
-        while (true) {
-            val key = watcher.take()
-
-            for (event in key.pollEvents()) {
-                if (event.kind() != StandardWatchEventKinds.ENTRY_MODIFY) {
-                    continue
-                }
-
-                if (System.currentTimeMillis() - clock >= 1000) {
-                    println("File change detected - re-rendering...")
-                    execute()
-
-                    clock = System.currentTimeMillis()
-                }
-            }
-
-            if (!key.reset()) {
-                break
-            }
-        }
-    }
-
     fun run() {
-        if (watch) {
-            println("Running in watch mode - file changes will trigger a re-render.")
-            execute()
-            watch()
-        } else {
-            execute()
-        }
+        execute()
     }
 }
