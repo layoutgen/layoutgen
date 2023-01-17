@@ -5,7 +5,7 @@ import art.scidsgn.layoutgen.interpreter.FunctionContext
 import art.scidsgn.layoutgen.interpreter.TypeName
 import art.scidsgn.layoutgen.visual.fill.HSLColor
 
-class HSLFunction : BuiltinFunction("HSV") {
+class HSLFunction : BuiltinFunction("HSL") {
     override fun execute(context: FunctionContext): HSLColor {
         val h = context.argumentSingleValue<Double>("h", TypeName.NUMBER)
         val s = context.argumentSingleValue<Double>("s", TypeName.NUMBER)

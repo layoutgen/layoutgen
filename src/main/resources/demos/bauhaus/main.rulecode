@@ -1,0 +1,8 @@
+
+@Memo
+BaseHue := $RandomInt(from = 0, to = 360)
+
+BgColor := $HSL(h = BaseHue, s = 50, l = 50)
+
+@Root
+Main := $Box(fill = BgColor)

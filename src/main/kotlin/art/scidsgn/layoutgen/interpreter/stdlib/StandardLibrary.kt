@@ -29,6 +29,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
 import art.scidsgn.layoutgen.interpreter.stdlib.string.ConcatenateFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.string.LengthFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.string.SplitFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.string.SubstringFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.turtle.*
@@ -142,6 +143,7 @@ object StandardLibrary {
         ConcatenateFunction(),
         LengthFunction(),
         SplitFunction(),
+        SubstringFunction(),
 
         // L-System
         LSystemFunction(),
