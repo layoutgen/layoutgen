@@ -1,0 +1,15 @@
+import "assets.rulecode" as Assets
+
+DockFrame := $NineSlice(image = Assets.Dock, top = 36, left = 8, right = 8)
+DockIcons := $ImageBox(image = Assets.FileMgrIcon)
+             $ImageBox(image = Assets.MineIcon)
+             $ImageBox(image = Assets.SketchIcon)
+             $ImageBox(image = Assets.SolitaireIcon)
+             $ImageBox(image = Assets.TrashIcon)
+Dock := $CenterBox {
+    $Box(
+        width = 276, height = 56,
+        fill = DockFrame
+    )
+    $HStack(gap = 4) { DockIcons }
+}

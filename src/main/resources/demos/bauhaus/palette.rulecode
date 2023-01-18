@@ -1,0 +1,29 @@
+@Memo
+BaseHue := $RandomInt(from = 0, to = 360)
+
+Base := $HSL(h = BaseHue, s = 70, l = 50)
+LightBase := $HSL(h = BaseHue, s = 70, l = 90)
+DarkBase := $HSL(h = BaseHue, s = 30, l = 20)
+
+Complementary := $HSL(h = $Add { BaseHue 180 }, s = 70, l = 50)
+DarkComplementary := $HSL(h = $Add { BaseHue 180 }, s = 30, l = 20)
+Tetradic := $HSL(h = $Add { BaseHue 90 }, s = 50, l = 40)
+
+@Memo
+Palette := LightBase DarkBase Base Complementary Tetradic
+        |  Complementary LightBase DarkComplementary Base Tetradic
+
+@Memo
+BgColor := $At(index = 0) { Palette }
+@Memo
+TextColor := $At(index = 1) { Palette }
+@Memo
+AccentColor1 := $At(index = 2) { Palette }
+@Memo
+AccentColor2 := $At(index = 3) { Palette }
+@Memo
+AccentColor3 := $At(index = 4) { Palette }
+
+AccentColor := AccentColor1
+            |  AccentColor2
+            |  AccentColor3

@@ -1,0 +1,19 @@
+import "palette.rulecode" as Palette
+
+PatternCircle := $Circle(fill = Palette.TextColor)
+
+PatternStripesDirection := "column" | "row"
+PatternStripes := $Flexbox(
+    direction = PatternStripesDirection,
+    alignItems = "stretch", alignContent = "stretch",
+    gap = 8
+) {
+    $Repeat(count = $RandomInt(from = 2, to = 5)) {
+        $Box(
+            fill = Palette.TextColor,
+            flexGrow = $RandomInt(from = 1, to = 10)
+        )
+    }
+}
+
+Pattern := PatternCircle | PatternStripes

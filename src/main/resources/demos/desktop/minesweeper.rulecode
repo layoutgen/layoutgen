@@ -1,0 +1,22 @@
+import "assets.rulecode" as Assets
+import "window.rulecode" as Window
+
+MinesweeperCell := [3]  $ImageBox(image = Assets.Mine1)
+                |  [3]  $ImageBox(image = Assets.Mine2)
+                |  [2]  $ImageBox(image = Assets.Mine3)
+                |  [2]  $ImageBox(image = Assets.Mine4)
+                |  [2]  $ImageBox(image = Assets.Mine5)
+                |  [1]  $ImageBox(image = Assets.MineFlag)
+                |  [13] $ImageBox(image = Assets.MineBlank)
+
+MinesweeperGrid := $Grid(
+    rows = $RandomInt(from = 5, to = 20),
+    cols = $RandomInt(from = 5, to = 20),
+    gap = 2,
+    fill = #1E1F1B,
+    each = MinesweeperCell
+)
+
+Minesweeper := Window.Window(
+    _content = MinesweeperGrid
+)

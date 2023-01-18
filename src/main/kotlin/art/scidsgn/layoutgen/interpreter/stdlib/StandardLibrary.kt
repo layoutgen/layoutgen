@@ -6,6 +6,7 @@ import art.scidsgn.layoutgen.interpreter.BuiltinFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.flow.BlockFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.image.*
 import art.scidsgn.layoutgen.interpreter.stdlib.layout.*
+import art.scidsgn.layoutgen.interpreter.stdlib.list.AtFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.CountFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.list.RepeatFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.lsystem.LSystemFunction
@@ -26,10 +27,7 @@ import art.scidsgn.layoutgen.interpreter.stdlib.random.RandomIntFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.CircleFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.RoundRectFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.shapes.path.*
-import art.scidsgn.layoutgen.interpreter.stdlib.string.ConcatenateFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.string.LengthFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.string.SplitFunction
-import art.scidsgn.layoutgen.interpreter.stdlib.string.SubstringFunction
+import art.scidsgn.layoutgen.interpreter.stdlib.string.*
 import art.scidsgn.layoutgen.interpreter.stdlib.text.FontFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.text.TextFunction
 import art.scidsgn.layoutgen.interpreter.stdlib.turtle.*
@@ -138,12 +136,15 @@ object StandardLibrary {
         // List
         CountFunction(),
         RepeatFunction(),
+        AtFunction(),
 
         // String
         ConcatenateFunction(),
         LengthFunction(),
         SplitFunction(),
         SubstringFunction(),
+        LowerCaseFunction(),
+        UpperCaseFunction(),
 
         // L-System
         LSystemFunction(),

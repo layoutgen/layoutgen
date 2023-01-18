@@ -28,11 +28,13 @@ class GridFunction : BuiltinFunction("Grid") {
             }
         }.toInt()
 
-        val childComponents: List<Component>
+        val childComponents: MutableList<Component> = mutableListOf()
         if (context.hasArgument("each")) {
-            childComponents = context.argumentList("each", TypeName.COMPONENT)
+            for (i in 0 until (rows * cols)) {
+                childComponents += context.argumentSingleValue<Component>("each", TypeName.COMPONENT)
+            }
         } else {
-            childComponents = context.body(TypeName.COMPONENT)
+            childComponents += context.body(TypeName.COMPONENT)
         }
 
         val component = Grid(rows, cols, childComponents)

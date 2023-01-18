@@ -1,8 +1,52 @@
+import "palette.rulecode" as Palette
+import "typography.rulecode" as Type
+import "phrases.rulecode" as Phrases
+import "bgpatterns.rulecode" as BgPatterns
+import "gridpatterns.rulecode" as GridPatterns
+
+Header := $MarginBox(all = 32) {
+    $Text(font = Type.Title, fill = Palette.TextColor) { Phrases.Buzzword }
+}
 
 @Memo
-BaseHue := $RandomInt(from = 0, to = 360)
+FocusGridSize := $RandomInt(from = 2, to = 5)
+Focus := $Box(width = 1024, height = 1024) {
+    BgPatterns.Pattern
+    $MarginBox(all = $RandomInt(from = 32, to = 128)) {
+        $Grid(
+            rows = FocusGridSize, cols = FocusGridSize,
+            gap = $RandomInt(from = 0, to = 48),
+            each = GridPatterns.Pattern
+        )
+    }
+}
 
-BgColor := $HSL(h = BaseHue, s = 50, l = 50)
+CornerCircleColor := Palette.AccentColor1
+                  |  Palette.AccentColor2
+                  |  Palette.TextColor
+                  |  Palette.BgColor
+CornerCircle := $Circle(fill = CornerCircleColor)
+
+CornerPattern := $MarginBox(all = 32, bottom = 48) {
+    $Grid(
+        width = 128, height = 64,
+        rows = 2, cols = 4,
+        each = CornerCircle
+    )
+}
 
 @Root
-Main := $Box(fill = BgColor)
+Main := $Flexbox(
+    fill = Palette.BgColor,
+    direction = "column",
+    justifyContent = "spaceBetween",
+    alignItems = "stretch"
+) {
+    Header
+    Focus
+    $Flexbox(
+        justifyContent = "flexEnd"
+    ) {
+        CornerPattern
+    }
+}

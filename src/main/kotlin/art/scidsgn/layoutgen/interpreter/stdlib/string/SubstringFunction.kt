@@ -12,12 +12,12 @@ class SubstringFunction : BuiltinFunction("Substring") {
             .substring(
                 context.argumentSingleValue<Double>("from", TypeName.NUMBER) {
                     if (it.rem(1) != 0.0) {
-                        throw GeneralError(Errors.STRING_SUBSTRING_RANGE_NOT_INTEGER)
+                        throw GeneralError(Errors.STRING_SUBSTRING_RANGE_MUST_BE_AN_INTEGER)
                     }
                 }.toInt(),
                 context.argumentSingleValue<Double>("to", TypeName.NUMBER) {
                     if (it.rem(1) != 0.0) {
-                        throw GeneralError(Errors.STRING_SUBSTRING_RANGE_NOT_INTEGER)
+                        throw GeneralError(Errors.STRING_SUBSTRING_RANGE_MUST_BE_AN_INTEGER)
                     }
                 }.toInt()
             )

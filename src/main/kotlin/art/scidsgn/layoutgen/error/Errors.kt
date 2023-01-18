@@ -62,7 +62,10 @@ enum class Errors(val message: String) {
     TURTLE_STATE_STACK_IS_EMPTY("State stack is empty - cannot restore"),
     TURTLE_STRIDE_ARGUMENTS_MISSING("Either of the following arguments must be present: \"set\", \"add\", \"scale\""),
 
-    STRING_SUBSTRING_RANGE_NOT_INTEGER("Substring range needs to be made up of two integers"),
+    STRING_SUBSTRING_RANGE_MUST_BE_AN_INTEGER("Substring range needs to be made up of two integers"),
+
+    LIST_INDEX_MUST_BE_WITHIN_RANGE("List item index must be within range"),
+    LIST_INDEX_MUST_MUST_BE_AN_INTEGER("List item index must be an integer"),
 
     CLI_INPUT_PATH_NOT_PRESENT("An input file is required with --input or -i"),
     CLI_UNKNOWN_ARGUMENT("Unknown command line argument %s"),

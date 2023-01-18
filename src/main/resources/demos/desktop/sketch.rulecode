@@ -1,0 +1,45 @@
+import "window.rulecode" as Window
+
+@Memo
+SketchWidth(_n) := $RandomInt(from = 100, to = 400)
+@Memo
+SketchHeight(_n) := $RandomInt(from = 100, to = 400)
+
+SketchRandomPoint(_n) := $Point(
+    x = $RandomInt(from = 0, to = SketchWidth(_n = _n)),
+    y = $RandomInt(from = 0, to = SketchHeight(_n = _n))
+)
+
+SketchRandomSegment(_n) := $PathLine(
+    to = SketchRandomPoint(_n = _n)
+)
+    |
+$PathQuadratic(
+    through = SketchRandomPoint(_n = _n),
+    to = SketchRandomPoint(_n = _n)
+)
+    |
+$PathCubic(
+    through1 = SketchRandomPoint(_n = _n),
+    through2 = SketchRandomPoint(_n = _n),
+    to = SketchRandomPoint(_n = _n)
+)
+
+SketchContentBase(_n) := $Path(
+    width = SketchWidth(_n = _n),
+    height = SketchHeight(_n = _n),
+    stroke = $Stroke(width = 2, fill = #000)
+) {
+    $PathMove(
+        to = SketchRandomPoint(_n = _n)
+    )
+    $Repeat(count = $RandomInt(from = 5, to = 20)) {
+        SketchRandomSegment(_n = _n)
+    }
+}
+
+SketchContent := SketchContentBase(_n = $RandomInt(from = 0, to = 100))
+
+Sketch := Window.Window(
+    _content = SketchContent
+)

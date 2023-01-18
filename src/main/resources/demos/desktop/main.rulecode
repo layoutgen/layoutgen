@@ -1,0 +1,32 @@
+import "dock.rulecode" as Dock
+import "minesweeper.rulecode" as Minesweeper
+import "files.rulecode" as Files
+import "window.rulecode" as Window
+import "sketch.rulecode" as Sketch
+
+AppWindow := Minesweeper.Minesweeper
+          |  Files.FileManager
+          |  Sketch.Sketch
+
+@Root
+Main := $Box(fill = #747766) {
+    $Repeat(count = $RandomInt(from = 2, to = 8)) {
+        $OffsetBox(
+            offsetX = $RandomInt(from = 128, to = 896),
+            offsetY = $RandomInt(from = 128, to = 600)
+        ) {
+            Window.Center(
+                _content = AppWindow
+            )
+        }
+    }
+
+    $Flexbox(
+        direction = "column",
+        justifyContent = "flexEnd",
+        alignItems = "center",
+        alignContent = "stretch"
+    ) {
+        Dock.Dock
+    }
+}

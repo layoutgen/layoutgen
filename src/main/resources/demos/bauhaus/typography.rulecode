@@ -1,0 +1,4 @@
+Type(_size, _style) := $Font(family = "Helvetica Neue", size = _size, style = _style)
+
+@Memo
+Title := Type(_size = 96, _style = "bold")

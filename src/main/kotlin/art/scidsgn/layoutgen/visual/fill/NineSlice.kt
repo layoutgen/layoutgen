@@ -14,7 +14,7 @@ class NineSlice(val image: BufferedImage, val margins: Margins) : Fill() {
         val imageHeight = image.height
 
         val textureWidth = max(target.size.targetSize.width.toInt(), margins.horizontal.toInt())
-        val textureHeight = max(target.size.targetSize.width.toInt(), margins.vertical.toInt())
+        val textureHeight = max(target.size.targetSize.height.toInt(), margins.vertical.toInt())
 
         val textureImage = BufferedImage(textureWidth + 1, textureHeight + 1, BufferedImage.TYPE_INT_ARGB)
         val textureGfx = textureImage.createGraphics()

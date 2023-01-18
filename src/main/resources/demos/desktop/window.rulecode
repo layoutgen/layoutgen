@@ -1,0 +1,20 @@
+import "assets.rulecode" as Assets
+
+WindowFrame := $NineSlice(image = Assets.Frame, top = 34, right = 50, bottom = 12, left = 12)
+
+Window(_content) := $Box(fill = WindowFrame) {
+    $MarginBox(all = 2, top = 32, right = 10, bottom = 10) {
+        _content
+    }
+}
+
+Center(_content) := $OffsetBox(offsetX = -500, offsetY = -500) {
+    $Flexbox(
+        width = 1000, height = 1000,
+        justifyContent = "center",
+        alignItems = "center",
+        alignContent = "stretch"
+    ) {
+        _content
+    }
+}

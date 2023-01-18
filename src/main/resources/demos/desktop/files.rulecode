@@ -1,0 +1,45 @@
+import "assets.rulecode" as Assets
+import "window.rulecode" as Window
+
+FileGridCell := $ImageBox(image = Assets.FolderIcon)
+             |  $ImageBox(image = Assets.ImageIcon)
+             |  $ImageBox(image = Assets.FileIcon)
+
+@Memo
+FileGridRows(_n) := $RandomInt(from = 3, to = 6)
+@Memo
+FileGridCols(_n) := $RandomInt(from = 3, to = 8)
+@Memo
+FileGridCount(_n) := $Mul {
+    FileGridRows(_n = _n)
+    FileGridCols(_n = _n)
+}
+
+@Memo
+FileCount(_n) := $RandomInt(
+    from = $Mul {
+        FileGridCount(_n = _n)
+        0.4
+    },
+    to = FileGridCount(_n = _n)
+)
+
+@Memo
+FileGridBase(_n) := $Grid(
+    rows = FileGridRows(_n = _n),
+    cols = FileGridCols(_n = _n)
+) {
+    $Repeat(count = FileCount(_n = _n)) {
+        $CenterBox(width = 64, height = 56) {
+            FileGridCell
+        }
+    }
+}
+
+FileGrid := FileGridBase(
+    _n = $RandomInt(from = 0, to = 100)
+)
+
+FileManager := Window.Window(
+    _content = FileGrid
+)

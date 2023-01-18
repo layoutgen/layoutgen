@@ -1,0 +1,32 @@
+import "palette.rulecode" as Palette
+import "typography.rulecode" as Type
+import "phrases.rulecode" as Phrases
+
+PatternBasic := $Box(fill = Palette.AccentColor)
+             |  $Circle(fill = Palette.AccentColor)
+
+PatternOffset := $Box {
+    $Box(fill = Palette.BgColor)
+    $OffsetBox(
+        offsetX = $RandomInt(from = -32, to = 32),
+        offsetY = $RandomInt(from = -32, to = 32)
+    ) {
+        $MarginBox(all = $RandomInt(from = 8, to = 48)) {
+            PatternBasic
+        }
+    }
+}
+    |
+$Box {
+    $Circle(fill = Palette.BgColor)
+    $OffsetBox(
+        offsetX = $RandomInt(from = -32, to = 32),
+        offsetY = $RandomInt(from = -32, to = 32)
+    ) {
+        $MarginBox(all = $RandomInt(from = 16, to = 96)) {
+            PatternBasic
+        }
+    }
+}
+
+Pattern := PatternBasic | PatternOffset
