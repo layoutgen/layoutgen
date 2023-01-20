@@ -1,0 +1,19 @@
+P := $TurtleForward
+P -> P Plus N
+
+N := $TurtleForward
+N -> P Minus N
+
+Plus := $TurtleTurn(angle = -90, unit = "deg")
+Minus := $TurtleTurn(angle = 90, unit = "deg")
+
+DragonCurve(_depth) := $TurtleMachine(position = $Point(x = 400, y = 400), stride = 40) {
+    $TurtlePress $LSystem(depth = _depth) { P }
+}
+
+@Root
+Main := $Box(fill = #ddd) {
+    $Path(stroke = $Stroke(fill = #000, width = 4)) {
+        DragonCurve(_depth = 8)
+    }
+}

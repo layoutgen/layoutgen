@@ -11,7 +11,7 @@ fun main() {
     try {
         val ruleCodePath = Path.of(
             {}.javaClass.classLoader.getResource(
-                "demos/bauhaus/main.rulecode"
+                "rulecode/dragon.rulecode"
             )!!.toURI()
         ).toString()
 

@@ -45,12 +45,18 @@ class Grid(val rows: Int, val cols: Int, children: List<Component> = emptyList()
         var height: Double? = size.definedSize.height ?: parentRequestedSize.height
 
         if (width == null && LayoutUtils.getComponentsWithoutDefinedWidth(childComponents).size < childComponents.size) {
-            width = (LayoutUtils.getMaxDefinedWidthOrNull(childComponents)
-                ?: 0.0) * cols + gap * (cols - 1)
+            val definedWidth = LayoutUtils.getMaxDefinedWidthOrNull(childComponents)
+
+            if (definedWidth != null) {
+                width = definedWidth * cols + gap * (cols - 1)
+            }
         }
         if (height == null && LayoutUtils.getComponentsWithoutDefinedHeight(childComponents).size < childComponents.size) {
-            height = (LayoutUtils.getMaxDefinedHeightOrNull(childComponents)
-                ?: 0.0) * rows + gap * (rows - 1)
+            val definedHeight = LayoutUtils.getMaxDefinedHeightOrNull(childComponents)
+
+            if (definedHeight != null) {
+                height = definedHeight * rows + gap * (rows - 1)
+            }
         }
 
         size.requestedSize = UnclearDimensions(width, height)
