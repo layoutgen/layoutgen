@@ -1,0 +1,5 @@
+@Memo
+A := $Box
+
+@Root
+Main := A

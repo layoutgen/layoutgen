@@ -63,9 +63,12 @@ class Interpreter(val random: Random = Random, val maxDepth: Int = 16) {
                 return memoizedRuleInvokations[invocation]!!
             } else {
                 val value = execute(rule.ruleTree, pickBranch(rule.branches), ruleArguments, depth)
-                if (value is Component) {
-                    throw InFileError(Errors.MEMO_RULE_CANNOT_RETURN_ELEMENT, emptyArray(), rule.codePosition)
+                value.forEach {
+                    if (it is Component) {
+                        throw InFileError(Errors.MEMO_RULE_CANNOT_RETURN_ELEMENT, emptyArray(), rule.codePosition)
+                    }
                 }
+
 
                 memoizedRuleInvokations[invocation] = value
                 return value
